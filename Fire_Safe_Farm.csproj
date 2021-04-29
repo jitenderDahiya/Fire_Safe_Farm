@@ -131,12 +131,32 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\jdstyle.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="fonts\OFL.txt" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="images\abc.jpg" />
+    <Content Include="images\abs.jpg" />
+    <Content Include="images\crop-farmer.jpg" />
+    <Content Include="images\Daco_4353987.png" />
+    <Content Include="images\farmers-hands-going-through-crops-wheat-field-sunset.jpg" />
+    <Content Include="images\first.jpg" />
+    <Content Include="images\johannes-plenio-pP9-kpgcbxY-unsplash %281%29.jpg" />
+    <Content Include="images\logo1.png.PNG" />
+    <Content Include="images\paz-arando-ldxdJ8wGqcU-unsplash.jpg" />
+    <Content Include="images\paz-arando-zwZusrYAGoM-unsplash.jpg" />
+    <Content Include="images\raphael-rychetsky-li9JfUHQfOY-unsplash %281%29.jpg" />
+    <Content Include="images\search-12-512.png" />
+    <Content Include="images\tom-hauk-j2uMHOUSqfU-unsplash.jpg" />
+    <Content Include="images\warren-wong-J33qmCVr02A-unsplash %281%29.jpg" />
+    <Content Include="images\warren-wong-J33qmCVr02A-unsplash.jpg" />
+    <Content Include="images\white-search-icon-transparent-background-1.jpg" />
+    <Content Include="images\wsws.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="fonts\AbrilFatface-Regular.ttf" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -159,9 +179,11 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\animation.cshtml" />
+    <Content Include="Views\Home\indimap.cshtml" />
+    <Content Include="Views\Home\ViewPage1.cshtml" />
+    <Content Include="Views\Shared\map_ani_layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

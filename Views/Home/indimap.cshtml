@@ -1,0 +1,449 @@
+﻿@{
+    Layout = "~/Views/Shared/map_ani_layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+
+    <!--D3 script-->
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+
+    <!--Mapbox Script-->
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+ 
+
+    <!--indicator js -->
+    <script src="~/Scripts/Indicator.js"></script>
+
+    <!--style sheet-->
+    <link rel="stylesheet" href="~/Content/jdstyle.css"/>
+</head>
+
+
+<body>
+    <header>
+
+        <style>
+            #main {
+                height: fit-content();
+                width: 100%;
+                background-color: cornflowerblue;
+            }
+
+            #container {
+                display: block;
+                position: absolute;
+                margin-top: 10%;
+                top: 120px;
+                right: 100px;
+                width: 500px;
+                height: 500px;
+                max-width: fit-content();
+                max-height: fit-content();
+                background-color: #ffffff60;
+                border-radius: 50px;
+                backdrop-filter: blur(5px);
+            }
+
+
+            #chart {
+                position: absolute;
+                width: 500px;
+                height: 500px;
+                padding-top:5px;
+                padding-left:125px;
+                padding-right:125px;
+                background-color: #ffffff00;
+                
+            }
+
+            #map {
+                margin-top:-20px !important;
+                width: 100%;
+                height: auto;
+            }
+        </style>
+
+        <style>
+
+            input[type=text] {
+                width: 400px;
+                padding: 10px 20px;
+                margin: 5px 0;
+                box-sizing: border-box;
+                border: 0px solid #ccc;
+                -webkit-transition: 0.3s;
+                transition: 0.3s;
+                outline: none;
+                font-size: 20px;
+                font-family: sans-serif;
+                border-radius: 30px;
+            }
+
+                input[type=text]:focus {
+                    border: 8px solid #ffffff00;
+                }
+
+
+            #srow {
+                border-radius: 30px;
+                height: 50px;
+                margin-left: 10%;
+                margin-bottom: 30px;
+            }
+
+            #sbtn {
+                background-color: crimson;
+                height: 50px;
+                width: 50px;
+                border-radius: 50%;
+                border-style: none;
+                margin: 1%;
+            }
+
+            #location {
+                height: 50px;
+                background-color: #ffffff;
+                width: fit-content();
+                max-width: 300px;
+                border-radius: 20px;
+                font-family: sans-serif;
+                font-size: 30px;
+                border-color: white;
+                border-style: none;
+            }
+
+
+                #location:active {
+                    border-color: none;
+                }
+
+            #icon {
+                align-content: center;
+                height: 30px;
+                width: 30px;
+            }
+        </style>
+
+        <style>
+            #circles{
+                display:inline-flex;
+                justify-content:space-between;
+                width:500px;
+                margin-top:350px;
+                padding-left:10px;
+                padding-right:10px;
+
+            }
+            .c{
+                height:50px;
+                width:50px;
+                border-radius:50%;
+                background-color:red;
+                backdrop-filter:blur(20px);
+                border-color:#00000030;
+                border-width:3px;
+                border-style:solid;
+                backdrop-filter:brightness(4px);
+                backdrop-filter:blur(50px);
+                filter:blur(1px);
+
+            }
+        </style>
+
+    </header>
+
+
+    <div id="main">
+        <div id="map"></div>
+        <div id="container">
+            <div id="chart"></div>
+
+            <div id="circles" class="row">
+                <div id="c1" class="c"><p id="cp1"></p></div>
+                <div id="c2" class="c"><p id="cp2"></p></div>
+                <div id="c3" class="c"><p id="cp3"></p></div>
+                <div id="c4" class="c"><p id="cp4"></p></div>
+                <div id="c5" class="c"><p id="cp5"></p></div>
+                <div id="c6" class="c"><p id="cp6"></p></div>
+
+
+            </div>
+
+            <div class="row" style="background-color:none;display:flex;padding:5px !important; justify-content:center !important;margin-top:30px;">
+                <input type="text" id="txt" placeholder="Type your location here" value="Melbourne">
+                <button id="sbtn" onclick="submit();"><img id="icon" src="~/Images/search-12-512.png" /></button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- map function script -->
+    <script>
+
+            mapboxgl.accessToken = 'pk.eyJ1IjoiamRhaDAwMDEiLCJhIjoiY2ttb3pvMmYyMjlsdzJvdDRzc3R3ZWp1bSJ9.k4l8C8SfWsC8GDxRwdp4xQ'
+
+
+            var map = new mapboxgl.Map({
+                container: 'map',
+                style: 'mapbox://styles/jdah0001/ckn43upw24mwn18nz8ko60usa',
+                center: [145.5139, -37.6561],
+                zoom: 10
+            });
+
+            var marker1 = new mapboxgl.Marker({ color: 'black' })
+                .setLngLat([145.5139, -37.6561])
+                .setPopup(new mapboxgl.Popup().setHTML("<h6>" + "Search your location to see the severity" + "</h6>"))
+                .addTo(map);
+
+
+
+        </script>
+    
+
+
+
+       <input id="locality">
+        <button id="random">search</button>
+
+    <!-- Indicator function and api call -->
+
+    <script>
+
+        var gWidth = Math.min(d3.select("#chart").node().offsetWidth, 250);
+
+        var gauge = gaugeChart()
+            .height(250)
+            .width(gWidth)
+            .innerRadius(gWidth / 4)
+            .outerRadius((gWidth / 4) + 40);
+
+        d3.select("#chart").datum([{
+            FFDI: 0,
+            category: "None"
+        }]).call(gauge);
+
+        var button = document.getElementById("random");
+        button.addEventListener("click", function () {
+            var locality = document.getElementById("locality").value;
+            data = getFFDI(locality);
+            data.then(function (d) {
+
+                d3.select("#chart").datum([
+                    {
+                        FFDI: d[0]["FFDI"],
+                        category: d[0]["FFDI_category"]
+                    }
+                ]).call(gauge);
+            })
+        });
+
+
+        function getFFDI(locality) {
+            var data = fetch("https://fireprediction.ga/forecast?locality=" + locality)
+                .then(response => {
+                    return response.json();
+                })
+                .then(data => {
+                    return data["days"].slice(0, 8);
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+
+            return data;
+
+        }
+
+        function randNumberBounds(min, max) {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min)) + min;
+        }
+
+
+        // Based on reusable chart pattern from https://bost.ocks.org/mike/chart/
+        function gaugeChart() {
+            var margin = { top: 0, right: 65, bottom: 10, left: 65 },
+                width = 250,
+                height = 150,
+                arcMin = -2.5,
+                arcMax = 2.5,
+                innerRadius = 70,
+                outerRadius = 80,
+                dataDomain = [0, 11, 24, 49, 74, 100],
+                labelPad = 5,
+                dataValue = function (d) { return +d; },
+                colorScale = d3.scaleQuantile(),
+                arcScale = d3.scaleLinear(),
+                colorOptions = ["#228B22", "#00BFFF", "#FFD700", "#DAA520", "#B22222"],
+                arc = d3.arc();
+
+
+            function chart(selection) {
+                var cat_text;
+                selection.each(function (data) {
+                    // Convert data to standard representation greedily;
+                    // this is needed for nondeterministic accessors.
+                    cat_text = data.map(function (d, i) { return d["category"]; });
+                    data = data.map(function (d, i) { return dataValue(d["FFDI"]); });
+
+                    arcScale = d3.scaleLinear().domain(dataDomain).range([arcMin, -1.2302, -1.0868, 0, 1.045, arcMax]);
+                    colorScale = d3.scaleQuantile().domain(dataDomain).range(colorOptions);
+                    arc = d3.arc().innerRadius(innerRadius)
+                        .outerRadius(outerRadius)
+                        .startAngle(arcMin);
+
+                    // Select the svg element, if it exists.
+                    var svg = d3.select(this).selectAll("svg").data([data]);
+
+                    // Otherwise, create the skeletal chart.
+                    var gEnter = svg.enter().append("svg").append("g");
+                    var arcGEnter = gEnter.append("g").attr("class", "arc");
+                    arcGEnter.append("path").attr("class", "bg-arc");
+                    arcGEnter.append("path").attr("class", "data-arc")
+                        .datum({ endAngle: arcMin, startAngle: arcMin, score: dataDomain[0] })
+                        .attr("d", arc)
+                        .style("fill", colorScale(dataDomain[0]))
+                        .each(function (d) { this._current = d; });
+                    arcGEnter.append("text").attr("class", "arc-label");
+                    arcGEnter.append("text").attr("class", "arc-text");
+
+
+                    arcGEnter.selectAll(".lines").data(arcScale.ticks(5).map(function (d) {
+                        return { score: d };
+                    })).enter()
+                        .append("path")
+                        .attr("class", "lines");
+                    arcGEnter.selectAll(".ticks").data(arcScale.ticks(5))
+                        .enter().append("text")
+                        .attr("class", "ticks");
+
+                    // Update the outer dimensions.
+                    var svg = selection.select("svg");
+                    svg.attr("width", width).attr("height", height);
+                    // Update the inner dimensions.
+                    var g = svg.select("g")
+                        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+                    var arcG = svg.select("g.arc")
+                        .attr("transform", "translate(" +
+                            ((width - margin.left - margin.right) / 2) + "," +
+                            ((height * (2 / 3)) + ")"));
+
+                    svg.select("g.arc .bg-arc")
+                        .datum({ endAngle: arcMax, score: data[0] })
+                        .style("fill", function (d) { return colorScale(d.score); })
+                        .style("opacity", 0.1)
+                        .attr("d", arc);
+
+                    // https://bl.ocks.org/mbostock/1346410
+                    function arcTween(a) {
+                        var i = d3.interpolate(this._current, a);
+                        this._current = i(0);
+                        return function (t) {
+                            return arc(i(t));
+                        };
+                    }
+
+                    var dataArc = svg.select("g.arc .data-arc")
+                        .datum({ score: data[0], startAngle: arcMin, endAngle: arcScale(data[0]) })
+                        .transition()
+                        .duration(750)
+                        .style("fill", function (d) { return colorScale(d.score); })
+                        .style("opacity", function (d) { return d.score < dataDomain[0] ? 0.3 : 1; })
+                        .attrTween("d", arcTween);
+
+                    var arcBox = svg.select("g.arc .bg-arc").node().getBBox();
+
+                    svg.select("text.arc-label")
+                        .datum({ score: data[0] })
+                        .attr("x", (arcBox.width / 2) + arcBox.x)
+                        .attr("y", -20)
+                        .style("fill", function (d) { return colorScale(d.score); })
+                        .style("alignment-baseline", "central")
+                        .style("text-anchor", "middle")
+                        .style("font-weight", "bolder")
+                        .style("font-size", "40px")
+                        .text(function (d) { return d3.format(".1f")(d.score); });
+
+                    svg.select("text.arc-text")
+                        .datum({ score: data[0] })
+                        .attr("x", (arcBox.width / 2) + arcBox.x)
+                        .attr("y", 10)
+                        .style("fill", function (d) { return colorScale(d.score); })
+                        .style("alignment-baseline", "central")
+                        .style("text-anchor", "middle")
+                        .style("font-size", "18px")
+                        .text(cat_text);
+
+                    var markerLine = d3.radialLine()
+                        .angle(function (d) { return arcScale(d); })
+                        .radius(function (d, i) {
+                            return innerRadius + ((i % 2) * ((outerRadius - innerRadius)));
+                        });
+                });
+            }
+
+            chart.margin = function (_) {
+                if (!arguments.length) return margin;
+                margin = _;
+                return chart;
+            };
+
+            chart.width = function (_) {
+                if (!arguments.length) return width;
+                width = _;
+                return chart;
+            };
+
+            chart.height = function (_) {
+                if (!arguments.length) return height;
+                height = _;
+                return chart;
+            };
+
+            chart.innerRadius = function (_) {
+                if (!arguments.length) return innerRadius;
+                innerRadius = _;
+                return chart;
+            };
+
+            chart.outerRadius = function (_) {
+                if (!arguments.length) return outerRadius;
+                outerRadius = _;
+                return chart;
+            };
+
+            chart.dataDomain = function (_) {
+                if (!arguments.length) return dataDomain;
+                dataDomain = _;
+                return chart;
+            };
+
+            chart.colorOptions = function (_) {
+                if (!arguments.length) return colorOptions;
+                colorOptions = _;
+                return chart;
+            };
+
+            chart.labelPad = function (_) {
+                if (!arguments.length) return labelPad;
+                labelPad = _;
+                return chart;
+            };
+
+            return chart;
+        }
+
+
+
+    </script>
+</body>
+</html>

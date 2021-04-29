@@ -1,31 +1,157 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Home";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+<div id="bck" class="first row" style="margin-top:0px;">
+    <div id="text1" class="container">How bushfire affect farms?</div>
+
 </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+
+
+<body style="background-color:ghostwhite;">
+
+    <div id="bck1" class="second row" style="justify-content:center;">
+        <div id="text2" class="container">How safe is your farm?</div>
+
+        <div class="glass-card" style="background:linear-gradient(170deg #ffffff50 #00000030); border-radius:40px !important;">
+         <div class="row" style="background-color:none;display:flex;padding:5px !important; justify-content:center !important;">
+           <input type="text" id="txt" placeholder="Type your location here" value="Melbourne">
+            <button id="sbtn" onclick="submit();"><img id="icon" src="~/Images/search-12-512.png" /></button>
+          </div>
+
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+</body>
+
+
+
+<script>
+    function submit() {
+        var sb = document.getElementById('txt').value;
+        console.log(sb)
+
+        window.location.replace("@Url.Action("IndiMap", "Home")");
+        localStorage.setItem('Q', sb);
+
+
+    }
+</script>
+
+<div id="bck2" class="third row" style="justify-content:center;">
+    <div id="text3" class="container text1">How to save your farm?</div>
+
+    
     </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
+<style>
+
+    input[type=text] {
+        width: 400px;
+        padding: 10px 20px;
+        margin: 5px 0;
+        box-sizing: border-box;
+        border: 0px solid #ccc;
+        -webkit-transition: 0.3s;
+        transition: 0.3s;
+        outline: none;
+        font-size: 20px;
+        font-family: sans-serif;
+        border-radius: 30px;
+    }
+
+        input[type=text]:focus {
+            border: 8px solid #ffffff00;
+        }
+
+
+    #srow {
+        border-radius: 30px;
+        height: 50px;
+        margin-left: 10%;
+        margin-top: 40%;
+    }
+
+    #sbtn {
+        background-color: crimson;
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+        border-style: none;
+        margin:1%;
+    }
+
+    #location {
+        height: 50px;
+        background-color: #ffffff;
+        width: fit-content();
+        max-width: 300px;
+        border-radius: 20px;
+        font-family: sans-serif;
+        font-size: 30px;
+        border-color: white;
+        border-style: none;
+    }
+
+
+        #location:active {
+            border-color: none;
+        }
+
+    #icon {
+        align-content: center;
+        height: 30px;
+        width: 30px;
+    }
+</style>
+
+<script type="text/javascript">
+
+    var id = document.getElementById('bck')
+    var id1 = document.getElementById('bck1')
+    var id2 = document.getElementById('bck2')
+
+    window.addEventListener('scroll', function () {
+        var pos = document.body.scrollTop
+
+        if (this.window.pageYOffset > 1100) {
+            id1.style.opacity = 1 - (this.window.pageYOffset - 1100) / 1100
+        } else if (this.window.pageYOffset < 1100) {
+            id.style.opacity = 1 - (this.window.pageYOffset) / 1100
+
+        } else if (this.window.pageYOffset > 1680) {
+            id2.style.opacity = 1 - (this.window.pageYOffset-1680) / 1100
+
+        }
+
+
+
+        /*console.log(this.window.pageYOffset)
+        console.log(pos)*/
+
+    });
+
+
+    @*var txt1 = document.querySelector('#text1');
+    var txt2 = document.querySelector('#text2');
+    var txt3 = document.querySelector('#text3');
+
+    window.addEventListener('scroll', function () {
+        var psy = this.window.scrollY;
+        var psx = this.window.scrollX;
+
+
+        if (psy > 100) {
+            txt1.style.right = psy-500 + 'px';
+        } else if (psy > 1100) {
+            txt2.style.right = psy-1000 + 'px';
+        } else if(psy > 2300) {
+            txt3.style.right = psy-2000 + 'px';
+        }
+
+        console.log(psy)
+    })
+*@
+
+
+
+</script>

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Fire_Safe_Farm.Controllers
+namespace New_UI.Controllers
 {
     public class HomeController : Controller
     {
@@ -13,9 +13,18 @@ namespace Fire_Safe_Farm.Controllers
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult IndiMap()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Indicator and Map";
+
+
+            return View();
+        }
+
+        public ActionResult Animation()
+        {
+            ViewBag.Message = "Guideline animation";
+
 
             return View();
         }
@@ -26,5 +35,7 @@ namespace Fire_Safe_Farm.Controllers
 
             return View();
         }
+
+
     }
 }
