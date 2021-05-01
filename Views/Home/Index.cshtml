@@ -3,7 +3,7 @@
 }
 
 <head>
-
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 </head>
 
@@ -78,9 +78,9 @@
 
 
 
-           <div class="glass-card" style="background:linear-gradient(170deg #ffffff50 #00000030); border-radius:40px !important;margin-top:100px;width:800px;">
+           <div class="glass-card" style="background:linear-gradient(170deg #ffffff50 #00000030); border-radius:40px !important;margin-top:100px;width:500px;">
                <div class="row" style="background-color:none;display:flex; justify-content:center !important;position:absolute;margin-top: 0%;">
-                <input type="text" id="txt" placeholder="Type your location here" value="Melbourne">
+                <input type="text" id="txt" placeholder="Type your location here" value="Healesville">
                 <button id="sbtn" onclick="submit();"><img id="icon" src="~/Images/search-12-512.png" /></button>
             </div>
 
@@ -95,10 +95,13 @@
         var sb = document.getElementById('txt').value;
         console.log(sb)
 
-        window.location.replace("@Url.Action("IndiMap", "Home")");
         localStorage.setItem('Q', sb);
-
-
+        if (sb == "") {
+            swal("Sorry", "You need to input a suburb name", "warning");
+        }
+        else {
+             window.location.replace("@Url.Action("IndiMap", "Home")");
+        }
     }
 </script>
 
