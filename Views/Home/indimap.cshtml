@@ -225,40 +225,40 @@
 
     <div id="main">
         @*        <div class="row" style="background-color:none;display:flex;padding:5px !important; justify-content:center !important;margin-top:45px;position:absolute;">
-                <input type="text" id="txt" placeholder="Type your location here">
-                <button id="sbtn" onclick="submit();"><img id="icon" src="~/Images/search-12-512.png" /></button>
-            </div>*@
+            <input type="text" id="txt" placeholder="Type your location here">
+            <button id="sbtn" onclick="submit();"><img id="icon" src="~/Images/search-12-512.png" /></button>
+        </div>*@
         <div class="container" style="justify-content:center;text-align:center;width:400px;position:absolute;z-index:1000;left:40%;margin-top: 150px;">
 
             <input type="text" id="txt" placeholder="Type your location here" style="width:400px;" value="Healesville" />
             <button id="sbtn"><img id="icon" src="~/Images/search-12-512.png" /></button>
         </div>
 
-
+        ["#228B22", "#00BFFF", "#FFD700", "#DAA520", "#B22222"]
         <div id="map"></div>
         <div id="container">
             <div id="row1">
-                <div class="lg col-md-12" style="background-color: green;">  </div>
+                <div class="lg col-md-12" style="background-color: #228B22;">  </div>
                 <p class="lg1">low-moderate</p>
 
             </div>
             <div id="row1">
-                <div class="lg col-md-12" style="background-color: cornflowerblue;"> </div>
+                <div class="lg col-md-12" style="background-color: #00BFFF;"> </div>
                 <p class="lg1">high</p>
             </div>
 
             <div id="row1">
-                <div class="lg col-md-12" style="background-color: yellow;"> </div>
+                <div class="lg col-md-12" style="background-color: #FFD700;"> </div>
                 <p class="lg1">very high</p>
             </div>
 
             <div id="row1">
-                <div class="lg col-md-12" style="background-color: orangered;"> </div>
+                <div class="lg col-md-12" style="background-color: #DAA520;"> </div>
                 <p class="lg1">severe</p>
             </div>
 
             <div id="row1">
-                <div class="lg col-md-12" style="background-color: red;"> </div>
+                <div class="lg col-md-12" style="background-color: #B22222;"> </div>
                 <p class="lg1"> extreme</p>
             </div>
             <div id="row1">
@@ -391,18 +391,12 @@
 
             Data = getFFDI(locality);
 
-            Data.then(function (response) {
-                console.log(response.status);
-            });
-
             Data.then(function (d) {
-
-                
 
                 console.log(d["resolvedAddress"])
                 var lat = d["latitude"];
                 var lon = d["longitude"];
-                var ffdi_cat0 = d["days"][0]["FFDI_category"]
+                var ffdi_cat0 = d["days"][0]["FFDI_category"];
 
                 myfunction(lat, lon, ffdi_cat0)
 
@@ -430,6 +424,7 @@
         function getFFDI(locality) {
             var data = fetch("https://fireprediction.ga/forecast?locality=" + locality)
                 .then(response => {
+                    console.log(response.status)
                     return response.json();
                 }).catch(error => {
                     swal("Sorry", "the suburb you are searching is not recorded", "error");
@@ -573,17 +568,17 @@
                         if (category == "low-moderate") {
                             return "You are Safe!";
                         }
-                        else if (category[0] === "high") {
+                        else if (category === "high") {
                             return "Be aware!"
                         }
-                        else if (category[0] === "very high") {
-                            return "Its risky!"
+                        else if (category === "very high") {
+                            return "Its not Safe!"
                         }
-                        else if (category[0] === "severe") {
-                            return "Dangerous!"
+                        else if (category === "severe") {
+                            return "It's Dangerous!"
                         }
-                        else if (category[0] === "extreme") {
-                            return "SOS!"
+                        else if (category === "extreme") {
+                            return "Save yourself!"
                         }
                         else {
                             return "-"
