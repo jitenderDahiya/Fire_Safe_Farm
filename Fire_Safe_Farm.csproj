@@ -178,6 +178,8 @@
     <Content Include="Forms\BurnOff.pdf" />
     <Content Include="Forms\S14.pdf" />
     <Content Include="Forms\S40.pdf" />
+    <Content Include="3dmodel\scene.bin" />
+    <Content Include="3dmodel\scene.gltf" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

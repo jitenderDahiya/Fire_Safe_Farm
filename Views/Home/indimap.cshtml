@@ -19,7 +19,9 @@
 
 
 
-
+    <!--indicator js -->
+    @*    <script src="~/Scripts/Indicator.js"></script>
+    *@
     <!--style sheet-->
     <link rel="stylesheet" href="~/Content/jdstyle.css" />
 </head>
@@ -86,7 +88,6 @@
                 font-size: 20px;
                 font-family: sans-serif;
                 border-radius: 30px;
-                margin-bottom:0px;
             }
 
                 input[type=text]:focus {
@@ -107,8 +108,7 @@
                 width: 50px;
                 border-radius: 50%;
                 border-style: none;
-                margin-top:1.5%;
-                margin-bottom:0;
+                margin: 1%;
             }
 
             #location {
@@ -148,10 +148,10 @@
             .autocomplete-items div {
                 font-family: sans-serif;
                 text-align: left;
-                width: 270px;
+                width: 250px;
                 font-size: 18px;
                 margin-left: 32px;
-                border-radius: 30px;
+                border-radius: 20px;
                 cursor: pointer;
                 background-color: #fff;
                 border-bottom: none;
@@ -234,31 +234,31 @@
             <button id="sbtn"><img id="icon" src="~/Images/search-12-512.png" /></button>
         </div>
 
-
+        ["#228B22", "#00BFFF", "#FFD700", "#DAA520", "#B22222"]
         <div id="map"></div>
         <div id="container">
             <div id="row1">
-                <div class="lg col-md-12" style="background-color: green;">  </div>
+                <div class="lg col-md-12" style="background-color: #228B22;">  </div>
                 <p class="lg1">low-moderate</p>
 
             </div>
             <div id="row1">
-                <div class="lg col-md-12" style="background-color: cornflowerblue;"> </div>
+                <div class="lg col-md-12" style="background-color: #00BFFF;"> </div>
                 <p class="lg1">high</p>
             </div>
 
             <div id="row1">
-                <div class="lg col-md-12" style="background-color: yellow;"> </div>
+                <div class="lg col-md-12" style="background-color: #FFD700;"> </div>
                 <p class="lg1">very high</p>
             </div>
 
             <div id="row1">
-                <div class="lg col-md-12" style="background-color: orangered;"> </div>
+                <div class="lg col-md-12" style="background-color: #DAA520;"> </div>
                 <p class="lg1">severe</p>
             </div>
 
             <div id="row1">
-                <div class="lg col-md-12" style="background-color: red;"> </div>
+                <div class="lg col-md-12" style="background-color: #B22222;"> </div>
                 <p class="lg1"> extreme</p>
             </div>
             <div id="row1">
@@ -313,9 +313,9 @@
         function myfunction(lat, lon, ffdi_cat) {
             var b = lat;
             var a = lon;
- 
 
-                mapboxgl.accessToken = 'pk.eyJ1IjoiamRhaDAwMDEiLCJhIjoiY2ttb3pvMmYyMjlsdzJvdDRzc3R3ZWp1bSJ9.k4l8C8SfWsC8GDxRwdp4xQ';
+
+            mapboxgl.accessToken = 'pk.eyJ1IjoiamRhaDAwMDEiLCJhIjoiY2ttb3pvMmYyMjlsdzJvdDRzc3R3ZWp1bSJ9.k4l8C8SfWsC8GDxRwdp4xQ';
             var map = new mapboxgl.Map({
                 container: 'map',
                 style: 'mapbox://styles/jdah0001/ckn43upw24mwn18nz8ko60usa',
@@ -323,12 +323,12 @@
                 zoom: 10
             });
 
-            var text = ffdi_cat +"<br>"+ txt_logic(ffdi_cat);
-                var marker1 = new mapboxgl.Marker({ color: 'black' })
-                    .setLngLat([a, b])
-                    .setPopup(new mapboxgl.Popup().setHTML("<h2>" + text + "</h2>"))
-                    .addTo(map);
-            }
+            var text = ffdi_cat + "<br>" + txt_logic(ffdi_cat);
+            var marker1 = new mapboxgl.Marker({ color: 'black' })
+                .setLngLat([a, b])
+                .setPopup(new mapboxgl.Popup().setHTML("<h2>" + text + "</h2>"))
+                .addTo(map);
+        }
 
 
     </script>
@@ -345,7 +345,7 @@
             @*alert(page1)*@
 
             if (page1 === "Healesville") {
-                return 
+                return
             } else if (page1 !== null || page1 === "Healesville") {
                 play(page1)
                 document.getElementById('txt').value = page1;
@@ -354,7 +354,7 @@
                 page1 = "Healesville";
             }
         }
-        
+
     </script>
 
     <!-- Indicator function and api call -->
@@ -386,23 +386,17 @@
 
         function play(locality) {
 
-            
+
 
 
             Data = getFFDI(locality);
 
-            Data.then(function (response) {
-                console.log(response.status);
-            });
-
             Data.then(function (d) {
-
-                
 
                 console.log(d["resolvedAddress"])
                 var lat = d["latitude"];
                 var lon = d["longitude"];
-                var ffdi_cat0 = d["days"][0]["FFDI_category"]
+                var ffdi_cat0 = d["days"][0]["FFDI_category"];
 
                 myfunction(lat, lon, ffdi_cat0)
 
@@ -430,6 +424,7 @@
         function getFFDI(locality) {
             var data = fetch("https://fireprediction.ga/forecast?locality=" + locality)
                 .then(response => {
+                    console.log(response.status)
                     return response.json();
                 }).catch(error => {
                     swal("Sorry", "the suburb you are searching is not recorded", "error");
@@ -573,17 +568,17 @@
                         if (category == "low-moderate") {
                             return "You are Safe!";
                         }
-                        else if (category[0] === "high") {
+                        else if (category === "high") {
                             return "Be aware!"
                         }
-                        else if (category[0] === "very high") {
-                            return "Its risky!"
+                        else if (category === "very high") {
+                            return "Its not Safe!"
                         }
-                        else if (category[0] === "severe") {
-                            return "Dangerous!"
+                        else if (category === "severe") {
+                            return "It's Dangerous!"
                         }
-                        else if (category[0] === "extreme") {
-                            return "SOS!"
+                        else if (category === "extreme") {
+                            return "Save yourself!"
                         }
                         else {
                             return "-"
@@ -873,9 +868,9 @@
 
 
 
-    
-  
-    
+
+
+
 </body>
 
 </html>
