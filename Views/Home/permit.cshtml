@@ -4,588 +4,477 @@
 
 <!DOCTYPE html>
 
+
 <html>
+
 <head>
-    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <title>Permits</title>
+    <!--tab icon-->
+    <link rel="icon" href="~/Images/logo1.png.PNG" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!--D3 script-->
-    <script src="https://d3js.org/d3.v4.min.js"></script>
-
-    <!--Mapbox Script-->
-    <link href="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css" rel="stylesheet">
-    <script src="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!--Font-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
 
 
+    <!--jquery-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
-    <!--indicator js -->
-    <script src="~/Scripts/Indicator.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!--Bootstrap 5 links-->
 
-    <!--style sheet-->
-    <link rel="stylesheet" href="~/Content/jdstyle.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
 </head>
-
-
 <body>
-    <header>
 
-        <style>
-            #main {
-                height: fit-content();
-                width: 100%;
-                background-color: cornflowerblue;
-            }
+    <style>
+        body {
+            font-family: 'Roboto-light' !important;
+            font-size: 15px;
+            background-color:lightgrey;
+            height:fit-content();
+        }
 
-            #container {
-                display: block;
-                position: absolute;
-                margin-top: 10%;
-                top: 120px;
-                right: 100px;
-                width: 500px;
-                height: 550px;
-                max-width: fit-content();
-                max-height: fit-content();
-                background-color: #ffffff60;
-                border-radius: 50px;
-                backdrop-filter: blur(5px);
-            }
+        h2 {
+            font-weight: bold;
+        }
 
+        #nav_txt {
+            padding-left: 20px;
+            padding-right: 20px;
+            padding-top: 10px;
+            padding-bottom: 0px;
+            font-weight: 100;
+            font-size: 20px;
+            text-decoration: none;
+            font-family: 'Roboto-light';
+            color: #fffffffa;
+            vertical-align: middle;
+            height: 40px;
+        }
 
-            #chart {
-                position: absolute;
-                width: 500px;
-                height: 250px;
-                padding-top: 5px;
-                padding-left: 125px;
-                padding-right: 125px;
-                background-color: #ffffff00;
-            }
-
-            #map {
-                margin-top: -20px !important;
-                width: 100%;
-                height: auto;
-            }
-        </style>
-
-        <style>
-
-            input[type=text] {
-                width: 400px;
-                padding: 10px 20px;
-                margin: 5px 0;
-                box-sizing: border-box;
-                border: 0px solid #ccc;
-                -webkit-transition: 0.3s;
-                transition: 0.3s;
-                outline: none;
-                font-size: 20px;
-                font-family: sans-serif;
-                border-radius: 30px;
-            }
-
-                input[type=text]:focus {
-                    border: 8px solid #ffffff00;
-                }
+        .navbar {
+            padding-top: 0;
+            background-color:#00000040;
+            backdrop-filter:blur(5px);
+        }
 
 
-            #srow {
-                border-radius: 30px;
-                height: 50px;
-                margin-left: 10%;
-                margin-top: 40%;
-            }
 
-            #sbtn {
-                background-color: crimson;
-                height: 50px;
-                width: 50px;
-                border-radius: 50%;
-                border-style: none;
-                margin: 1%;
-            }
+        .cover {
+            background-image: url("/images/bu (1).jpg");
+            height: 500px;
+            width: 100%;
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            width: auto;
+            perspective: 50px;
+            display: flex;
+            margin-top:-120px;
+        }
 
-            #location {
-                height: 50px;
-                background-color: #ffffff;
-                width: fit-content();
-                max-width: 300px;
-                border-radius: 20px;
-                font-family: sans-serif;
-                font-size: 30px;
-                border-color: white;
-                border-style: none;
+
+        input[type=text] {
+            width: 400px;
+            height: 60px;
+            padding: 10px 20px;
+            margin: 5px 0;
+            box-sizing: border-box;
+            border: 0px solid #ccc;
+            -webkit-transition: 0.3s;
+            transition: 0.3s;
+            outline: none;
+            font-size: 20px;
+            font-family: sans-serif;
+            border-radius: 30px;
+            margin-bottom: 0px;
+        }
+
+            input[type=text]:focus {
+                border: 8px solid #ffffff00;
             }
 
 
-                #location:active {
-                    border-color: none;
-                }
+        #srow {
+            border-radius: 30px;
+            height: 50px;
+            margin-left: 10%;
+            margin-top: 40%;
+        }
 
-            #icon {
-                align-content: center;
-                height: 30px;
-                width: 30px;
+        #sbtn {
+            background-color: crimson;
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+            border-style: none;
+            margin: 0%;
+        }
+
+        #location {
+            height: 50px;
+            background-color: #ffffff;
+            width: fit-content();
+            max-width: 300px;
+            border-radius: 20px;
+            font-family: sans-serif;
+            font-size: 30px;
+            border-color: white;
+            border-style: none;
+        }
+
+
+            #location:active {
+                border-color: none;
             }
 
-            .autocomplete-items {
-                width: 380px;
-                margin-left: 35px;
-                position: absolute;
-                border: 1px solid #d4d4d4;
-                border-bottom: none;
-                border-top: none;
-                z-index: 100;
-                left: 0px;
-                top: 510px;
-                right: -10px;
+        #icon {
+            align-content: center;
+            height: 30px;
+            width: 30px;
+        }
+
+        autocomplete-items {
+            width: 280px;
+            position: absolute;
+            border: 1px solid #d4d4d4;
+            border-bottom: none;
+            border-top: none;
+            z-index: 100;
+            top: -50px;
+        }
+
+
+        .autocomplete-items div {
+            position:absolute;
+            font-family: sans-serif;
+            text-align: left;
+            width: 280px;
+            font-size: 15px;
+            margin-left: 38.5%;
+            border-radius: 30px;
+            cursor: pointer;
+            background-color: #fff;
+            border-bottom: none;
+            padding: 15px;
+        }
+
+            .autocomplete-items div:hover {
+                background-color: #e9e9e9;
             }
 
-                .autocomplete-items div {
-                    font-family: sans-serif;
-                    font-size: 18px;
-                    border-radius: 20px;
-                    padding-left: 10px;
-                    cursor: pointer;
-                    background-color: #fff;
-                    border-bottom: none;
-                    padding: 15px;
-                }
+        .autocomplete-active {
+            background-color: DodgerBlue !important;
+            color: #ffffff;
+        }
+    </style>
 
-                    .autocomplete-items div:hover {
-                        background-color: #e9e9e9;
-                    }
+    <div class="cover container-fluid" style="text-align:center;vertical-align:middle;">
 
-            .autocomplete-active {
-                background-color: DodgerBlue !important;
-                color: #ffffff;
-            }
-        </style>
+        <div class="container-fluid" style="backdrop-filter:blur(7px);margin:2%; border-radius:10px;">
+            <p style="font-size:50px;color:whitesmoke;padding-top:7%;"> Fire Permits </p>
+            <p style="font-size:25px;color:whitesmoke;"> Use of fire in the open air during the Fire Danger Period or on a day of Total Fire Ban you may require a permit.</p>
 
-        <style>
-            #circles {
-                display: inline-flex;
-                justify-content: space-between;
-                width: 500px;
-                margin-top: 350px;
-                padding-left: 10px;
-                padding-right: 10px;
-            }
-
-            .c {
-                height: 50px;
-                width: 50px;
-                border-radius: 50%;
-                background-color: red;
-                backdrop-filter: blur(20px);
-                border-color: #00000030;
-                border-width: 3px;
-                border-style: solid;
-                backdrop-filter: brightness(4px);
-                backdrop-filter: blur(50px);
-                filter: blur(1px);
-            }
-        </style>
-
-    </header>
+            <div style="width:100%; justify-content:center !important;">
 
 
-    <div id="main">
-        <div class="row autocomplete" style="background-color:none;display:flex;padding:5px !important; justify-content:center !important;margin-top:45px;position:absolute;">
-            <input type="text" id="txt" placeholder="Type your location here">
-            <button id="sbtn" onclick="submit();"><img id="icon" src="~/Images/search-12-512.png" /></button>
+                <input type="text" id="txt" placeholder="Type your location here" value="frankston">
+                <button id="sbtn" onclick="check();"><img id="icon" src="~/Images/search-12-512.png" /></button>
+            </div>
+
         </div>
 
 
 
-        @*        <div id="map"></div>
-        *@        <div id="container">
-            <div id="chart"></div>
-
-            <div id="circles" class="row">
-                <div id="c1" class="c"><p id="cp1"></p></div>
-                <div id="c2" class="c"><p id="cp2"></p></div>
-                <div id="c3" class="c"><p id="cp3"></p></div>
-                <div id="c4" class="c"><p id="cp4"></p></div>
-                <div id="c5" class="c"><p id="cp5"></p></div>
-                <div id="c6" class="c"><p id="cp6"></p></div>
-
-
-            </div>
-
-            <div class="row autocomplete" style="background-color:none;display:flex;padding:5px !important; justify-content:center !important;margin-top:45px;position:absolute;">
-                <input type="text" id="txt" placeholder="Type your location here">
-                <button id="sbtn" onclick="submit();"><img id="icon" src="~/Images/search-12-512.png" /></button>
-            </div>
-        </div>
     </div>
 
 
-    <!-- map function script -->
-    <script>
 
-        mapboxgl.accessToken = 'pk.eyJ1IjoiamRhaDAwMDEiLCJhIjoiY2ttb3pvMmYyMjlsdzJvdDRzc3R3ZWp1bSJ9.k4l8C8SfWsC8GDxRwdp4xQ'
-        var map = new mapboxgl.Map({
-            container: 'map',
-            style: 'mapbox://styles/jdah0001/ckn43upw24mwn18nz8ko60usa',
-            center: [145.5139, -37.6561],
-            zoom: 12
-        });
-        var marker1 = new mapboxgl.Marker({ color: 'black' })
-            .setLngLat([145.5139, -37.6561])
-            .setPopup(new mapboxgl.Popup().setHTML("<h6>" + "Search your location to see the severity" + "</h6>"))
-            .addTo(map);
+    <div class="container" style="min-height:400px; max-height:fit-content(); border-block-color:#00000030;backdrop-filter:blur(3px);padding:3px; ">
 
-        @*function myfunction() {
-            var location = document.getElementById('search').value;
-            var jsonurl = 'https://fireprediction.ga/forecast?locality=' + location;
-            var forecastdata_longtitude = "";
-            var forecastdata_latitude = "";
-            var forecastdata_FFDI = "";
-            $.getJSON(jsonurl, function (data) {
-                forecastdata_latitude = data.latitude;
-                forecastdata_longtitude = data.longitude;
-                forecastdata_FFDI = data.days[0].FFDI_category;
-                b = parseFloat(forecastdata_latitude);
-                a = parseFloat(forecastdata_longtitude);
-                mapboxgl.accessToken = 'pk.eyJ1IjoiamRhaDAwMDEiLCJhIjoiY2ttb3pvMmYyMjlsdzJvdDRzc3R3ZWp1bSJ9.k4l8C8SfWsC8GDxRwdp4xQ'
-                var map = new mapboxgl.Map({
-                    container: 'map',
-                    style: 'mapbox://styles/jdah0001/ckn43upw24mwn18nz8ko60usa',
-                    center: [a, b],
-                    zoom: 12
-                });
-                var text = forecastdata_FFDI;
-                var marker1 = new mapboxgl.Marker({ color: 'black' })
-                    .setLngLat([a, b])
-                    .setPopup(new mapboxgl.Popup().setHTML("<h2>" + text + "</h2>"))
-                    .addTo(map);
-                mapboxgl.accessToken = 'pk.eyJ1IjoiamRhaDAwMDEiLCJhIjoiY2ttb3pvMmYyMjlsdzJvdDRzc3R3ZWp1bSJ9.k4l8C8SfWsC8GDxRwdp4xQ';
-                var map = new mapboxgl.Map({
-                    container: 'map',
-                    style: 'mapbox://styles/jdah0001/ckn43upw24mwn18nz8ko60usa',
-                    center: [a, b],
-                    zoom: 12
-                });
-                var text = forecastdata_FFDI;
-                var marker1 = new mapboxgl.Marker({ color: 'black' })
-                    .setLngLat([a, b])
-                    .setPopup(new mapboxgl.Popup().setHTML("<h2>" + text + "</h2>"))
-                    .setPopup(new mapboxgl.Popup().setHTML("<h6>" + "Today - you are safe " + "<br>" + "<br>" + "Severity:" + text + "</h6>"))
-                    .addTo(map);
-            })
-        }*@
+        <button class="btn burnoff">Burn-off Notify Form</button>
+        <div class="collapse txt_burnoff inner">
+            <h2> Burn-off(planned burn)</h2>
+            <p style="text-align:justify;">
+                To avoid the spread of bushfire, Burn off the grass, weeds, stubble, undergrowth or vegetation.
+                These burn off without permission can result in fines of up to $20,000 and/or 12 months imprisonment.
+                Moreover check up with your local council to know the laws for lighting fires and burning rubbish.
+                Unregistered burn-offs can cause brigades to be called out unnecessarily.
 
-    </script>
+            </p>
+            <h2> Burn-off checklist</h2>
+
+            <ul>
+                <li>
+                    Check and follow local regulations or laws set down
+                    by CFA or your local council.
+                </li>
+                <li>
+                    Notify neighbours at least two hours before
+                    starting the burn.
+                </li>
+                <li>
+                    Notify VicFire on 1800 668 511
+                </li>
+                <li>
+                    Check the weather forecast for the day of the
+                    burn and a few days afterwards.
+                </li>
+                <li>
+                    Check the fuel moisture conditions.
+                </li>
+
+                <li>
+                    Establish a fire break of no less than three metres
+                    cleared of all flammable material.
+                </li>
+
+                <li>
+                    Make sure there are enough resources on hand to monitor,
+                    contain and extinguish the burn safely and effectively.
+                </li>
 
 
+            </ul>
+
+            <h2> Register your burn-off</h2>
+            <p>Prior notify the Emergency Services Telecommunications Authority (ESTA) of your planned burn</p>
+            <ul>
+                <li>
+                    By  Email: Fill the <a target="_blank" href="@Url.Action("Burnoff","Home")" style="color:red">Burn-off Notify permit</a> and email to <a style="color:red" href="burnoffs@esta.vic.gov.au"> burnoffs@esta.vic.gov.au</a>
+                </li>
+
+                <li> By Phone:  Register your burn-off by calling ESTA on 1800 668 511, 24 hours a day, seven days a week.</li>
+
+                <li> Online: can register online <a href="https://firepermits.vic.gov.au/">Fire Permits Victoria</a></li>
+            </ul>
+
+        </div>
+        <button class="btn s13">Fire Danger Period (Schedule 13) Permit</button>
+        <div class="collapse txt_s13 inner">
+            <h2>Fire Dander Period</h2>
+            <p> CFA declares the Fire Danger during period of increased fire risk.</p>
+            <p> During this fire danger period permits is required who need to use fire in open.</p>
+            <p> Burning of fine fuels where essential, needs a Schedule 13 permit.</p>
+
+            <ul>
+                <li>Online, Submit the online form at <a href="https://firepermits.vic.gov.au/">Fire Permits Victoria</a></li>
+                <li>If unable to apply online, obtain an application form from your local council.</li>
+            </ul>
+
+        </div>
+        <button class="btn s14">Fire Danger Period (Schedule 14) Permit</button>
+        <div class="collapse txt_s14 inner">
+            <p style="text-align:justify;">If burn-off purpose is not covered above by Schedule 13 permit. like biosecurity requirements such as diseased plants or deceased livestock; essential hot works to repair or maintain infrastructure on rail or road corridors, solid fuel catering; fireworks; blacksmithing; hot air ballooning; bird scaring device;</p>
+            <h4>Apply</h4>
+            <ul>
+                <li>
+                    By Email, Fill out your  <a target="_blank" href="@Url.Action("Schedule14","Home")" style="color:red">Schedule 14 permit</a>and mail to <a style="color:red" href="fire.restrictions@cfa.vic.gov.au">  fire.restrictions@cfa.vic.gov.au</a> or post to <hr />
+                    <div style="text-align:left">
+                        <p>CFA Permit Officer</p>
+                        <p>Level 8 136, Exhibition Street</p>
+                        <p> Melbourne VIC 8002</p>
+                        <hr />
+                    </div>
+
+                </li>
+                <li>Online, Submit the online form at <a href="https://firepermits.vic.gov.au/">Fire Permits Victoria</a></li>
+            </ul>
+        </div>
 
 
-    <input id="locality">
-    <button id="random">search</button>
 
+        <button class="btn s40">Total Fire Ban (Section 40) Permit </button>
+        <div class="collapse txt_s40 inner">
+            <h2>Total Fire Ban</h2>
+            <p style="text-align:justify">
+                Don't lit the fire in the open air unless you have a special permit.
+                Total fire ban is declared by the CFA when fire can spread and could be uncontrolable.
+            </p>
+            <h2>Total Fire Ban Permit (Section 40) Eligibility</h2>
+            <ul>
+                <li>Community organisations</li>
+                <li> Charitable organisations</li>
+                <li>Fundraising organisations</li>
+                <li>Statutory corporations</li>
+                <li>Municipal Councils</li>
+                <li>Industrial operations or trade</li>
+            </ul>
 
+            <h6 style="font-weight:bold">Can apply for special purposes</h6>
+            <ul>
+                <li>Carrying out necessary work / business activity</li>
+                <li>Public Entertainment</li>
+                <li>Religious or cultural purposes</li>
+            </ul>
 
-    <!-- Indicator function and api call -->
+            <h2> Activities can do</h2>
+            <ul>
+                <li>Welding, cutting and/or grinding</li>
+                <li>Heating and spreading of bitumen and like substances</li>
+                <li>Blow lamps or gas torches</li>
+                <li>Safety fuses in blasting operations</li>
+                <li>Emergency flares at civil and military aerodromes</li>
+                <li>Flares at a petroleum fractionation plant, a gas plant or any plant of a like nature</li>
+                <li>Industrial heat testing</li>
+                <li>Bee keeping - using bee smokers</li>
+                <li>Catering - use of fire in the open air (applicant must hold a Temporary Food Premises / Stall permit from the relevant Municipal Health Officer)</li>
+                <li>Fireworks and other uses of fire for public entertainment (applicant must hold a Pryotechnical License)</li>
+                <li>Sawmill waste and refuse burners</li>
+                <li>Use of LPG burners for Hot Air Ballooning (applicant must be a commercial operator).</li>
+            </ul>
 
-    <script>
+            <h2>Apply</h2>
+            <ul>
+                <li>
+                    By Email, fill the <a target="_blank" href="@Url.Action("Schedule40","Home")" style="color:red">Section 40 permit</a> and email to <a style="color:red" href="fire.restrictions@cfa.vic.gov.au"> fire.restrictions@cfa.vic.gov.au</a> or mail
+                    <hr />
+                    <p>CFA Permit Officer</p>
+                    <p>Level 8 136 Exhibition Street</p>
+                    <p>Melbourne VIC 8002</p>
 
-        var gWidth = Math.min(d3.select("#chart").node().offsetWidth, 250);
+                </li>
 
-        var gauge = gaugeChart()
-            .height(250)
-            .width(gWidth)
-            .innerRadius(gWidth / 4)
-            .outerRadius((gWidth / 4) + 40);
+            </ul>
 
-        d3.select("#chart").datum([{
-            FFDI: 0,
-            category: "None"
-        }]).call(gauge);
+            <p style="color:darkblue">Permits can be issued prior and be valid for the whole summer.</p>
+            <p style="color:red"> Submit your form early. During peak times otherwise it can take up to a week to issue permits.</p>
+        </div>
+    </div>
 
-        var button = document.getElementById("random");
-        button.addEventListener("click", function () {
-            var locality = document.getElementById("locality").value;
-            Data = getFFDI(locality);
+    <style>
 
-
-            Data.then(d => {
-                console.log(d)
-                //lat = d[""]
-@*                var lat = d["latitude"];
-                var long = d["longitude"]
-                var days = d["days"]
-                console.log(lat);
-*@
-             @*   day1_ffdi = d["days"][0]["FFDI"];
-                day1_ffdi = d["days"][0]["FFDI_category"]
-                day2_ffdi = d["days"][1]["FFDI"];
-                day2_ffdi = d["days"][1]["FFDI_category"]
-                day3_ffdi = d["days"][2]["FFDI"];
-                day3_ffdi = d["days"][2]["FFDI_category"]
-
-
-                console.log(day3_ffdi);*@
-
-
-            })
-
-
-            Data.then(function (d) {
-
-                    d3.select("#chart").datum([
-                        {
-                            FFDI: d["days"][0]["FFDI"],
-                            category: d["days"][0]["FFDI_category"]
-                        }
-                    ]).call(gauge);
-                })
-            });
-
-
-        function getFFDI(locality) {
-            var data = fetch("https://fireprediction.ga/forecast?locality=" + locality)
-                .then(response => {
-                    return response.json();
-                })
-                .catch(error => {
-                    console.log(error)
-                })
-
-            return data;
-
+        .btn {
+            height: 50px;
+            width: 100%;
+            background-color: #00000030;
+            text-align: left;
+            vertical-align: middle;
+            padding-left: 20px;
+            font-family: sans-serif;
+            font-size: 20px;
+            border-block-color: #ffffff80;
+            margin: 2px;
+            border-radius: 10px;
         }
 
-        function randNumberBounds(min, max) {
-            min = Math.ceil(min);
-            max = Math.floor(max);
-            return Math.floor(Math.random() * (max - min)) + min;
-        }
 
 
-        // Based on reusable chart pattern from https://bost.ocks.org/mike/chart/
-        function gaugeChart() {
-            var margin = { top: 0, right: 65, bottom: 10, left: 65 },
-                width = 250,
-                height = 150,
-                arcMin = -2.5,
-                arcMax = 2.5,
-                innerRadius = 70,
-                outerRadius = 80,
-                dataDomain = [0, 11, 24, 49, 74, 100],
-                labelPad = 5,
-                dataValue = function (d) { return +d; },
-                colorScale = d3.scaleQuantile(),
-                arcScale = d3.scaleLinear(),
-                colorOptions = ["#228B22", "#00BFFF", "#FFD700", "#DAA520", "#B22222"],
-                arc = d3.arc();
-
-
-            function chart(selection) {
-                var cat_text;
-                selection.each(function (data) {
-                    // Convert data to standard representation greedily;
-                    // this is needed for nondeterministic accessors.
-                    cat_text = data.map(function (d, i) { return d["category"]; });
-                    data = data.map(function (d, i) { return dataValue(d["FFDI"]); });
-
-                    arcScale = d3.scaleLinear().domain(dataDomain).range([arcMin, -1.2302, -1.0868, 0, 1.045, arcMax]);
-                    colorScale = d3.scaleQuantile().domain(dataDomain).range(colorOptions);
-                    arc = d3.arc().innerRadius(innerRadius)
-                        .outerRadius(outerRadius)
-                        .startAngle(arcMin);
-
-                    // Select the svg element, if it exists.
-                    var svg = d3.select(this).selectAll("svg").data([data]);
-
-                    // Otherwise, create the skeletal chart.
-                    var gEnter = svg.enter().append("svg").append("g");
-                    var arcGEnter = gEnter.append("g").attr("class", "arc");
-                    arcGEnter.append("path").attr("class", "bg-arc");
-                    arcGEnter.append("path").attr("class", "data-arc")
-                        .datum({ endAngle: arcMin, startAngle: arcMin, score: dataDomain[0] })
-                        .attr("d", arc)
-                        .style("fill", colorScale(dataDomain[0]))
-                        .each(function (d) { this._current = d; });
-                    arcGEnter.append("text").attr("class", "arc-label");
-                    arcGEnter.append("text").attr("class", "arc-text");
-
-
-                    arcGEnter.selectAll(".lines").data(arcScale.ticks(5).map(function (d) {
-                        return { score: d };
-                    })).enter()
-                        .append("path")
-                        .attr("class", "lines");
-                    arcGEnter.selectAll(".ticks").data(arcScale.ticks(5))
-                        .enter().append("text")
-                        .attr("class", "ticks");
-
-                    // Update the outer dimensions.
-                    var svg = selection.select("svg");
-                    svg.attr("width", width).attr("height", height);
-                    // Update the inner dimensions.
-                    var g = svg.select("g")
-                        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-                    var arcG = svg.select("g.arc")
-                        .attr("transform", "translate(" +
-                            ((width - margin.left - margin.right) / 2) + "," +
-                            ((height * (2 / 3)) + ")"));
-
-                    svg.select("g.arc .bg-arc")
-                        .datum({ endAngle: arcMax, score: data[0] })
-                        .style("fill", function (d) { return colorScale(d.score); })
-                        .style("opacity", 0.1)
-                        .attr("d", arc);
-
-                    // https://bl.ocks.org/mbostock/1346410
-                    function arcTween(a) {
-                        var i = d3.interpolate(this._current, a);
-                        this._current = i(0);
-                        return function (t) {
-                            return arc(i(t));
-                        };
-                    }
-
-                    var dataArc = svg.select("g.arc .data-arc")
-                        .datum({ score: data[0], startAngle: arcMin, endAngle: arcScale(data[0]) })
-                        .transition()
-                        .duration(750)
-                        .style("fill", function (d) { return colorScale(d.score); })
-                        .style("opacity", function (d) { return d.score < dataDomain[0] ? 0.3 : 1; })
-                        .attrTween("d", arcTween);
-
-                    var arcBox = svg.select("g.arc .bg-arc").node().getBBox();
-
-                    svg.select("text.arc-label")
-                        .datum({ score: data[0] })
-                        .attr("x", (arcBox.width / 2) + arcBox.x)
-                        .attr("y", -20)
-                        .style("fill", function (d) { return colorScale(d.score); })
-                        .style("alignment-baseline", "central")
-                        .style("text-anchor", "middle")
-                        .style("font-weight", "bolder")
-                        .style("font-size", "40px")
-                        .text(function (d) { return d3.format(".1f")(d.score); });
-
-                    svg.select("text.arc-text")
-                        .datum({ score: data[0] })
-                        .attr("x", (arcBox.width / 2) + arcBox.x)
-                        .attr("y", 10)
-                        .style("fill", function (d) { return colorScale(d.score); })
-                        .style("alignment-baseline", "central")
-                        .style("text-anchor", "middle")
-                        .style("font-size", "18px")
-                        .text(cat_text);
-
-                    var markerLine = d3.radialLine()
-                        .angle(function (d) { return arcScale(d); })
-                        .radius(function (d, i) {
-                            return innerRadius + ((i % 2) * ((outerRadius - innerRadius)));
-                        });
-                });
+            .btn:hover {
+                background-color: peru;
             }
 
-            chart.margin = function (_) {
-                if (!arguments.length) return margin;
-                margin = _;
-                return chart;
-            };
 
-            chart.width = function (_) {
-                if (!arguments.length) return width;
-                width = _;
-                return chart;
-            };
-
-            chart.height = function (_) {
-                if (!arguments.length) return height;
-                height = _;
-                return chart;
-            };
-
-            chart.innerRadius = function (_) {
-                if (!arguments.length) return innerRadius;
-                innerRadius = _;
-                return chart;
-            };
-
-            chart.outerRadius = function (_) {
-                if (!arguments.length) return outerRadius;
-                outerRadius = _;
-                return chart;
-            };
-
-            chart.dataDomain = function (_) {
-                if (!arguments.length) return dataDomain;
-                dataDomain = _;
-                return chart;
-            };
-
-            chart.colorOptions = function (_) {
-                if (!arguments.length) return colorOptions;
-                colorOptions = _;
-                return chart;
-            };
-
-            chart.labelPad = function (_) {
-                if (!arguments.length) return labelPad;
-                labelPad = _;
-                return chart;
-            };
-
-            return chart;
+        .inner {
+            padding: 20px;
         }
+    </style>
+    <script>
+
+        $(document).ready(function () {
+
+            $(".burnoff").click(function () {
+                $('.txt_burnoff').collapse('toggle')
+            })
+            $(".s13").click(function () {
+                $('.txt_s13').collapse('toggle')
+            })
+            $(".s14").click(function () {
+                $('.txt_s14').collapse('toggle')
+            })
+            $(".s40").click(function () {
+                $('.txt_s40').collapse('toggle')
+            })
 
 
+        });
+
+
+
+
+
+        function toggle(sdt, edt, tfb) {
+
+            $(".txt_burnoff").collapse('hide');
+            $(".txt_s40").collapse('hide');
+            $(".txt_s13").collapse('hide');
+            $(".txt_s14").collapse('hide');
+
+            var d = new Date();
+            var sdt = new Date(sdt);
+            var edt = new Date(edt);
+
+
+            if (tfb == 'true') {
+                $(".txt_burnoff").collapse('show');
+                $(".txt_s40").collapse('show');
+                $(".txt_s13").collapse('hide');
+                $(".txt_s14").collapse('hide');
+            } else if (tfb == 'false' && d >= sdt && d <= edt) {
+
+                $(".txt_burnoff").collapse('show');
+                $(".txt_s13").collapse('show');
+                $(".txt_s14").collapse('show');
+                $(".txt_s40").collapse('hide');
+
+            } else {
+                $(".txt_burnoff").collapse('show');
+                $(".txt_s13").collapse('hide');
+                $(".txt_s14").collapse('hide');
+                $(".txt_s40").collapse('hide');
+
+            }
+
+
+        }
 
     </script>
 
-    <!--6 days color code script-->
-
-
-
+    <!-- API call -->
 
     <script>
-        let lst = ['#00000030', 'green', 'blue', 'yellow', 'orange', 'red', 'darkred']
 
         function check() {
+            var loc = document.getElementById('txt').value;
+@*            document.getElementById("out").innerHTML = loc;
+*@
+            $.getJSON('https://firesafe-farms.ga/check?locality=' + loc, function (data) {
 
-            var t = document.getElementById('txt').value;
-            document.getElementById('c').style.backgroundColor = lst[colorcode(t)];
-            document.getElementById('c').innerHTML = String(lst[Number(colorcode(t))]);
-        }
+@*                var sdt = Number(data.start.split('/')[0]);
+                var smn = Number(data.start.split('/')[1]);
+                var syr = Number(data.start.split('/')[2]);
+                var edt = Number(data.end.split('/')[0]);
+                var emn = Number(data.end.split('/')[1]);
+                var eyr = Number(data.end.split('/')[2]);*@
+                var sdt = String(data.start);
+                var edt = String(data.end);
+                var tfb = String(data.fire_ban);
+                console.log(tfb)
+
+                toggle(sdt, edt, tfb)
 
 
-
-
-        function colorcode(tmp) {
-
-            if (tmp === '') {
-                return 0;
-            } else if (tmp <= 10) {
-                return 1;
-            } else if (tmp > 10 & tmp <= 20) {
-                return 2;
-            } else if (tmp > 20 & tmp <= 30) {
-                return 3;
-            } else if (tmp > 30 & tmp <= 40) {
-                return 4;
-            } else if (tmp > 40 & tmp <= 50) {
-                return 5;
-            } else if (tmp > 50) {
-                return 6;
-            }
-
+            })
 
         }
+
+
+
 
 
     </script>
 
-    <!--Autocomplete function for search bar-->
+
+    <!--searchbar autofill-->
+
     <script>
+
         function autocomplete(inp, arr, limit) {
             var currentFocus;
             limit = limit || 10;
@@ -661,7 +550,14 @@
             });
         }
         var countries = ["Lindsay point", "Murray-sunset", "Wargan", "Neds corner", "Cullulleraine", "Merbein west", "Merbein", "Mildura", "Merbein south", "Nichols point", "Merrinee", "Koorlong", "Irymple", "Meringur", "Werrimull", "Cardross", "Red cliffs", "Carwarp", "Iraak", "Nangiloc", "Colignan", "Hattah", "Robinvale", "Tol tol", "Happy valley", "Bannerton", "Lake powell", "Boundary bend", "Wemen", "Liparoo", "Annuello", "Wandown", "Kooloonong", "Narrung", "Kenley", "Ouyen", "Panitya", "Kulwin", "Natya", "Winnambool", "Bolton", "Boinka", "Torrita", "Walpeup", "Manangatang", "Piangil", "Murrayville", "Cowangie", "Underbool", "Carina", "Tutye", "Linga", "Cocamba", "Mittyack", "Gerahmin", "Chinkapook", "Turoar", "Towan", "Nyah", "Tempy", "Pier milan", "Nyrraby", "Nyah west", "Vinifera", "Beverford", "Patchewollock", "Lake tyrrell", "Tyrrell downs", "Chillingollah", "Polisbet", "Pira", "Woorinen north", "Tyntynder south", "Tyntynder", "Big desert", "Nandaly", "Bimbourie", "Nowie", "Bulga", "Woorinen south", "Murrawee", "Straten", "Nyarrin", "Waitchie", "Swan hill west", "Swan hill", "Speed", "Ninda", "Tyrrell", "Gowanford", "Ultima", "Ultima east", "Castle donnington", "Pental island", "Turriff", "Turriff east", "Sea lake", "Goschen", "Lake boga", "Fish point", "Lascelles", "Myall", "Springfield", "Chinangin", "Kunat", "Tresco west", "Tresco", "Mystic park", "Winlaton", "Benjeroop", "Murrabit west", "Boigbeat", "Meatian", "Beauchamp", "Lake charm", "Murrabit", "Yaapeet", "Hopetoun", "Banyan", "Berriwillock", "Murnungin", "Lalbert", "Capels crossing", "Woomelang", "Bael bael", "Reedy lake", "Westby", "Koondrook", "Albacutya", "Willangie", "Culgoa", "Wangie", "Wandella", "Kerang", "Teal point", "Gannawarra", "Cohuna", "Watchupga", "Sutton", "Cokum", "Tittybong", "Cannie", "Budgerum east", "Sandhill lake", "Kerang east", "Koroop", "Rainbow", "Marlbed", "Jil jil", "Warne", "Kalpienung", "Towaninny", "Quambatook", "Pine view", "Normanville", "Dingwall", "Tragowel", "Milnes bridge", "Cullen", "Beulah", "Curyo", "Nullawil", "Meering west", "Lake meran", "Macorna north", "Mcmillans", "Keely", "Wee wee rup", "Burkes bridge", "Picola", "Yielima", "Yalca", "Strathmerton", "Ulupna", "Mywee", "Koonoomoo", "Telopea downs", "Kenmare", "Kinnabulla", "Karyrie", "Whirily", "Towaninny south", "Oakvale", "Appin", "Appin south", "Macorna", "Mincha west", "Horfield", "Leitchville", "Gunbower", "Barmah", "Bearii", "Yarroweyah", "Cobram", "Reedy dam", "Ballapur", "Birchip", "Dumosa", "Ninyeunook", "Gredgwin", "Barraport", "Leaghur", "Mincha", "Pyramid hill", "Patho", "Picola west", "Katunga", "Cobram east", "Thologolong", "Burrowye", "Mount alfred", "Walwa", "Yanac", "Netherby", "Jeparit", "Willenabrina", "Wilkur", "Birchip west", "Narraport", "Wycheproof", "Bunguluke", "Jeruk", "Barraport west", "Minmindie", "Canary island", "Loddon vale", "Torrumbarry", "Nathalia", "Waaia", "Muckatah", "Katamatite", "Katamatite east", "Boosey", "Burramine", "Yarrawonga", "Wahgunyah", "Carlyle", "Gooramadda", "Pine mountain", "Tintaldra", "Brim", "Warmur", "Morton plains", "Glenloth east", "Catumnal", "Yando", "Durham ox", "Gladfield", "Sylvaterre", "Jungaburra", "Terrick terrick east", "Wharparilla", "Numurkah", "Naring", "Burramine south", "Bundalong", "Brimin", "Norong", "Rutherglen", "Browns plains", "Barnawartha", "Barnawartha north", "Talgarno", "Granya", "Bungil", "Guys forest", "Broughton", "Lah", "Bangerang", "Thalia", "Glenloth", "Lake marmal", "Boort", "Terrick terrick", "Echuca", "Lower moira", "Kanyapella", "Kotupna", "Kaarimba", "Invergordon", "Tungamah", "Telford", "Wilby", "Boomahnoomoonah", "Bundalong south", "Boorhaman north", "Lilliput", "Cornishtown", "West wodonga", "Gateway island", "Bonegilla", "Bethanga", "Koetong", "Cudgewa", "Towong", "Lorquon", "Crymelon", "Watchem west", "Watchem", "Corack", "Corack east", "Chirrip", "Wycheproof south", "Nareewillock", "Terrappee", "Yarrawalla", "Mologa", "Roslynmead", "Bamawm extension", "Echuca west", "Echuca village", "Yambuna", "Mundoona", "Wunghnu", "Drumanure", "Youanmite", "Youarang", "Peechelba", "Peechelba east", "Boorhaman east", "Chiltern valley", "Chiltern", "Indigo valley", "Huon creek", "Wodonga", "Bandiana", "Georges creek", "Bullioh", "Shelley", "Corryong", "Serviceton", "Kaniva", "Nhill", "Glenlee", "Tarranyurk", "Aubrey", "Cannum", "Warracknabeal", "Areegra", "Massey", "Donald", "Granite flat", "Teddywaddy west", "Teddywaddy", "Buckrabanyule", "Wychitella north", "Mysia", "Fernihurst", "Jarklin", "Calivil", "Mitiamo", "Pine grove", "Kotta", "Koyuga", "Tongala", "Wyuna", "St germains", "Undera", "Bunbartha", "Tallygaroopna", "Katandra west", "Katandra", "Yabba north", "Waggarandall", "Pelluebla", "Almonds", "Killawarra", "Boorhaman", "Springhurst", "Leneva", "Baranduda", "Huon", "Jarvis creek", "Old tallangatta", "Tallangatta east", "Berringama", "Colac colac", "Towong upper", "Antwerp", "Carron", "Litchfield", "Jeffcott north", "Wooroonook", "Charlton", "Barrakee", "Wychitella", "Borung", "Lockington", "Bamawm", "Strathallan", "Wyuna east", "Coomboona", "Marionvale", "St james", "Lake rowan", "Boweya north", "Boweya", "Boralma", "Staghorn flat", "Kiewa", "Tangambalanga", "Tallangatta", "Tallangatta south", "Tallangatta valley", "Lucyvale", "Nariel valley", "Thowgla valley", "Biggara", "Lillimur", "Kiata", "Gerang gerung", "Dimboola", "Kellalac", "Sheep hills", "Boolite", "Gil gil", "Jeffcott", "Woosang", "Bears lagoon", "Prairie", "Tennyson", "Ballendella", "Fairy dell", "Nanneella", "Timmering", "Kyvalley", "Kyabram", "Lancaster", "Mooroopna north", "Shepparton north", "Congupna", "Pine lodge", "Cosgrove", "Dookie", "Boxwood", "Devenish", "Bungeet west", "Thoona", "Mount bruno", "Wangandary", "North wangaratta", "Bowser", "Byawatha", "Eldorado", "Beechworth", "Wooragee", "Yackandandah", "Osbornes flat", "Allans flat", "Gundowring", "Sandy creek", "Charleroi", "Miram", "Wallup", "Lawler", "Laen north", "Dooboobetic", "Yeungroon east", "Wedderburn", "Skinners flat", "Woolshed flat", "Korong vale", "Kinypanial", "Pompapiel", "Dingee", "Milloo", "Diggora", "Rochester", "Merrigum", "Gillieston", "Mooroopna north west", "Ardmona", "Shepparton", "Grahamvale", "Mount major", "Major plains", "Taminick", "Wangaratta south", "Wangaratta", "East wangaratta", "Londrigan", "Tarrawingee", "Everton upper", "Stanley", "Kergunyah", "Lawloit", "Murra warra", "Kewell", "Minyip", "Laen east", "Yeungroon", "Richmond plains", "Wedderburn junction", "Fiery flat", "Serpentine", "Kamarooka north", "Drummartin", "Bonn", "Corop", "Girgarre", "Kyabram south", "Cooma", "Byrneside", "Tatura", "Mooroopna", "Orrvale", "Shepparton east", "Cosgrove south", "Dookie college", "Stewarton", "Goorambat", "Chesney vale", "Winton north", "Laceby", "Oxley flats", "Bruarong", "Kergunyah south", "Tallandoon", "Dartmouth", "Little desert", "Blackheath", "Laen", "Rich avon", "Cope cope", "Gooroc", "Coonooer bridge", "Yawong hills", "Nine mile", "Glenalbyn", "Powlett plains", "Auchmore", "Tandarra", "Kamarooka", "Hunter", "Elmore", "Carag carag", "Stanhope", "Girgarre east", "Harston", "Tatura east", "Toolamba", "Kialla", "Kialla east", "Caniambo", "Gowangardie", "Nalinga", "Broken creek", "Glenrowan", "Oxley", "Milawa", "Markwood", "Everton", "Bowmans forest", "Murmungee", "Mudgegonga", "Glen creek", "Dederang", "Eskdale", "Mitta mitta", "Tom groggin", "Wail", "Kalkee", "Murtoa", "Rich avon west", "Rich avon east", "Avon plains", "Swanwater west", "Sutherland", "Slaty creek", "Berrimal", "Kurraca west", "Kurraca", "Kurting", "Salisbury west", "Raywood", "Neilborough", "Burnewang", "Burramboot", "Rushworth", "Waranga shores", "Dhurringile", "Arcadia", "Tamleugh north", "Earlston", "Koonda", "Upotipotpon", "Goomalibee", "Benalla", "Winton", "Glenrowan west", "Docker", "Bobinawarrah", "Whorouly", "Gapsted", "Barwidgee", "Upper gundowring", "Peronne", "Goroke", "Nurcoung", "Jung", "Rupanyup", "Banyena", "Traynors lagoon", "Swanwater", "Gowar east", "Fentons creek", "Wehla", "Brenanah", "Inglewood", "Bridgewater north", "Yarraberb", "Huntly north", "Bagshot north", "Avonmore", "Runnymede", "Murchison north", "Karramomus", "Violet town", "Tarnook", "Greta west", "Greta", "Moyhu", "Whorouly south", "Whorouly east", "Myrtleford", "Rosewhite", "Kancoona", "Running creek", "Duchembegarra", "Pimpinio", "Dooen", "Grays bridge", "Gre gre north", "St arnaud north", "St arnaud", "St arnaud east", "Kooreh", "Logan", "Kingower", "Bridgewater", "Campbells forest", "Sebastian", "Goornong", "Creek view", "Colbinabbin", "Wanalta", "Moora", "Murchison", "Murchison east", "Moorilim", "Arcadia south", "Miepoll", "Tamleugh", "Baddaginnie", "Lurg", "Upper lurg", "Hansonville", "Meadow creek", "Carboor", "Merriang south", "Buffalo river", "Ovens", "Coral bank", "Mongans bridge", "Neuarpurr", "Minimay", "Grass flat", "Longerenong", "Marnoo", "Marnoo east", "Gre gre south", "Gre gre", "Moolerr", "Burkes flat", "Rheola", "Arnold west", "Arnold", "Derby", "Woodvale", "Whipstick", "Huntly", "Bagshot", "Muskerry", "Myola", "Toolleen", "Cornella", "Gobarup", "Whroo", "Wahring", "Molka", "Moglonemby", "Riggs creek", "Boho", "Warrenbayne", "Molyullah", "Upper ryans creek", "Greta south", "Edi", "Nug nug", "Eurobin", "Porepunkah", "Bright", "Tawonga", "Gymbowen", "Mitre", "Natimuk", "Vectis", "Horsham", "Riverside", "Lubeck", "Marnoo west", "Bolangum", "Beazleys bridge", "Carapooee west", "Carapooee", "Emu", "Cochranes creek", "Mcintyre", "Murphys creek", "Llanelly", "Leichardt", "Myers flat", "Eaglehawk north", "Epsom", "Ascot", "Wellsford", "Fosterville", "Bailieston", "Kirwans bridge", "Pranjip", "Euroa", "Balmattum", "Swanpool", "Moorngag", "Tatong", "Myrrhee", "King valley", "Edi upper", "Mount buffalo", "Arapiles", "Quantong", "Lower norton", "Haven", "Drung", "St helens plains", "Wallaloo", "Kanya", "Tottington", "Rostron", "Stuart mill", "Bealiba", "Moliagul", "Newbridge", "Woodstock on loddon", "Marong", "Wilsons hill", "Maiden gully", "Long gully", "East bendigo", "Longlea", "Axedale", "Redcastle", "Moormbool west", "Wirrate", "Nagambie", "Longwood", "Sheans creek", "Marraweeney", "Boho south", "Lima", "Whitfield", "Dandongadale", "Buckland", "Wandiligong", "Germantown", "Tawonga south", "Mount beauty", "Nelse", "Benambra", "Cobberas", "Benayeo", "Bringalbert", "Ozenkadnook", "Karnak", "Miga lake", "Tooan", "Noradjuha", "Mckenzie creek", "Bungalally", "Wal wal", "Callawadda", "Wallaloo east", "Paradise", "Winjallok", "Dalyenong", "Goldsborough", "Painswick", "Waanyarra", "Laanecoorie", "Woodstock west", "Shelbourne", "Lockwood", "Kangaroo flat", "Spring gully", "Strathfieldsaye", "Knowsley", "Ladys pass", "Mount camel", "Locksley", "Longwood east", "Creightons creek", "Kithbrook", "Creek junction", "Lima east", "Lima south", "Samaria", "Whitlands", "Cheshunt", "Smoko", "Bogong", "Patyah", "Jilpanger", "Wonwondah", "Laharum", "Dadswells bridge", "Riachella", "Morrl morrl", "Redbank", "Moyreisk", "Archdale", "Dunluce", "Dunolly", "Lockwood south", "Ravenswood", "Big hill", "Mandurang south", "Emu creek", "Axe creek", "Eppalock", "Costerfield", "Graytown", "Puckapunyal", "Mitchellstown", "Tabilk", "Gooram", "Kelvin view", "Strathbogie", "Bridge creek", "Archerton", "Tolmie", "Rose river", "Harrietville", "Hotham heights", "Falls creek", "Glen wills", "Glen valley", "Suggan buggan", "Apsley", "Ullswater", "Charam", "Clear lake", "Nurrabiel", "Glenorchy", "Campbells bridge", "Greens creek", "Navarre", "Barkly", "Natte yallock", "Archdale junction", "Mount hooghly", "Bet bet", "Bromley", "Eddington", "Neereman", "Eastville", "Harcourt north", "Sedgwick", "Lyal", "Kimbolton", "Derrinal", "Heathcote", "Northwood", "Mangalore", "Avenel", "Upton hill", "Tarcombe", "Ruffy", "Barjarg", "Cheshunt south", "Deddick valley", "Mockinya", "Wartook", "Ledcourt", "Deep lead", "Tulkara", "Wattle creek", "Landsborough", "Rathscar", "Timor west", "Timor", "Havelock", "Baringhup west", "Baringhup", "Nuggetty", "Walmer", "Ravenswood south", "Sutton grange", "Myrtle creek", "Mia mia", "Merton", "Ancona", "Bonnie doon", "Wabonga", "Abbeyard", "Bundara", "Omeo valley", "Brumby", "Edenhope", "Wombelano", "Douglas", "Toolondo", "Brimpaen", "Lake lonsdale", "Stawell", "Concongella", "Joel joel", "Landsborough west", "Frenchmans", "Moonambel", "Tanwood", "Rathscar west", "Wareek", "Bowenvale", "Carisbrook", "Moolort", "Tarrengower", "Maldon", "Gower", "Harcourt", "Redesdale", "Heathcote south", "Tooborac", "Seymour", "Whiteheads creek", "Caveat", "Terip terip", "Gobur", "Maindample", "Mansfield", "Barwite", "Merrijig", "Selwyn", "Anglers rest", "Bingo munjie", "Omeo", "Hinnomunjie", "Wulgulmerang", "Langkoop", "Harrow", "Telangatuk east", "Zumsteins", "Mount dryden", "Illawarra", "Joel south", "Shays flat", "Warrenmang", "Percydale", "Avoca", "Homebush", "Bung bong", "Moonlight flat", "Maryborough", "Welshmans reef", "Muckleford", "Castlemaine", "Faraday", "Elphinstone", "Metcalfe", "Glenhope", "Glenhope east", "Pyalong", "Glenaroua", "Hilldene", "Highlands", "Dropmore", "Kanumbra", "Woodfield", "Mount buller", "Wonnangatta", "Dargo", "Dinner plain", "Cobungra", "Bindi", "Tubbut", "Bonang", "Kadnook", "Kanagulk", "Cherrypool", "Halls gap", "Fyans creek", "Mokepilly", "Black range", "Great western", "Bulgana", "Crowlands", "Glenlofty", "Adelaide lead", "Daisy hill", "Majorca", "Joyces creek", "Newstead", "Green gully", "Yapeen", "Campbells creek", "Chewton", "Barfold", "Sugarloaf creek", "Tallarook", "Trawool", "Ghin ghin", "Yarck", "Fawcett", "Maintongoon", "Boorolite", "Mirimbah", "Tongio", "Nunniong", "Wulgulmerang west", "Wulgulmerang east", "Delegate river", "Bendoc", "Poolaijelo", "Balmoral", "Glenisla", "Lake fyans", "Bellellen", "Elmhurst", "Glenpatrick", "Amphitheatre", "Lillicur", "Talbot", "Red lion", "Cotswold", "Strathlea", "Sandon", "Strangways", "Guildford", "Vaughan", "Fryerstown", "Taradale", "Malmsbury", "Metcalfe east", "Langley", "Sidonia", "Baynton", "Nulla vale", "Kerrisdale", "Molesworth", "Cathkin", "Koriella", "Alexandra", "Devils river", "Lake eildon", "Howes creek", "Goughs bay", "Delatite", "Howqua hills", "Howitt plains", "Wongungarra", "Gelantipy", "Buldah", "Powers creek", "Connewirricoo", "Culla", "Rocklands", "Bellfield", "Pomonal", "Moyston", "Rhymney", "Dunneworthy", "Mount cole creek", "Eversley", "Lexton", "Caralulup", "Mount glasgow", "Mount cameron", "Glengower", "Campbelltown", "Yandoit hills", "Yandoit", "Glenlyon", "Glenluce", "Drummond north", "Kyneton", "Pastoria", "Benloch", "High camp", "Broadford", "Reedy creek", "Strath creek", "Homewood", "Killingworth", "Whanregarwen", "Taylor bay", "Macs cove", "Billabong", "Cassilis", "Swifts creek", "Dorodong", "Dergholm", "Chetwynd", "Tarrayoukyan", "Pigeon ponds", "Vasey", "Norval", "Ararat", "Warrak", "Mount cole", "Glenlogie", "Mount lonarch", "Burnbank", "Evansford", "Clunes", "Ullina", "Smeaton", "Werona", "Franklinford", "Mount franklin", "Porcupine ridge", "Drummond", "Lauriston", "Pipers creek", "Lancefield", "Goldie", "Willowmavin", "Moranding", "Kilmore east", "Sunday creek", "Flowerdale", "Yea", "Limestone", "Acheron", "Thornton", "Eildon", "Jamieson", "Howqua", "Wentworth", "Butchers ridge", "Yalmy", "Chandlers creek", "Nareen", "Englefield", "Mooralla", "Grampians", "Mafeking", "Cathcart", "Dobie", "Bayindeen", "Raglan", "Chute", "Waubra", "Mount beckworth", "Lawrence", "Kooroocheang", "Basalt", "Dry diggings", "Denver", "Spring hill", "Tylden", "Kyneton south", "Carlsruhe", "Newham", "Forbes", "Kilmore", "Clonbinane", "Murrindindi", "Taggerty", "Rubicon", "Reynard", "Brookville", "Doctors flat", "Ensay north", "Buchan", "W tree", "Goongerah", "Combienbar", "Coojar", "Gatum", "Mirranatwa", "Willaura north", "Maroona", "Denicull creek", "Buangor", "Waterloo", "Langi kal kal", "Glenbrae", "Mount bolton", "Glendaruel", "Tourello", "Glendonald", "Blampied", "Eganstown", "Daylesford", "Musk", "Wheatsheaf", "Little hampton", "Trentham", "Woodend", "Hesket", "Romsey", "Bylands", "Wandong", "Glenburn", "Kevington", "Arbuckle", "Crooked river", "Cowa", "Ensay", "Wroxham", "Maramingo creek", "Lake mundi", "Warrock", "Brimboal", "Wando bridge", "Brit brit", "Gringegalgona", "Cavendish", "Langi logan", "Ballyrogan", "Middle creek", "Beaufort", "Ercildoune", "Addington", "Learmonth", "Coghills creek", "Creswick", "Kingston", "Newlyn north", "Mount prospect", "Sailors falls", "Leonards hill", "Bullarto", "Lyonville", "North blackwood", "Trentham east", "Ashbourne", "Macedon", "Mount macedon", "Cherokee", "Kerrie", "Monegeetta", "Chintin", "Darraweit guim", "Wallan", "Upper plenty", "Buxton", "Enochs point", "Knockwood", "Tamboritha", "Marthavale", "Stirling", "Reedy flat", "Nurran", "Errinundra", "Club terrace", "Noorinbee north", "Wangarabell", "Wando vale", "Konongwootong", "Melville forest", "Victoria valley", "Willaura", "Tatyoon", "Trawalla", "Burrumbeet", "Windermere", "Blowhard", "Bald hills", "Cabbage tree", "Dean", "Mollongghip", "Korweinguboora", "Blakeville", "Barrys reef", "Lerderderg", "Bullengarook", "New gisborne", "Riddells creek", "Bolinda", "Beveridge", "Whittlesea", "Kinglake west", "Pheasant creek", "Kinglake", "Toolangi", "Gaffneys creek", "Crookayan", "Buragwonduc", "Moroka", "Miowera", "Hawkhurst", "Timbarra", "Noorinbee", "Genoa", "Mallacoota", "Corndale", "Nangeela", "Dunrobin", "Carapook", "Wootong vale", "Victoria point", "Bornes hill", "Rossbridge", "Yalla-y-poora", "Cross roads", "Stockyard hill", "Lake goldsmith", "Nerring", "Brewster", "Mitchell park", "Mount rowan", "Glen park", "Wattle flat", "Bullarook", "Springbank", "Barkstead", "Spargo creek", "Blackwood", "Greendale", "Gisborne", "Sunbury", "Clarkefield", "Eden park", "Humevale", "Kinglake central", "Narbethong", "Marysville", "Licola north", "Ryans", "Deptford", "Tambo crossing", "Buchan south", "Wingan river", "Gipsy point", "Casterton", "Coleraine", "Gritjurk", "Bulart", "Stavely", "Stoneleigh", "Mena park", "Carngham", "Bo peep", "Cardigan", "Alfredton", "Ballarat central", "Nerrina", "Gong gong", "Bungaree", "Gordon", "Bunding", "Ballan", "Gisborne south", "Wildwood", "Mickleham", "Craigieburn", "Donnybrook", "Woodstock", "Yan yean", "Arthurs creek", "Strathewen", "St andrews", "Steels creek", "Cambarville", "Matlock", "Woods point", "Licola", "Sargood", "Nap nap marra", "Wrathung", "Budgee budgee", "Tabberabbera", "Double bridges", "Bete bolong north", "Orbost", "Cabbage tree creek", "Cann river", "Lindsay", "Sandford", "Clover flat", "Wannon", "Hensley park", "Karabeal", "Dunkeld", "Glenthompson", "Lake bolac", "Mininera", "Streatham", "Lake wongan", "Mount emu", "Chepstowe", "Snake valley", "Haddon", "Smythes creek", "Mount clear", "Navigators", "Dunnstown", "Millbrook", "Myrniong", "Korobeit", "Coimadai", "Toolern vale", "Diggers rest", "Oaklands junction", "Wollert", "Mernda", "Doreen", "Cottles bridge", "Dixons creek", "Chum creek", "Healesville", "Fernshaw", "East warburton", "Mcmahons creek", "Reefton", "Jericho", "Toolome", "Moornapa", "Cobbannah", "Tonghi creek", "Tamboon", "Strathdownie", "Bahgallah", "Henty", "Paschendale", "Tarrenlea", "Bochara", "Moutajup", "Wickliffe", "Westmere", "Carranballac", "Skipton", "Pittong", "Linton", "Scarsdale", "Smythesdale", "Ross creek", "Magpie", "Buninyong", "Scotsburn", "Yendon", "Mount egerton", "Ingliston", "Pentland hills", "Darley", "Long forest", "Harkness", "Kurunjang", "Plumpton", "Bulla", "Greenvale", "Campbellfield", "Epping", "South morang", "Yarrambat", "Hurstbridge", "Panton hill", "Christmas hills", "Yarra glen", "Tarrawarra", "Toombon", "Glenfalloch", "Worrowing", "Wrixon", "Bullumwaal", "Waterholes", "Nowa nowa", "Wairewa", "Bete bolong", "Jarrahmond", "Brodribb river", "Bellbird creek", "Bemm river", "Killara", "Merino", "Tahara bridge", "Tahara", "Hamilton", "Strathkellar", "Narrapumelap south", "Newtown", "Napoleons", "Durham lead", "Clarendon", "Lal lal", "Bungal", "Mount wallace", "Fiskville", "Glenmore", "Maddingley", "Hopetoun park", "Brookfield", "Cobblebank", "Grangefields", "Fraser rise", "Hillside", "Keilor lodge", "Melbourne airport", "Gowanbrae", "Glenroy", "Reservoir", "Bundoora", "Greensborough", "Eltham north", "Kangaroo ground", "Yering", "Gruyere", "Badger creek", "Warburton", "Thomson", "Koorool", "Woolenook", "Iguana creek", "Mount taylor", "Clifton creek", "Bruthen", "Manorina", "Tahara west", "Yulecart", "Morgiana", "Tarrington", "Croxton east", "Nerrin nerrin", "Vite vite north", "Bradvale", "Mannibadar", "Berringa", "Staffordshire reef", "Enfield", "Garibaldi", "Grenville", "Elaine", "Morrisons", "Balliang", "Rowsley", "Parwan", "Eynesbury", "Strathtulloh", "Fieldstone", "Truganina", "Burnside", "St albans", "Keilor east", "Essendon", "Coburg", "Preston", "Heidelberg heights", "Lower plenty", "Templestowe", "Warrandyte", "Warrandyte south", "Chirnside park", "Lilydale", "Launching place", "Don valley", "Millgrove", "Big pats creek", "Toorongo", "Baw baw", "Yangoura", "Glenmaggie", "Gillum", "Monomak", "Valencia creek", "Briagolong", "Glenaladale", "Wuk wuk", "Melwood", "Granite rock", "Sarsfield", "Tambo upper", "Toorloo arm", "Tostaree", "Wombat creek", "Simpsons creek", "Newmerella", "Marlo", "Dartmoor", "Digby", "Grassdale", "Branxholme", "Yatchaw", "Tabor", "Penshurst", "Woodhouse", "Nareeb", "Chatsworth", "Woorndoo", "Dundonnell", "Pura pura", "Willowvale", "Cape clear", "Illabarook", "Dereel", "Mount mercer", "Cargerie", "Beremboke", "Balliang east", "Mount cottrell", "Sunshine west", "Tottenham", "Footscray", "North melbourne", "Abbotsford", "Kew", "Balwyn north", "Blackburn north", "Donvale", "Ringwood", "Croydon", "Montrose", "Mount evelyn", "Wandin east", "Seville", "Woori yallock", "Yarra junction", "Wesburn", "Ada", "Noojee", "Loch valley", "Tanjil bren", "Boisdale", "Stockdale", "Fernbank", "Walpa", "Lindenow", "Calulu", "Wy yung", "Lucknow", "Nicholson", "Johnsonville", "Swan reach", "Kalimna west", "Waygara", "Corringle", "Mumbannar", "Byaduk north", "Buckley swamp", "Vite vite", "Derrinallum", "Mingay", "Mount bute", "Wallinduc", "Werneth", "Rokewood junction", "Corindhap", "Meredith", "Steiglitz", "Staughton vale", "Quandong", "Wyndham vale", "Tarneit", "Hoppers crossing", "Altona", "Altona north", "Prahran", "Glen iris", "Burwood", "Burwood east", "Vermont south", "Bayswater", "Boronia", "Mount dandenong", "Olinda", "Silvan", "Yellingbo", "Hoddles creek", "Gladysdale", "Three bridges", "Powelltown", "Tanjil", "Coongulla", "Newry", "Bushy park", "Munro", "Lindenow south", "Bairnsdale", "East bairnsdale", "Broadlands", "Metung", "Nungurner", "Lakes entrance", "Lake tyers", "Winnap", "Hotspur", "Condah", "Wallacedale", "Mount napier", "Gazette", "Caramut", "Hexham", "Darlington", "Lismore", "Rokewood", "Shelford", "She oaks", "Anakie", "Little river", "Mambourin", "Werribee", "Point cook", "Brighton", "Carnegie", "Oakleigh", "Glen waverley", "Wheelers hill", "Knoxfield", "Upper ferntree gully", "Tecoma", "The patch", "Emerald", "Avonsleigh", "Gembrook", "Beenak", "Gentle annie", "Piedmont", "Neerim north", "Icy creek", "Caringal", "Walhalla", "Walhalla east", "Llowalong", "Stratford", "Goon nure", "Forge creek", "Eagle point", "Boole poole", "Nyerimilang", "Greenwald", "Lyons", "Byaduk", "Gerrigerrup", "Minhamite", "Purdeet", "Berrybank", "Bamganie", "Lethbridge", "Maude", "Cocoroc", "Werribee south", "Highett", "Heatherton", "Springvale", "Dandenong north", "Lysterfield south", "Lysterfield", "Belgrave south", "Cockatoo", "Neerim", "Neerim east", "Fumina south", "Rawson", "Seaton", "Heyfield", "Tinamba", "Maffra", "Perry bridge", "Meerlieu", "Bengworden", "Ocean grange", "Nelson", "Drik drik", "Myamyn", "Breakaway creek", "Knebsworth", "Macarthur", "Warrabkook", "Mortlake", "Duverney", "Cressy", "Barunah park", "Teesdale", "Bannockburn", "Sutherlands creek", "Lara", "Point wilson", "Mordialloc", "Keysborough", "Dandenong", "Eumemmerring", "Narre warren", "Harkaway", "Beaconsfield upper", "Pakenham upper", "Nar nar goon north", "Tynong north", "Tonimbuk", "Labertouche", "Jindivick", "Neerim south", "Hill end", "Moondarra", "Jacob creek", "Coopers creek", "Toongabbie", "Cowwarr", "Denison", "Riverslea", "Loch sport", "Mount richmond", "Drumborg", "Milltown", "Hawkesdale", "Minjah", "Bookaar", "Larralea", "Leslie manor", "Foxhow", "Barunah plains", "Hesse", "Inverleigh", "Moorabool", "Avalon", "Bangholme", "Lynbrook", "Narre warren south", "Berwick", "Officer", "Pakenham", "Bunyip north", "Crossover", "Buln buln east", "Willow grove", "Boola", "Winnindoo", "Nambrok", "Fulham", "Bundalaguah", "Montgomery", "Airly", "Clydebank", "Lake wellington", "Heywood", "Lake condah", "Bessiebelle", "Broadwater", "Woolsthorpe", "Ellerslie", "Kolora", "Kariah", "Cundare north", "Weering", "Wingeel", "Murgheboluc", "Stonehaven", "Gheringhap", "Batesford", "Norlane", "Seaford", "Skye", "Cranbourne west", "Cranbourne east", "Clyde north", "Officer south", "Nar nar goon", "Garfield", "Bunyip", "Longwarry", "Drouin", "Drouin east", "Buln buln", "Nilma north", "Shady creek", "Trafalgar", "Tanjil south", "Yallourn north", "Glengarry west", "Glengarry north", "Glengarry", "Kilmany", "Sale", "East sale", "The heart", "Seacombe", "Homerton", "Orford", "Willatook", "Warrong", "Ballangeich", "The sisters", "Glenormiston south", "Glenormiston north", "Dreeite", "Cundare", "Beeac", "Eurack", "Ombersley", "Gnarwarre", "Barrabool", "Fyansford", "Drysdale", "Portarlington", "St leonards", "Frankston", "Langwarrin", "Cranbourne south", "Devon meadows", "Clyde", "Cardinia", "Koo wee rup", "Pakenham south", "Cora lynn", "Vervale", "Iona", "Modella", "Drouin south", "Warragul", "Darnum", "Yarragon", "Trafalgar east", "Westbury", "Tyers", "Rosedale", "Longford", "Pearsondale", "Dutson", "Dutson downs", "Gorae west", "Gorae", "Heathmere", "Tyrendarra", "Tarrone", "Grassmere", "Framlingham east", "Terang", "Noorat", "Boorcan", "Gnotuk", "Camperdown", "Chocolyn", "Weerite", "Pomborneit north", "Wool wool", "Dreeite south", "Winchelsea", "Buckley", "Mount moriac", "Waurn ponds", "Grovedale", "Moolap", "Leopold", "Wallington", "Mannerim", "Swan bay", "Mount eliza", "Baxter", "Pearcedale", "Blind bight", "Tooradin", "Monomeith", "Yannathan", "Catani", "Ripplebrook", "Warragul south", "Bona vista", "Moe", "Newborough", "Yallourn", "Maryvale", "Traralgon", "Traralgon east", "Flynn", "Paradise beach", "Narrawong", "Tyrendarra east", "Codrington", "St helens", "Kirkstall", "Koroit", "Winslow", "Purnim", "Framlingham", "Garvoc", "Alvie", "Warrion", "Ondit", "Irrewarra", "Moriac", "Freshwater creek", "Mount duneed", "Connewarre", "Ocean grove", "Point lonsdale", "Mount martha", "Moorooduc", "Tyabb", "Somerville", "Caldermeade", "Lang lang", "Heath hill", "Athlone", "Hallora", "Ellinbank", "Cloverlea", "Yarragon south", "Trafalgar south", "Coalville", "Driffield", "Morwell", "Hazelwood north", "Traralgon south", "Loy yang", "Flynns creek", "Gormandale", "Hiamdale", "Willung", "Stradbroke", "Golden beach", "Cape bridgewater", "Cashmore", "Portland north", "Bolwarra", "Yambuk", "Port fairy", "Toolong", "Southern cross", "Yarpturk", "Purnim west", "Panmure", "Dixie", "Cobrico", "Bostocks creek", "Tesbury", "Tandarook", "Koallah", "Pomborneit", "Pomborneit east", "Corunnun", "Balintore", "Colac", "Warncoort", "Birregurra", "Winchelsea south", "Wurdiboluc", "Gherang", "Modewarre", "Paraparap", "Torquay", "Tuerong", "Hastings", "French island", "Nyora", "Poowong north", "Mountain view", "Seaview", "Ferndale", "Allambee", "Allambee reserve", "Childers", "Thorpdale", "Narracan", "Hazelwood", "Hazelwood south", "Callignee", "Willung south", "Seaspray", "Portland west", "Portland", "Rosebrook", "Killarney", "Tower hill", "Illowa", "Dennington", "Warrnambool", "Wangoom", "Cudgee", "Laang", "Ecklin south", "Elingamite north", "Cobden", "Bullaharre", "South purrumbete", "Stonyford", "Swan marsh", "Pirron yallock", "Larpent", "Elliminyt", "Yeo", "Bambra", "Wensleydale", "Anglesea", "Bellbrae", "Jan juc", "Sorrento", "Arthurs seat", "Dromana", "Merricks north", "Bittern", "Crib point", "Loch", "Poowong", "Poowong east", "Strzelecki", "Wild dog valley", "Hallston", "Allambee south", "Mirboo north", "Delburn", "Yinnar", "Yinnar south", "Jeeralang junction", "Jeeralang", "Callignee north", "Darriman", "Giffard west", "Giffard", "Allansford", "Naringal", "Naringal east", "Glenfyne", "Jancourt east", "Carpendeit", "Bungador", "Irrewillipe", "Irrewillipe east", "Barongarook west", "Barongarook", "Yeodene", "Murroon", "Deans marsh", "Boonah", "Rye", "Fingal", "Boneo", "Main ridge", "Red hill south", "Merricks", "Hmas cerberus", "The gurdies", "Woodleigh", "Jeetho", "Korumburra", "Arawata", "Mount eccles", "Leongatha north", "Berrys creek", "Boolarra", "Budgeree", "Mount tassie", "Blackwarry", "Carrajung lower", "Mepunga west", "Mepunga east", "Nullawarre", "Nullawarre north", "Ayrford", "Brucknell", "Curdies river", "Timboon", "Scotts creek", "Simpson", "Gerangamete", "Barwon downs", "Pennyroyal", "Eastern view", "Aireys inlet", "Cape schanck", "Flinders", "Cowes", "Bass", "Glen forbes", "Almurta", "Kernot", "Bena", "Korumburra south", "Ruby", "Leongatha", "Koorooman", "Boorool", "Mardan", "Mirboo", "Boolarra south", "Grand ridge", "Macks creek", "Balook", "Won wron", "The cove", "Nirranda", "Curdievale", "Cowleys creek", "Carlisle river", "Gellibrand", "Kawarren", "Forrest", "Benwerrin", "Lorne", "Summerlands", "Ventnor", "Woolamai", "Ryanston", "Glen alvie", "Kongwak", "Outtrim", "Leongatha south", "Nerrena", "Dumbalk", "Dumbalk north", "Madalya", "Devon north", "Woodside", "Nirranda south", "Timboon west", "Paaratte", "Newfield", "Cooriemungle", "Barramunga", "Cape woolamai", "Kilcunda", "Dalyston", "West creek", "Lance creek", "Koonwarra", "Meeniyan", "Dollar", "Turtons creek", "Gunyah", "Wonyip", "Hiawatha", "Staceys bridge", "Jack river", "Yarram", "Peterborough", "Port campbell", "Kennedys creek", "Chapple vale", "Wyelangta", "Ferguson", "Beech forest", "Wye river", "Separation creek", "Wonthaggi", "Inverloch", "Pound creek", "Tarwin", "Stony creek", "Foster north", "Wonga", "Mount best", "Toora north", "Binginwarri", "Alberton west", "Alberton", "Hunterston", "Princetown", "Lavers hill", "Weeaproinah", "Tanybryn", "Kennett river", "Cape paterson", "Venus bay", "Tarwin lower", "Middle tarwin", "Buffalo", "Foster", "Toora", "Welshpool", "Hedley", "Langsborough", "Port albert", "Tarraville", "Manns beach", "Gellibrand lower", "Yuulong", "Glenaire", "Aire valley", "Apollo bay", "Wongarra", "Fish creek", "Port welshpool", "Wattle hill", "Johanna", "Yanakie", "Hordern vale", "Cape otway", "Walkerville", "Waratah bay", "Sandy point", "Wilsons promontory", "Travancore", "Sunset strip", "Archies creek", "Rippleside", "Tantaraboo", "Strathmore heights", "South wharf", "Grey river", "Adams estate", "Windsor", "Ironbark", "Bakery hill", "Balaclava", "Eureka", "Ripponlea", "Drumcondra", "Waterford park", "Dutton way", "Waterways", "Seddon", "Walkerville south", "Kooyong", "Yabba south", "Vermont", "Ormond", "Dockers plains", "Banksia peninsula", "Coburg north", "Clydesdale", "Viewbank", "Narre warren east", "The basin", "Parkville", "Altona meadows", "Yundool", "Lake eppalock", "Bolwarrah", "Barkers creek", "Princes hill", "Wimbledon heights", "Wandana heights", "Warrayure", "Whittington", "Newlands arm", "Charlemont", "Macleod", "Lalor", "Rosanna", "South dudley", "Ringwood north", "Essendon fields", "Esmond", "Walkerville north", "Swan island", "Pascoe vale", "Fairley", "Nayook", "Curlewis", "Queenscliff", "Spotswood", "Marcus hill", "North geelong", "Moggs creek", "Fairhaven", "Merrimu", "Russells bridge", "Flora hill", "Taylors lakes", "Bravington", "Wattle glen", "Longwarry north", "Aberfeldie", "Maryknoll", "Watsonia north", "Seville east", "Maribyrnong", "Docklands", "Rocklyn", "Sailors hill", "Seabrook", "Caulfield south", "Notting hill", "Maidstone", "Watsonia", "Montmorency", "Southbank", "Rythdale", "Snake island", "South melbourne", "Red hill", "Oakleigh east", "Baw baw village", "Fitzroy", "Eaglehawk", "Tylden south", "Thalloo", "Sunderland bay", "West footscray", "Soldiers hill", "Chewton bushlands", "Caulfield", "Tidal river", "Yarraville", "Melbourne", "Yarrawonga south", "Yuroke", "Hamlyn heights", "Chapel flat", "Manifold heights", "Cobains", "Huntingdale", "Kingsville", "Stanhope south", "Elsternwick", "Koo wee rup north", "Colbrook", "Rhyll", "Heytesbury lower", "Miners rest", "East geelong", "Jumbuk", "Bradford", "Muckleford south", "Churchill", "Bullarto south", "Ebden", "Trida", "Doncaster east", "Rosebery", "Blackburn south", "Roses gap", "Canterbury", "Park orchards", "Keilor north", "Cabarita", "Taroon", "Mount waverley", "Dawson", "Alma", "Golden point", "Woodside north", "Barnadown", "Macclesfield", "Ellaswood", "Koornalla", "Mandurang", "Toolamba west", "Hampton", "Kealba", "Simson", "Lemnos", "Mailors flat", "Mckenzie hill", "Invermay", "Tarnagulla", "Mount toolebewong", "Bathumi", "Hallam", "Lamplough", "Yelta", "Upwey", "Freeburgh", "Calrossie", "Laverton", "York plains", "Elevated plains", "Carrum", "Brandy creek", "Rochford", "Skenes creek north", "Petticoat creek", "Harmers haven", "North wonthaggi", "Wattle bank", "Anderson", "Marengo", "Pioneer bay", "Tetoora road", "Manor lakes", "Skenes creek", "Deepdene", "Bentleigh", "Dandenong south", "Fumina", "Surrey hills", "Mornington", "Vesper", "Carlton north", "Beaconsfield", "Thornbury", "Amor", "Fawkner", "Hepburn", "Port melbourne", "Newport", "Williamstown", "Miralie", "Wood wood", "Keilor", "Rosebud", "Bayles", "Cranbourne north", "Mooroolbark", "Newlyn", "Clifton springs", "Coomoora", "Piries", "Bunkers hill", "Durdidwarrah", "Waarre", "Coldstream", "Callignee south", "Jam jerrup", "Tenby point", "Wallace", "Bacchus marsh", "Skibo", "Coronet bay", "Corinella", "Armstrong", "Krowera", "Newcomb", "Whitelaw", "Bentleigh east", "Muntham", "Melton south", "Creswick north", "Ranceby", "Woodglen", "Williams landing", "Caulfield north", "Airport west", "Waranga", "Camberwell", "Rowville", "Mont albert", "Germania", "Clifton hill", "Essendon north", "Mckinnon", "Burnley", "Essendon west", "Baromi", "Seaholme", "Fitzroy north", "Albion", "Albert park", "Jacana", "Kingsbury", "Smiths beach", "Glen huntly", "Cardigan village", "South kingsville", "Churchill island", "Hampton east", "Surf beach", "Yallambie", "Alphington", "Bonbeach", "Bell park", "Murrumbeena", "Chelsea", "Gardenvale", "Collingwood", "Ballarat north", "Elwood", "Ashwood", "Invermay park", "Belgrave heights", "Geelong west", "Croydon hills", "Kilsyth south", "Carrajung", "Garfield north", "Newbury", "Malvern", "Drouin west", "Ashburton", "Frankston north", "Sandhurst", "Lang lang east", "Caulfield east", "Winter valley", "Canadian", "Irishtown", "Herne hill", "Lucas", "Cambrian hill", "Strathmore", "St kilda west", "Erica", "Newington", "Quarry hill", "Black hill", "Dales creek", "Nangana", "Box hill south", "Chelsea heights", "Coolaroo", "Hollands landing", "Croydon south", "Moe south", "Warranwood", "Aspendale", "Tootgarook", "Cobaw", "Waldara", "Nirranda east", "Menzies creek", "Mepunga", "Tarilta", "Monbulk", "Thorpdale south", "The honeysuckles", "Yangery", "Deer park", "Sulky", "Merriang", "Kalimna", "Coonooer west", "Hernes oak", "Cororooke", "Meadow heights", "Dingley village", "Naroghid", "Sassafras", "Carrum downs", "Kardella south", "Betley", "Golden gully", "Breakwater", "Chadstone", "Bennison", "Dewhurst", "Ringwood east", "Heidelberg west", "Plenty", "Diamond creek", "Wonga park", "Indented head", "Carlton", "Briar hill", "Heidelberg", "Eaglemont", "Ascot vale", "Balwyn", "Box hill", "Lake wendouree", "Bonshaw", "Bumberrah", "Junction village", "Black rock", "Bendigo", "West bendigo", "Coragulac", "Allestree", "Bellbridge", "Weir views", "Noorat east", "Bell post hill", "Mont albert north", "St andrews beach", "Box hill north", "St helena", "Delahey", "Sunshine", "Bayswater north", "Gladstone park", "Hazel park", "Thomastown", "Merricks beach", "Point leo", "Hepburn springs", "California gully", "Clarinda", "Brunswick east", "Tyenna", "Lake gardens", "Noble park north", "Noble park", "Colac west", "Pitfield", "Deanside", "Shepherds flat", "Broadmeadows", "Sandringham", "Capel sound", "Clarkes hill", "Clematis", "Geelong", "Parkdale", "Watsons creek", "Williamstown north", "Hampton park", "Kalkallo", "Gainsborough", "Smiths gully", "Aspendale gardens", "Botanic ridge", "Frankston south", "Cranbourne", "Albanvale", "North shore", "Corio", "Dunach", "Springmount", "Kensington", "San remo", "Neerim junction", "Kallista", "Birdwoodton", "St kilda east", "Bridgewater on loddon", "Mount pleasant", "Mcloughlins beach", "Silverleaves", "Delacombe", "Hillcrest", "Wiseleigh", "Tyaak", "Langdons hill", "Allendale", "Kings park", "Redan", "Edithvale", "Ardeer", "Hughesdale", "Lake bunga", "Crossley", "Colac east", "Condah swamp", "Burnside heights", "Flaggy creek", "Malvern east", "Carrajung south", "Woorarra east", "Sailors gully", "Warrenheip", "Robertsons beach", "Endeavour hills", "Kalorama", "Boolarong", "Nowhere creek", "Hawthorn", "Taylors hill", "Hadfield", "Research", "Kialla west", "Flagstaff", "Moonee ponds", "Braeside", "Tarra valley", "Blackburn", "Laverton north", "Tynong", "Rokeby", "Wantirna south", "Templestowe lower", "Keilor downs", "Beaumaris", "Fairfield", "Nintingbool", "Langwarrin south", "Inkerman", "Fern hill", "Highton", "Pastoria east", "Springdallah", "Howqua inlet", "Sawmill settlement", "Brooklyn", "Tremont", "Marungi", "Oak park", "South yarra", "Golden square", "Jackass flat", "St clair", "Balnarring", "Edgecombe", "Gelliondale", "Hilgay", "St kilda", "Armadale", "Woodend north", "Greenhill", "Pootilla", "Lovely banks", "Nalangil", "Melton west", "Woorinen", "Musk vale", "Wendouree", "Mead", "Havilah", "Clayton south", "Goulburn weir", "Woodford", "Shannonvale", "Ravenhall", "Woorarra west", "Broomfield", "North warrandyte", "Clayton", "Jancourt", "Zeerust", "Castle creek", "Mossiface", "Dalmore", "Wandin north", "Cannons creek", "Moorabbin", "Springvale south", "Ferny creek", "Cairnlea", "Lardner", "Lyndhurst", "Breamlea", "Warneet", "Guys hill", "Doncaster", "Mitcham", "Avondale heights", "Somerton", "Claretown", "Newhaven", "Oakleigh south", "Sherbrooke", "Mount doran", "Selby", "Bulleen", "Lake tyers beach", "West melbourne", "Richmond", "Heathmont", "Torwood", "Mount eccles south", "Middle park", "Brunswick west", "Pascoe vale south", "Ballarat east", "Bend of islands", "Woodside beach", "Braybrook", "Leigh creek", "Lillico", "Raymond island", "Shoreham", "Safety beach", "Cadello", "Nunawading", "Mount sabine", "Blairgowrie", "Attwood", "Main lead", "Balnarring beach", "Wallagaraugh", "Murrindal", "Kardella", "Rocky point", "Westmeadows", "Patterson lakes", "Mccrae", "Nutfield", "Paynesville", "Aberfeldy", "Warragul west", "St albans park", "Belgrave", "Flamingo beach", "Sebastopol", "Elingamite", "Exford", "Piggoreet", "Bushfield", "North bendigo", "Doveton", "Nilma", "Forest hill", "Scotchmans lead", "Bells beach", "Argyle", "Sydenham", "Heathcote junction", "Cape conran", "Armstrong creek", "Caroline springs", "Somers", "Daltons bridge", "Croydon north", "Narre warren north", "Portsea", "Ivanhoe", "Smokeytown", "Craigie", "Eastwood", "White hills", "Brown hill", "Moyarra", "Glomar beach", "Sunshine north", "Ivanhoe east", "Kew east", "Barwon heads", "Baynton east", "Mulgrave", "Mountain bay", "Maffra west upper", "Amherst", "Mount burnett", "Myrtlebank", "Kilsyth", "Mount helen", "Keilor park", "Toorak", "Junortoun", "Dallas", "Castella", "Fairbank", "Bungeet", "Cremorne", "Sugarloaf", "Cheltenham", "Scoresby", "Hawthorn east", "Northcote", "Ceres", "Weatherboard", "Strathdale", "Niddrie", "Calder park", "Darlimurla", "Jumbunna", "Queensferry", "Grantville", "Tinamba west", "Rockbank", "Tullamarine", "Kennington", "Port franklin", "Gilderoy", "Aintree", "Thornhill park", "Brunswick", "Derrimut", "Flemington", "Moorabbin airport", "Marshall", "Ferntree gully", "Whoorel", "Wooreen", "Mill park", "Roxburgh park", "Wurruk", "Melton", "Bonnie brook", "Bellarine", "Speewa", "Murraydale", "Gonn crossing", "Wantirna", "Brighton east", "Mentone", "Belmont", "South geelong", "Eltham", "Agnes", "East melbourne"];
-        autocomplete(document.getElementById("txt"), countries,5);
+        autocomplete(document.getElementById("txt"), countries, 3);
     </script>
+
+
+
 </body>
+
+
+
+
 </html>

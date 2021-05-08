@@ -1,0 +1,262 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <!--tab icon-->
+    <link rel="icon" href="~/Images/logo1.png.PNG" />
+    <title>Burnoff</title>
+</head>
+<body style="margin-left:10%;margin-right:10%;margin-top:5%;">
+
+    
+    <div class="row">
+        <script src="https://unpkg.com/pdf-lib@1.4.0"></script>
+        <script src="https://unpkg.com/downloadjs@1.4.7"></script>
+        <script>
+            const { degrees, PDFDocument, rgb, StandardFonts } = PDFLib
+
+            async function modifyPdf() {
+                //gather data from input
+
+                var location = document.getElementById('Location').value;
+                var Pname = document.getElementById('Pname').value;
+                var MR = document.getElementById('MR').value;
+                var sdate = document.getElementById('sdate').value;
+                var edate = document.getElementById('edate').value;
+                var nop = document.getElementById('nop').value;
+                var Size = document.getElementById('Size').value;
+                var FT = document.getElementById('FT').value;
+                var PN = document.getElementById('PN').value;
+                var sc = document.getElementById('sc').value;
+
+                // Fetch an existing PDF document
+                const url = '/Forms/BurnOff.pdf'
+                const existingPdfBytes = await fetch(url).then(res => res.arrayBuffer())
+
+                // Load a PDFDocument from the existing PDF bytes
+                const pdfDoc = await PDFDocument.load(existingPdfBytes)
+                // Embed the Helvetica font
+                const helveticaFont = await pdfDoc.embedFont(StandardFonts.Helvetica)
+                // Get the first page of the document
+                const pages = pdfDoc.getPages()
+                const firstPage = pages[0]
+
+                // Get the width and height of the first page
+                const { width, height } = firstPage.getSize()
+
+                const pngUrl = '/images/cross.png'
+                const pngImageBytes = await fetch(pngUrl).then((res) => res.arrayBuffer())
+                const pngImage = await pdfDoc.embedPng(pngImageBytes)
+                const pngDims = pngImage.scale(0.005)
+
+                if (document.getElementById('yes').checked) {
+                    firstPage.drawImage(pngImage, {
+                        x: 317,
+                        y: 525,
+                        width: pngDims.width,
+                        height: pngDims.height,
+                    })
+
+                }
+                if (document.getElementById('no').checked) {
+                    firstPage.drawImage(pngImage, {
+                        x: 317,
+                        y: 487,
+                        width: pngDims.width,
+                        height: pngDims.height,
+                    })
+                }
+                // Draw a string of text diagonally across the first page
+                firstPage.drawText(location, {
+                    x: 320,
+                    y: 630,
+                    size: 10,
+                    font: helveticaFont,
+                    color: rgb(0, 0, 0),
+                })
+                firstPage.drawText(Pname, {
+                    x: 320,
+                    y: 580,
+                    size: 10,
+                    font: helveticaFont,
+                    color: rgb(0, 0, 0),
+                })
+                firstPage.drawText(MR, {
+                    x: 320,
+                    y: 550,
+                    size: 10,
+                    font: helveticaFont,
+                    color: rgb(0, 0, 0),
+                })
+                firstPage.drawText(sdate, {
+                    x: 320,
+                    y: 450,
+                    size: 10,
+                    font: helveticaFont,
+                    color: rgb(0, 0, 0),
+                })
+                firstPage.drawText(edate, {
+                    x: 320,
+                    y: 390,
+                    size: 10,
+                    font: helveticaFont,
+                    color: rgb(0, 0, 0),
+                })
+                firstPage.drawText(nop, {
+                    x: 320,
+                    y: 340,
+                    size: 10,
+                    font: helveticaFont,
+                    color: rgb(0, 0, 0),
+                })
+                firstPage.drawText(Size, {
+                    x: 320,
+                    y: 310,
+                    size: 10,
+                    font: helveticaFont,
+                    color: rgb(0, 0, 0),
+                })
+                firstPage.drawText(FT, {
+                    x: 320,
+                    y: 280,
+                    size: 10,
+                    font: helveticaFont,
+                    color: rgb(0, 0, 0),
+                })
+                firstPage.drawText(PN, {
+                    x: 320,
+                    y: 245,
+                    size: 10,
+                    font: helveticaFont,
+                    color: rgb(0, 0, 0),
+                })
+                firstPage.drawText(sc, {
+                    x: 320,
+                    y: 220,
+                    size: 10,
+                    font: helveticaFont,
+                    color: rgb(0, 0, 0),
+                })
+
+                // Serialize the PDFDocument to bytes (a Uint8Array)
+                const pdfBytes = await pdfDoc.save()
+
+                // Trigger the browser to download the PDF document
+                download(pdfBytes, "application.pdf", "application/pdf");
+            }
+        </script>
+        <link href="https://fonts.googleapis.com/css?family=RobotoCondense" rel="stylesheet">
+        <div class="col-md-6">
+            <style>
+            .myForm > * { font: 1.5em 'RobotoCondense', sans-serif; }
+
+                .myForm {
+                    display: grid;
+                    grid-template-columns: [labels] auto [controls] 1fr;
+                    grid-auto-flow: row;
+                    grid-gap: .8em .5em;
+                    background: #00000014;
+                    padding: 1.2em;
+                }
+
+                    .myForm > label,
+                    .myForm > fieldset {
+                        grid-column: labels;
+                        grid-row: auto;
+                    }
+
+                    .myForm > input,
+                    .myForm > select,
+                    .myForm > textarea,
+                    .myForm > button {
+                        grid-column: controls;
+                        grid-row: auto;
+                        padding: .4em;
+                        border: 0;
+                    }
+
+                    .myForm > fieldset {
+                        grid-column: span 2;
+                    }
+
+                    .myForm > button {
+                        background: darkkhaki;
+                        color: white;
+                    }
+
+                    .myForm > textarea {
+                        min-height: 3em;
+                    }
+            </style>
+            <div class="row" style="text-align:center;height:fit-content();">
+                <p style="font-size:40px"> Burn-off Notification</p>
+                <p style="font-size:20px">The following information relates to a planned burn-off </p>
+            </div>
+            <form class="myForm">
+
+                <div class="row">
+
+                </div>
+                <label for="Location"><strong>1.Location </strong></label>
+                <input type="text" id="Location" name="Location" required>
+                <label for="location_des">– full street address, include nearest intersection.<br /> For large land holders, include where on your property. <br />This helps to identify the exact location in Victoria </label>
+
+                <br />
+                <label for="Pname"><strong>2.Premises</strong></label>
+                <input type="text" name="Pname" id="Pname" required>
+                <label for="Pname">- If applicable</label>
+
+                <label for="MR"><strong>3.Map Reference</strong></label>
+                <input type="text" name="MR" id="MR" required>
+                <label for="MR">- If known and please indicate details of map type <br /> eg Melways, Spatial Vision</label>
+
+                <fieldset>
+                    <legend><strong>4.Will fire burn continuously overnight?</strong></legend>
+                    <label> <input type="radio" name="wo" id="yes"> Yes - Ensure council/permit regulations for patrolling burns overnight are complied with </label>
+                    <label> <input type="radio" name="wo" id="no"> No - Please provide start/finish times for each day below </label>
+                </fieldset>
+
+                <label for="sdate"><strong>5.Start date and time</strong></label>
+                <input type="datetime-local" name="sdate" id="sdate" required>
+                <label for="sdate">- intended to light up <br />Have you checked the weather forecast?<br /> Are the weather conditions calm for the burn?</label>
+
+                <label for="edate"><strong>6.End date and time</strong></label>
+                <input type="datetime-local" name="edate" id="edate" required>
+                <label for="edate">- when will smoke/flames no longer be visible?<br />Consider the weather forecast two days afte</label>
+
+                <label for="nop"><strong>7.Number of piles?</strong></label>
+                <input type="text" name="nop" id="nop" required>
+                <label for="nop">If more than one, provide size of each pile <br />Please indicate distance between if more than 500m apart</label>
+
+                <label for="Size"><strong>8.Size</strong></label>
+                <input type="text" name="Size" id="Size" required>
+                <label for="Size">- sq metres / hectaresEg.<br /> 10 sqm = 2m x 5m, or 2 Hectares (Ha)</label>
+
+
+                <label for="FT"><strong>9.Fuel Type</strong></label>
+                <input type="text" name="FT" id="FT" required>
+                <label for="FT">- Tree debris, stubble, plantation,<br /> garden waste, crop, building material, other</label>
+
+
+                <label for="PN"><strong>10.Permit number</strong></label>
+                <input type="text" name="PN" id="PN" required>
+                <label for="PN">- if applicable<br /> Shire/Council, DELWP, CFA</label>
+
+
+                <label for="sc"><strong>11.Site contact</strong></label>
+                <input type="text" name="sc" id="sc" required>
+                <label for="sc">- Name and Phone Number</label>
+            </form>
+
+        </div>
+        <br /> <br />
+        <div style="text-align:center;padding-bottom:100px;"> <button onclick="modifyPdf()" style="background-color:red; backdrop-filter:blur(2px); height:30px;width:100px;border-radius:5px; border-width:1px;border-color:#00000030;font-weight:bold; ">Download</button></div>
+    </div>  
+
+</body>
+</html>

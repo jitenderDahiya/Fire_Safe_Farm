@@ -22,7 +22,6 @@
 /* first second third are the parallax background*/
 .first {
     display: flex;
-    perspective: 10px;
     /* The image used */
     background-image: url("/Images/abc.jpg");
     /* Set a specific height */

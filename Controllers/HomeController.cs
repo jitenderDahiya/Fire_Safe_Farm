@@ -29,12 +29,41 @@ namespace New_UI.Controllers
             return View();
         }
 
-        public ActionResult Contact()
+        public ActionResult Permit()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "permit";
 
             return View();
         }
+
+        public ActionResult Burnoff()
+        {
+            ViewBag.Message = "Burnoff";
+
+            return View();
+        }
+
+        public ActionResult Schedule13()
+        {
+            ViewBag.Message = "Schedule13";
+
+            return View();
+        }
+
+        public ActionResult Schedule14()
+        {
+            ViewBag.Message = "Schedule14";
+
+            return View();
+        }
+
+        public ActionResult Schedule40()
+        {
+            ViewBag.Message = "Schedule40";
+
+            return View();
+        }
+
 
 
     }

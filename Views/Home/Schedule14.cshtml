@@ -1,0 +1,555 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <!--tab icon-->
+    <link rel="icon" href="~/Images/logo1.png.PNG" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Schedule 14 permit</title>
+</head>
+<body style="margin-left:10%;margin-right:10%;margin-top:2%;">
+    <div class="row" style="margin-top:10%">
+        <script src="https://unpkg.com/pdf-lib@1.4.0"></script>
+        <script src="https://unpkg.com/downloadjs@1.4.7"></script>
+        <script>
+            const { degrees, PDFDocument, rgb, StandardFonts } = PDFLib
+
+            async function modifyPdf2() {
+                //gather data from input
+                var telephone = document.getElementById('telephone3').value;
+                var Applicant = document.getElementById('Applicant3').value;
+                var pfwlnnwln = document.getElementById('pfwlnnwln3').value;
+                var otherdes = document.getElementById('otherdes3').value;
+                var AR = document.getElementById('AR3').value;
+                var JTAR = document.getElementById('JTAR3').value;
+                var EmailAddress = document.getElementById('EmailAddress3').value;
+                var SAddress = document.getElementById('SAddress3').value;
+                var town = document.getElementById('town3').value;
+                var Postcode = document.getElementById('Postcode3').value;
+                var law = document.getElementById('law3').value;
+                var pfwps = document.getElementById('pfwps3').value;
+                var explain = document.getElementById('explain3').value;
+                var Individual = document.getElementById('Individual3').value;
+                var adate = document.getElementById('adate3').value;
+                var other1des = document.getElementById('other1des4').value;
+                var law = document.getElementById('law3').value;
+                var pfwps = document.getElementById('pfwps3').value;
+                var explain = document.getElementById('explain3').value;
+
+
+                // Fetch an existing PDF document
+                const url = '/Forms/S14.pdf'
+                const existingPdfBytes = await fetch(url).then(res => res.arrayBuffer())
+
+                // Load a PDFDocument from the existing PDF bytes
+                const pdfDoc = await PDFDocument.load(existingPdfBytes)
+                // Embed the Helvetica font
+                const helveticaFont = await pdfDoc.embedFont(StandardFonts.Helvetica)
+                // Get the first page of the document
+                const pages = pdfDoc.getPages()
+                const firstPage = pages[0]
+                const secondPage = pages[1]
+                const thirdPage = pages[2]
+
+                // Get the width and height of the first page
+                const { width, height } = firstPage.getSize()
+
+                const pngUrl = '/images/cross.png'
+                const pngImageBytes = await fetch(pngUrl).then((res) => res.arrayBuffer())
+                const pngImage = await pdfDoc.embedPng(pngImageBytes)
+                const pngDims = pngImage.scale(0.005)
+
+                if (document.getElementById('catering3').checked) {
+                    firstPage.drawImage(pngImage, {
+                        x: 80,
+                        y: 303,
+                        width: pngDims.width,
+                        height: pngDims.height,
+                    })
+                }
+                if (document.getElementById('Blacksmithing3').checked) {
+                    firstPage.drawImage(pngImage, {
+                        x: 80,
+                        y: 288,
+                        width: pngDims.width,
+                        height: pngDims.height,
+                    })
+                }
+                if (document.getElementById('FT3').checked) {
+                    firstPage.drawImage(pngImage, {
+                        x: 80,
+                        y: 273,
+                        width: pngDims.width,
+                        height: pngDims.height,
+                    })
+                }
+                if (document.getElementById('pfwlnn3').checked) {
+                    firstPage.drawImage(pngImage, {
+                        x: 80,
+                        y: 255,
+                        width: pngDims.width,
+                        height: pngDims.height,
+                    })
+                    firstPage.drawText(pfwlnnwln, {
+                        x: 200,
+                        y: 245,
+                        size: 10,
+                        font: helveticaFont,
+                        color: rgb(0, 0, 0),
+
+                    })
+
+                }
+                if (document.getElementById('gpbcd3').checked) {
+                    firstPage.drawImage(pngImage, {
+                        x: 80,
+                        y: 230,
+                        width: pngDims.width,
+                        height: pngDims.height,
+                    })
+                }
+                if (document.getElementById('hab3').checked) {
+                    firstPage.drawImage(pngImage, {
+                        x: 80,
+                        y: 215,
+                        width: pngDims.width,
+                        height: pngDims.height,
+                    })
+
+                }
+                if (document.getElementById('other3').checked) {
+                    firstPage.drawImage(pngImage, {
+                        x: 80,
+                        y: 197,
+                        width: pngDims.width,
+                        height: pngDims.height,
+                    })
+                    firstPage.drawText(otherdes, {
+                        x: 280,
+                        y: 290,
+                        size: 10,
+                        font: helveticaFont,
+                        color: rgb(0, 0, 0),
+
+                    })
+                }
+
+                if (document.getElementById('fl3').checked) {
+                    firstPage.drawImage(pngImage, {
+                        x: 80,
+                        y: 133,
+                        width: pngDims.width,
+                        height: pngDims.height,
+                    })
+
+                }
+                if (document.getElementById('gas3').checked) {
+                    firstPage.drawImage(pngImage, {
+                        x: 80,
+                        y: 118,
+                        width: pngDims.width,
+                        height: pngDims.height,
+                    })
+                }
+                if (document.getElementById('electricity3').checked) {
+                    firstPage.drawImage(pngImage, {
+                        x: 80,
+                        y: 103,
+                        width: pngDims.width,
+                        height: pngDims.height,
+                    })
+                }
+                if (document.getElementById('oandf3').checked) {
+                    firstPage.drawImage(pngImage, {
+                        x: 80,
+                        y: 88,
+                        width: pngDims.width,
+                        height: pngDims.height,
+                    })
+                }
+                if (document.getElementById('sfwc3').checked) {
+                    firstPage.drawImage(pngImage, {
+                        x: 80,
+                        y: 71,
+                        width: pngDims.width,
+                        height: pngDims.height,
+                    })
+                }
+                if (document.getElementById('other4').checked) {
+                    firstPage.drawImage(pngImage, {
+                        x: 80,
+                        y: 55,
+                        width: pngDims.width,
+                        height: pngDims.height,
+                    })
+                    firstPage.drawText(other1des, {
+                        x: 280,
+                        y: 140,
+                        size: 10,
+                        font: helveticaFont,
+                        color: rgb(0, 0, 0),
+                    })
+                }
+                if (document.getElementById('pcaa113').checked) {
+                    secondPage.drawImage(pngImage, {
+                        x: 475,
+                        y: 580,
+                        width: pngDims.width,
+                        height: pngDims.height,
+                    })
+                }
+                if (document.getElementById('pcaa123').checked) {
+                    secondPage.drawImage(pngImage, {
+                        x: 475,
+                        y: 538,
+                        width: pngDims.width,
+                        height: pngDims.height,
+                    })
+                }
+                if (document.getElementById('pcaa133').checked) {
+                    secondPage.drawImage(pngImage, {
+                        x: 475,
+                        y: 498,
+                        width: pngDims.width,
+                        height: pngDims.height,
+                    })
+                }
+                if (document.getElementById('pcaa143').checked) {
+                    secondPage.drawImage(pngImage, {
+                        x: 475,
+                        y: 450,
+                        width: pngDims.width,
+                        height: pngDims.height,
+                    })
+                }
+                if (document.getElementById('pcaa153').checked) {
+                    secondPage.drawImage(pngImage, {
+                        x: 475,
+                        y: 407,
+                        width: pngDims.width,
+                        height: pngDims.height,
+                    })
+                }
+                if (document.getElementById('pcaa163').checked) {
+                    secondPage.drawImage(pngImage, {
+                        x: 475,
+                        y: 215,
+                        width: pngDims.width,
+                        height: pngDims.height,
+                    })
+                }
+                // Draw a string of text diagonally across the first page
+                firstPage.drawText(telephone, {
+                    x: 300,
+                    y: 600,
+                    size: 10,
+                    font: helveticaFont,
+                    color: rgb(0, 0, 0),
+                })
+                firstPage.drawText(Applicant, {
+                    x: 300,
+                    y: 560,
+                    size: 10,
+                    font: helveticaFont,
+                    color: rgb(0, 0, 0),
+                })
+                firstPage.drawText(AR, {
+                    x: 300,
+                    y: 520,
+                    size: 10,
+                    font: helveticaFont,
+                    color: rgb(0, 0, 0),
+                })
+                firstPage.drawText(JTAR, {
+                    x: 300,
+                    y: 480,
+                    size: 10,
+                    font: helveticaFont,
+                    color: rgb(0, 0, 0),
+                })
+                firstPage.drawText(EmailAddress, {
+                    x: 300,
+                    y: 445,
+                    size: 10,
+                    font: helveticaFont,
+                    color: rgb(0, 0, 0),
+                })
+                firstPage.drawText(SAddress, {
+                    x: 320,
+                    y: 415,
+                    size: 10,
+                    font: helveticaFont,
+                    color: rgb(0, 0, 0),
+                })
+                firstPage.drawText(town, {
+                    x: 320,
+                    y: 395,
+                    size: 10,
+                    font: helveticaFont,
+                    color: rgb(0, 0, 0),
+                })
+                firstPage.drawText(Postcode, {
+                    x: 320,
+                    y: 375,
+                    size: 10,
+                    font: helveticaFont,
+                    color: rgb(0, 0, 0),
+                })
+                secondPage.drawText(law, {
+                    x: 280,
+                    y: 750,
+                    size: 10,
+                    font: helveticaFont,
+                    color: rgb(0, 0, 0),
+                })
+                secondPage.drawText(pfwps, {
+                    x: 280,
+                    y: 690,
+                    size: 10,
+                    font: helveticaFont,
+                    color: rgb(0, 0, 0),
+                })
+                secondPage.drawText(explain, {
+                    x: 280,
+                    y: 665,
+                    size: 10,
+                    font: helveticaFont,
+                    color: rgb(0, 0, 0),
+                })
+                thirdPage.drawText(Individual, {
+                    x: 150,
+                    y: 650,
+                    size: 10,
+                    font: helveticaFont,
+                    color: rgb(0, 0, 0),
+                })
+                thirdPage.drawText(adate, {
+                    x: 400,
+                    y: 650,
+                    size: 10,
+                    font: helveticaFont,
+                    color: rgb(0, 0, 0),
+                })
+
+                // Serialize the PDFDocument to bytes (a Uint8Array)
+                const pdfBytes = await pdfDoc.save()
+
+                // Trigger the browser to download the PDF document
+                download(pdfBytes, "application.pdf", "application/pdf");
+            }
+        </script>
+        <link href="https://fonts.googleapis.com/css?family=RobotoCondense" rel="stylesheet">
+        <div class="col-md-6">
+            <style>
+                .myForm > * {
+                    font: 1.5em 'RobotoCondense', sans-serif;
+                }
+
+                .myForm {
+                    display: grid;
+                    grid-template-columns: [labels] auto [controls] 1fr;
+                    grid-auto-flow: row;
+                    grid-gap: .8em .5em;
+                    background: #00000014;
+                    padding: 1.2em;
+                }
+
+                    .myForm > label,
+                    .myForm > fieldset {
+                        grid-column: labels;
+                        grid-row: auto;
+                    }
+
+                    .myForm > input,
+                    .myForm > select,
+                    .myForm > textarea,
+                    .myForm > button {
+                        grid-column: controls;
+                        grid-row: auto;
+                        padding: .4em;
+                        border: 0;
+                    }
+
+                    .myForm > fieldset {
+                        grid-column: span 2;
+                    }
+
+                    .myForm > button {
+                        background: darkkhaki;
+                        color: white;
+                    }
+
+                    .myForm > textarea {
+                        min-height: 3em;
+                    }
+            </style>
+            <div class="row" style="text-align:center;height:fit-content();">
+                <p style="font-size:20px">COUNTRY FIRE AUTHORITY ACT 1958</p>
+                <p style="font-size:20px">APPLICATION FOR A SCHEDULE 14 PERMIT TO USE FIRE DURING</p>
+                <p style="font-size:40px"> THE FIRE DANGER PERIOD</p>
+                <p style="font-size:20px">The following information relates to a planned burn-off </p>
+                <p style="font-size:20px ;text-align:justify">
+                    Note – A permit to use fire during a Fire danger period does not allow you to use fire on a day of Total Fire Ban.
+                    You may apply for a permit for a day of Total Fire Ban in accordance with Section 40 of the Country Fire
+                    Authority Act 1958.
+                </p>
+                <h2 style="text-align:left">TO: THE CHIEF OFFICER</h2>
+                <p style="font-size:20px;text-align:justify">
+                    The applicant hereby applies for a Schedule 14 permit under Section 38 of the Country Fire Authority
+                    Act 1958. The applicant supplies the following information in support of the application:
+                </p>
+            </div>
+
+
+            <form class="myForm">
+                <div class="row">
+                   
+                </div>
+                <label for="telephone3"><strong>1. Telephone </strong></label>
+                <input type="text" id="telephone3" name="telephone3" required>
+                <label for="telephone3">– Must be 24 hour availability</label>
+
+
+                <label for="Applicant3"><strong>2. Applicant</strong></label>
+                <input type="text" name="Applicant3" id="Applicant3" required>
+                <label for="Applicant3">- (name of Company, Statutory Corporation, Municipal Council, or individual and where relevant, the applicant’s ABN/ACN/ARBN)</label>
+
+                <label for="AR3"><strong>3.Authorised representative</strong></label>
+                <input type="text" name="AR3" id="AR3" required>
+                <label for="AR3">-  The person who will have oversight of the work conducted using the permit</label>
+
+                <label for="JTAR3"><strong>4. Job title of authorised representative:</strong></label>
+                <input type="text" name="JTAR3" id="JTAR3" required>
+
+
+                <label for="EmailAddress3"><strong>5. Email address</strong></label>
+                <input type="text" name="EmailAddress3" id="EmailAddress3" required>
+
+                <label for="Address3"><strong>6. Address of applicant</strong></label>
+                <label for="Address3"> Must be a physical address</label>
+
+                <label for="SAddress3"><strong>Street Address</strong></label>
+                <input type="text" name="SAddress3" id="SAddress3" required>
+                <label for="town3"><strong>Town/Suburb</strong></label>
+                <input type="text" name="town3" id="town3" required>
+                <label for="Postcode3"><strong>Postcode</strong></label>
+                <input type="text" name="Postcode3" id="Postcode3" required>
+
+
+                <fieldset>
+                    <legend><strong>Description of Work</strong></legend>
+                    <legend>6. Type of work to be carried out: (tick)</legend>
+                    <label> <input type="checkbox" name="dow1" id="catering3"> Catering </label><br />
+                    <label> <input type="checkbox" name="dow1" id="Blacksmithing3">  Blacksmithing </label><br />
+                    <label> <input type="checkbox" name="dow1" id="FT3">  Fire training </label><br />
+                    <label> <input type="checkbox" name="dow1" id="pfwlnn3"> Public fireworks </label>
+                    <label> -Worksafe license number:</label>
+                    <input type="text" name="dow1" id="pfwlnnwln3" /><br />
+                    <label> <input type="checkbox" name="dow1" id="gpbcd3"> Gas powered bird scaring devices </label><br />
+                    <label> <input type="checkbox" name="dow1" id="hab3"> Hot air ballooning </label><br />
+                    <label> <input type="checkbox" name="dow1" id="other3"> Other: </label>
+                    <label> -Please Describe: </label>
+                    <input type="text" name="dow1" id="otherdes3">
+                </fieldset>
+
+                <fieldset>
+                    <legend>7. What will fuel the fire?: (eg)</legend>
+                    <label> <input type="checkbox" name="ff1" id="fl3"> Flammable liquid </label><br />
+                    <label> <input type="checkbox" name="ff1" id="gas3"> Gas </label><br />
+                    <label> <input type="checkbox" name="ff1" id="electricity3"> Electricity </label><br />
+                    <label> <input type="checkbox" name="ff1" id="oandf3"> Oils and/or fats </label><br />
+                    <label> <input type="checkbox" name="ff1" id="sfwc3">  Solid fuel (eg wood, charcoal) </label><br />
+                    <label> <input type="checkbox" name="ff1" id="other4"> Other </label>
+                    <label> -Please Describe: </label>
+                    <input type="text" name="ff1" id="other1des4">
+                </fieldset>
+
+                <label for="law3"><strong>8. Location at which the work will be done</strong></label>
+                <input type="text" name="law3" id="law3" required>
+                <label for="law3">- If multiple locations, please list each one. If you are a state-wide operator, please write ‘state-wide’.</label>
+
+
+                <label for="pfwps3"><strong>9. Period for which permit sought</strong></label>
+                <input type="text" name="pfwps3" id="pfwps3" required>
+
+                <label for="explain3"><strong>10. Explain why the use of fire in the open air on a day of Total Fire Ban is necessary</strong></label>
+                <input type="text" name="explain3" id="explain3" required>
+
+                <fieldset style="font-size:15px">
+                    <legend><strong>Permit conditions and Applicant’s acknowledgments</strong></legend>
+                    <label> <input type="checkbox" name="pcaa1" id="pcaa113"> 11. The applicant acknowledges that conditions and restrictions will apply if a permit is granted. The applicant agrees to abide by these conditions and restrictions and is aware that any permit granted may be suspended for a period of time or revoked.  </label><br />
+                    <label> <input type="checkbox" name="pcaa1" id="pcaa123">12. The applicant acknowledges that failure to comply with each of the conditions and restrictions contained in any permit issued is an offence under section 40(9) of the Country Fire Authority Act 1958 </label><br />
+                    <label>
+                        <input type="checkbox" name="pcaa1" id="pcaa133">13. The applicant acknowledges that compliance with the permit conditions will not itself release the applicant from liability (civil or criminal) for any damage sustained by another person as a result of any fire lit by the applicant pursuant to the permit (as provided in section 38(4) of the Country Fire Authority Act 1958).
+                    </label><br />
+                    <label> <input type="checkbox" name="pcaa1" id="pcaa143"> 14. The applicant acknowledges that if a permit is issued, the permit will only apply in that area defined within the permit and that seperate permits may be required in the Fire Rescue Victoria district or within any National Parks, on Protected Public Land or within any fire protected area under the Forest Act 1958. </label><br />
+                    <label> <input type="checkbox" name="pcaa1" id="pcaa153"> 15. The applicant acknowledges that the Country Fire Authority will assess this application and may determine not to issue a permit. </label><br />
+                    <label>
+                        <input type="checkbox" name="pcaa1" id="pcaa163">  16. Country Fire Authority’s (CFA) Fire and Emergency Management Directorate
+                        are collecting your information on behalf of Fire Rescue Victoria (FRV) and
+                        Department of Environment, Land, Water and Planning (DELWP) through the
+                        powers delegated to it through the Country Fire Authority Act 1958 and
+                        Regulations and the Forests Act 1958 and Regulations. This information is being
+                        collected for the purpose of:<br />
+                        <u> • evaluating your Fire Permit Application;</u><br />
+                        <u> • communicating with you about your application and/or permit; and</u><br />
+                        <u>
+                            • monitoring compliance and management of fire, smoke management and
+                            ignition risk across public and private land in Victoria.
+                        </u><br />
+                        And this will be disclosed to authorised staff within CFA, DELWP and FRV for
+                        these agencies to execute their duties associated with the provision of your fire
+                        permit.<br />
+                        CFA, DELWP and FRV may also disclose your contact information to contracted
+                        service providers for surveying purposes.<br />
+                        For emergency management purposes this system may disclose your
+                        information to:<br />
+                        <u> • Emergency Services Telephone Authority (ESTA);</u><br />
+                        <u> • Emergency Management Victoria (EMV);</u><br />
+                        <u> • Relevant Municipalities, Administrative Units and Public Authorities;</u><br />
+                        <u> • Bureau of Meteorology (BOM);</u><br />
+                        <u>  • Environment Protection Authority (EPA);</u><br />
+                        <u>
+                            • Fire Prevention Officers for the purpose of fire and emergency
+                            management;
+                        </u><br />
+                        <u>
+                            • Electronic systems to inform the community through Vic Emergency
+                            Platforms of the planned burns.
+                        </u><br />
+                        If you do not provide the required information, the application/permit cannot be assessed and issued.<br />
+                        You can access the information by contacting the CFA Policy, Procedures and
+                        Governance Coordinator within the State Capability Team at
+                        statecapabilityteam@cfa.vic.gov.au or by calling 03 9262 8756. or the DELWP
+                        Customer Service Centre on 13 61 86. For FRV by phone on 03 9662 2311 and
+                        ask to speak to our Privacy Officer.<br />
+                        CFA, DELWP and FRV will handle all information in accordance with the
+                        obligations under the Privacy and Data Protection Act 2014 and privacy policies,
+                        which can be located on each agency’s website. Your information will not be
+                        disclosed for any other purpose other than where required by law.
+                    </label>
+                </fieldset>
+
+                <label for="Asignature3"><strong>17. Applicant signature</strong></label>
+                <label for="Individual3"><strong>Individual</strong></label>
+                <input type="text" name="Individual3" id="Individual3" required>
+                <label for="adate3"><strong>Date</strong></label>
+                <input type="text" name="adate3" id="adate3" required />
+
+            </form>
+
+        </div>
+        <br /> <br />
+        <div style="text-align:center;padding-bottom:100px;"> <button onclick="modifyPdf2()" style="background-color:red; backdrop-filter:blur(2px); height:30px;width:100px;border-radius:5px; border-width:1px;border-color:#00000030;font-weight:bold; ">Download</button></div>
+
+
+
+    </div>
+
+
+</body>
+</html>
