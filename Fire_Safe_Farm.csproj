@@ -211,6 +211,7 @@
     <Content Include="Views\Home\Schedule13.cshtml" />
     <Content Include="Views\Home\Schedule14.cshtml" />
     <Content Include="Views\Home\Schedule40.cshtml" />
+    <Content Include="Views\Home\Recovery.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
