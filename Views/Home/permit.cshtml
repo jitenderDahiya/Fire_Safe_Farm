@@ -67,7 +67,7 @@
 
         .cover {
             background-image: url("/images/bu (1).jpg");
-            height: 500px;
+            height: 800px;
             width: 100%;
             background-attachment: fixed;
             background-position: center;
@@ -173,6 +173,14 @@
             background-color: DodgerBlue !important;
             color: #ffffff;
         }
+
+        .output{
+            height:80px;
+            width:500px;
+            border-radius:10px;
+            background-color:#00000070;
+            backdrop-filter:blur(30px);
+        }
     </style>
 
     <div class="cover container-fluid" style="text-align:center;vertical-align:middle;">
@@ -181,11 +189,21 @@
             <p style="font-size:50px;color:whitesmoke;padding-top:7%;"> Fire Permits </p>
             <p style="font-size:25px;color:whitesmoke;"> Use of fire in the open air during the Fire Danger Period or on a day of Total Fire Ban you may require a permit.</p>
 
-            <div style="width:100%; justify-content:center !important;">
+
+            <p style="font-size:20px;color:whitesmoke;margin-top:100px;"> Search your location to find the appropriate permits presently. </p>
+            <div style="width:100%; justify-content:center !important; margin-top:10px;">
 
 
                 <input type="text" id="txt" placeholder="Type your location here" value="frankston">
                 <button id="sbtn" onclick="check();"><img id="icon" src="~/Images/search-12-512.png" /></button>
+
+            </div>
+
+            <div class="row" style="justify-content:center;margin-top:60px;vertical-align:middle;">
+                <div class="output row" >
+                    <div class="col-sm-6"><p style="font-size:20px;color:whitesmoke;vertical-align:middle;padding-top:5px;">Fire Danger Period:</p><p id="FDP" style="font-size:15px;color:whitesmoke;text-align:center;">-</p></div>
+                    <div class="col-sm-6"><p style="font-size:20px;color:whitesmoke;vertical-align:middle;padding-top:5px;">Total Fire Ban:</p><p id="TFB" style="font-size:15px;color:whitesmoke;text-align:center;">-</p> </div>
+                </div>
             </div>
 
         </div>
@@ -440,6 +458,14 @@
 
     <script>
 
+        function tf(x) {
+            if (x == "true") {
+                return "Yes restrictions may apply"
+            } else {
+                return "No - restrictions may apply";
+            }
+        }
+
         function check() {
             var loc = document.getElementById('txt').value;
 @*            document.getElementById("out").innerHTML = loc;
@@ -455,6 +481,10 @@
                 var sdt = String(data.start);
                 var edt = String(data.end);
                 var tfb = String(data.fire_ban);
+
+
+                document.getElementById("FDP").innerHTML = sdt+"-"+edt;
+                document.getElementById("TFB").innerHTML = tf(tfb);
                 console.log(tfb)
 
                 toggle(sdt, edt, tfb)

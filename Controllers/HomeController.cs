@@ -64,7 +64,12 @@ namespace New_UI.Controllers
             return View();
         }
 
+        public ActionResult Recovery()
+        {
+            ViewBag.Message = "Recovery";
 
+            return View();
+        }
 
     }
 }
