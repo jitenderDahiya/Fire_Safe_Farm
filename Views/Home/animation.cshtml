@@ -7,7 +7,7 @@
 <div class="row" style="margin-top:0%">
     <div class="farm" id="farm">
         <div class="model" id="model" style="float:left; width:65%;">
-            <canvas id="number" width="5120" height="5120"> </canvas>
+            <canvas id="number" width="10240" height="10240"> </canvas>
         </div>
         <div style="float:right; width:35%; background-color:#333333; height:100%">
             <div id="info" style="margin-top:20%">
@@ -53,12 +53,11 @@
     }
 
     #info {
-        margin-top: 29px;
-        padding-top: 50px;
+        
         margin-left: 10%;
         margin-right: 2%;
         overflow-y: scroll;
-        height: 700px;
+        height: 70%
     }
 
     #number {
@@ -92,9 +91,9 @@
 
         const canvas = document.getElementById("number");
         const ctx = canvas.getContext("2d");
-        const x = 2560;
-        const y = 2560;
-        const radius = 2560;
+        const x = 5120;
+        const y = 5120;
+        const radius = 5120;
         const startAngle = 0;
         const endAngle = Math.PI * 2;
 
@@ -105,13 +104,13 @@
         ctx.opacity = 0.1;
 
         ctx.strokeStyle = "rgb(255, 255, 255)";
-        ctx.lineWidth = 100;
+        ctx.lineWidth = 300;
         ctx.beginPath();
         ctx.arc(x, y, radius, startAngle, endAngle);
         ctx.stroke();
 
         ctx.fillStyle = "rgb(255, 255, 255)";
-        ctx.font = "4120px roboto";
+        ctx.font = "7560px roboto-light";
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
         ctx.fillText("+", x, y);
@@ -230,8 +229,8 @@
 
         event.preventDefault();
 
-        mouse.x = (event.clientX / (window.innerWidth * scaleX)) * 2 - 1;
-        mouse.y = -(event.clientY / (window.innerHeight * scaleY)) * 2 + 1;
+        mouse.x = (event.clientX / ((window.innerWidth * scaleX) - 10)) * 2 - 1;
+        mouse.y = -(event.clientY / ((window.innerHeight * scaleY) + 275)) * 2 + 1;
 
         raycaster.setFromCamera(mouse, camera);
 
@@ -252,11 +251,11 @@
     function renderText(itemName) {
         if (itemName == "tree") {
             document.getElementById("info").innerHTML = "<h1 class='header_item'>Trees and Other Vegetation</h1>" + "</br>" +
-                "<p class='text'>Vegetation should be planned well around your property to protect it from the danger of bushfire. Sometimes you require a planning permit to. The instructions give certainty to landowners and residents at risk from bushfire so that vegetation can be cleared and the property maintained in a fire-ready condition. Follwing rules apply for residents living in bushfire prone areas.</p>" + "</br></br>" +
+                "<p class='text'>Vegetation should be planned well around your property to protect it from the danger of bushfire. Sometimes you require a planning permit to cut down or burn off the vegetation. The given instructions provides certainty to landowners and residents at risk from bushfire so that vegetation can be cleared and the property maintained in a fire-ready condition. Follwing rules apply for residents living in bushfire prone areas.</p>" + "</br></br>" +
                 "<ol class='text'>" +
-                "<li><b>10m Rule:</b></br>This allows landoweners andresidents to clear any vegitation around 10m radious of the accomodation.</br></br></li>" +
-                "<li><b>30m Rule:</b></br>This allows landoweners andresidents to clear any vegitation except trees around 30m radious of the accomodation.</br></br></li>" +
-                "<li><b>50m Rule:</b></br>This allows landoweners andresidents to clear any vegitation except trees within 60m radious of the accomodation.</br></br></li>" +
+                "<li><b>10m Rule:</b></br>This allows land owners and residents to clear any vegetation around 10m radious of the accomodation.</br></br></li>" +
+                "<li><b>30m Rule:</b></br>This allows land owners and residents to clear any vegetation except trees around 30m radious of the accomodation.</br></br></li>" +
+                "<li><b>50m Rule:</b></br>This allows land owners and residents to clear any vegetation except trees within 60m radious of the accomodation.</br></br></li>" +
                 "</ol >"
         }
 
@@ -323,6 +322,30 @@
                 "<li>Prepare route for evacuation before fire season and train your animals accordingly. It is always difficult to handle a panic animal. </li>" +
                 "<li>Keep the external gates closed so animals dont go on run and damage themselves due to poor vision.</li>" +
                 "</ul>"
+        }
+
+        else if (itemName == "house") {
+            document.getElementById("info").innerHTML = "<h1 class='header_item'>House</h1>" + "</br>" +
+                "<p class='text'>Protecting your property is very important during bushfire. When it comes to house safety, you can do a lot more. The following list items and their  certain measures taken with them can help you protect your house during bushfire.</p>" +
+                "<p class='text'>You can do a lot more to save the animals on the farm. When prepared well, you can save there lives. During bushfires, if no taken care of animals can panic and suffer injuries which may even result in their deaths. Some of the animals, like horses have a good insticts to avoid fire while when weather gets hot, sheeps are always reluctatnt to go. You have to make specific arrangemnets based on the animals you own to protect them in bushfire season.</p>" +
+                "</br>" +
+                "<p class='text_min'>What you need to do?</p>" +
+                "<ol class='text', type='1'>" +
+                "<li><b>Roof:</b>" +
+                "<ul class='text'><li>Use fire resistent sarking under the roofs to prevent bushfire damagning and coming from your roof</li><li>Seal the roof gaps using compressed minaral wool insulation</li></ul>" +
+                "</li > " +
+                "<li>Windows:" +
+                "<ul class='text'><li>Use shutters on windows to tightly close them and prevent fire from coming inside</li><li>Seal the gaps in windows and its borders</li><li>Maintain window sills so they don't have any flaking paint</li></ul>" +
+                "</li>" + 
+                "<li><b>Doors:</b>" +
+                "<ul class='text'><li>Avoid wooden doors. Insead use metal ones.</li><li>Seal the gaps around door frame</li></ul>" +
+                "</li>" +
+                "<li><b>Decks:</b>" +
+                "<ul class='text'><li>Make decks out of concrete material or metal</li><li>Add some gaps between decking materials</li><li>Leep it seperate from dwellings</li></ul>" +
+                "</li>" +
+                "</ul>"
+
+
         }
 
 

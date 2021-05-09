@@ -10,6 +10,7 @@
     <!--tab icon-->
     <link rel="icon" href="~/Images/logo1.png.PNG" />
     <title>Burnoff</title>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body style="margin-left:10%;margin-right:10%;margin-top:5%;">
 
@@ -53,6 +54,7 @@
                 const pngImageBytes = await fetch(pngUrl).then((res) => res.arrayBuffer())
                 const pngImage = await pdfDoc.embedPng(pngImageBytes)
                 const pngDims = pngImage.scale(0.005)
+
 
                 if (document.getElementById('yes').checked) {
                     firstPage.drawImage(pngImage, {
@@ -147,7 +149,12 @@
                 const pdfBytes = await pdfDoc.save()
 
                 // Trigger the browser to download the PDF document
-                download(pdfBytes, "application.pdf", "application/pdf");
+                if (sdate > edate) {
+                    swal("Sorry", "the suburb you are searching is not recorded", "error");
+                }
+                else {
+                    download(pdfBytes, "application.pdf", "application/pdf");
+                }
             }
         </script>
         <link href="https://fonts.googleapis.com/css?family=RobotoCondense" rel="stylesheet">
