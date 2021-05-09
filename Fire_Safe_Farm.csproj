@@ -152,6 +152,9 @@
     <Content Include="images\logo1.png.PNG" />
     <Content Include="images\paz-arando-ldxdJ8wGqcU-unsplash.jpg" />
     <Content Include="images\paz-arando-zwZusrYAGoM-unsplash.jpg" />
+    <Content Include="images\pexels-public-domain-pictures-66267%281%29.jpg" />
+    <Content Include="images\pexels-tucă-bianca-360177%281%29.jpg" />
+    <Content Include="images\pexels-vlad-bagacian-1059042%281%29.jpg" />
     <Content Include="images\r0_1_1200_676_w1200_h678_fmax.jpg" />
     <Content Include="images\raphael-rychetsky-li9JfUHQfOY-unsplash %281%29.jpg" />
     <Content Include="images\rec1.jpg" />
@@ -182,6 +185,7 @@
     <Content Include="Forms\S40.pdf" />
     <Content Include="3dmodel\scene.bin" />
     <Content Include="3dmodel\scene.gltf" />
+    <None Include="Properties\PublishProfiles\FIresafefarm - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

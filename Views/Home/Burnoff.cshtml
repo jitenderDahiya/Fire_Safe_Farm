@@ -150,7 +150,7 @@
 
                 // Trigger the browser to download the PDF document
                 if (sdate > edate) {
-                    swal("Sorry", "the suburb you are searching is not recorded", "error");
+                    swal("Sorry", "The start date can't be greater than end date", "error");
                 }
                 else {
                     download(pdfBytes, "application.pdf", "application/pdf");
@@ -229,11 +229,11 @@
                 </fieldset>
 
                 <label for="sdate"><strong>5.Start date and time</strong></label>
-                <input type="datetime-local" name="sdate" id="sdate" required>
+                <input type="date" name="sdate" id="sdate" required>
                 <label for="sdate">- intended to light up <br />Have you checked the weather forecast?<br /> Are the weather conditions calm for the burn?</label>
 
                 <label for="edate"><strong>6.End date and time</strong></label>
-                <input type="datetime-local" name="edate" id="edate" required>
+                <input type="date" name="edate" id="edate" required>
                 <label for="edate">- when will smoke/flames no longer be visible?<br />Consider the weather forecast two days afte</label>
 
                 <label for="nop"><strong>7.Number of piles?</strong></label>
