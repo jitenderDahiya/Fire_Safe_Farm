@@ -14,8 +14,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!--Font-->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
 
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <!--jquery-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -33,7 +34,7 @@
 
     <style>
         body {
-            font-family: 'Roboto-light' !important;
+            font-family: 'Roboto' !important;
             font-size: 15px;
             background-color:lightgrey;
             height:fit-content();
@@ -51,7 +52,7 @@
             font-weight: 100;
             font-size: 20px;
             text-decoration: none;
-            font-family: 'Roboto-light';
+            font-family: 'Roboto';
             color: #fffffffa;
             vertical-align: middle;
             height: 40px;
@@ -157,7 +158,7 @@
             text-align: left;
             width: 280px;
             font-size: 15px;
-            margin-left: 38.5%;
+            margin-left:40%;
             border-radius: 30px;
             cursor: pointer;
             background-color: #fff;
@@ -491,6 +492,8 @@
 
 
             })
+                .fail(function (jqXHR, textStatus, errorThrown) { swal("Sorry", "Your Suburb is not found", "warning") })
+
 
         }
 

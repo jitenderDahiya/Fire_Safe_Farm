@@ -5,15 +5,17 @@
 <head>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
+    <link href="~/Content/jdstyle.css" rel="stylesheet" />
 </head>
+
 
 <body style="background-color:ghostwhite;">
 
     <div id="bck" class="first row" style="margin-top:0px;">
         <div id="text1" class="container">
-            Keep your farms safe from bushfire.
-            <div style="font-size:40px;">We help our farmers keep their farms safe by informing and guiding them to protect their farms.</div>
-                
+            Keep your farms safe from bushfire
+            <div style="font-size:30px;">We help our farmers keep their farms safe by informing and guiding them to protect their farms</div>
+
             <div style="height:180px; width:100%;background-color:#ffffff30;backdrop-filter:blur(3px);text-align:center;font-size:70px;z-index:400;box-shadow:10px 10px 10px #00000060;">
 
 
@@ -25,9 +27,9 @@
                     <p class="highlightcontent_1 col-lg-8" id="highlightcontent_1" style="color:red;width:50%;"></p>
 
                     <div class="row">
-                        <p col-lg-8" style="color:black;font-size:22px;width:50%;font-family:serif;font-weight:bold;">Farmland burned</p>
+                        <p col-lg-8" id="bf" style="color:black;font-size:22px;width:50%;font-weight:bold;">Farmland burned</p>
 
-                        <p col-lg-8" style="color:black;font-size:22px;width:50%;font-family:serif;font-weight:bold;">Livestock died in bushfire.</p>
+                        <p col-lg-8" id="bf" style="color:black;font-size:22px;width:50%;font-weight:bold;">Livestock died in bushfire (2019-2020)</p>
                     </div>
 
                 </div>
@@ -54,9 +56,9 @@
             window.requestAnimationFrame(step);
         }
         const obj1 = document.getElementById("highlightcontent_1");
-        animateValue(obj1, 0, 25000, 1000);
+        animateValue(obj1, 0, 25000, 1500);
         const obj2 = document.getElementById("highlightcontent_2");
-        animateValue(obj2, 0, 14, 1000);
+        animateValue(obj2, 0, 14, 1500);
     </script>
     <style>
         .highlightcontent_2::after {
@@ -78,13 +80,13 @@
 
 
 
-           <div class="glass-card" style="background:linear-gradient(170deg #ffffff50 #00000030); border-radius:40px !important;margin-top:100px;width:500px;">
-               <div class="row" style="background-color:none;display:flex; justify-content:center !important;position:absolute;margin-top: 0%;width: 600px;">
+        <div class="glass-card" style="background:linear-gradient(170deg #ffffff50 #00000030); border-radius:40px !important;margin-top:-100px;width:500px;">
+            <div class="row" style="background-color:none;display:flex; justify-content:center !important;position:absolute;margin-top: 0%;width: 600px;">
                 <input type="text" id="txt" placeholder="Type your location here" value="Healesville">
                 <button id="sbtn" onclick="submit();"><img id="icon" src="~/Images/search-12-512.png" /></button>
-                </div>
-
             </div>
+
+        </div>
     </div>
 </body>
 
@@ -133,7 +135,7 @@
         font-size: 20px;
         font-family: sans-serif;
         border-radius: 30px;
-        margin-bottom:0px;
+        margin-bottom: 0px;
     }
 
         input[type=text]:focus {
@@ -223,9 +225,8 @@
         z-index: 100;
         left: 50%;
         top: -50px;
-        
     }
-    
+
 
     .autocomplete-items div {
         font-family: sans-serif;
@@ -238,7 +239,6 @@
         background-color: #fff;
         border-bottom: none;
         padding: 15px;
-
     }
 
         .autocomplete-items div:hover {

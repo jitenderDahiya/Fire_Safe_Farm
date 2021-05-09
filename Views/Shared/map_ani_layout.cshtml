@@ -26,9 +26,9 @@
 
     <header>
 
-        
 
-        <nav id="mynav" class="navbar navbar-expand-lg navbar-light" >
+
+        <nav id="mynav" class="navbar navbar-expand-lg navbar-light">
 
             <div class="container-fluid">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav_container" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
@@ -106,7 +106,12 @@
                 background-color: #ffffff90;
                 backdrop-filter: blur(10px);
             }
-            
+
+
+            #mynav {
+                z-index: 400;
+                box-shadow: 10px 10px 20px #00000060;
+            }
         </style>
     </header>
 
@@ -115,16 +120,16 @@
 
 
 
-    
 
-        @RenderBody()
+
+    @RenderBody()
 
 
 
     <hr />
     <div class="container body-content">
-        <footer style="text-align:center;">
-            <p>&copy; @DateTime.Now.Year - JxD</p>
+        <footer style="text-align:center">
+            <p>&copy; @DateTime.Now.Year - Epoch <img src="~/images/team1.png" style="width:30px;" /></p>
         </footer>
     </div>
 

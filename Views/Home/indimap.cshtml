@@ -344,9 +344,12 @@
             var page1 = localStorage.getItem("Q");
             @*alert(page1)*@
 
-            if (page1 === "Healesville") {
+
+ @*           if (page1 === "Healesville") {
                 return
-            } else if (page1 !== null || page1 === "Healesville") {
+            } else 
+*@
+            if (page1 !== null || page1 === "Healesville") {
                 play(page1)
                 document.getElementById('txt').value = page1;
 
