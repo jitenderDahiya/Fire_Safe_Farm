@@ -230,7 +230,7 @@
             </div>*@
         <div class="container" style="justify-content:center;text-align:center;width:400px;position:absolute;z-index:1000;left:40%;margin-top: 150px;">
 
-            <input type="text" id="txt" placeholder="Type your location here" style="width:400px;" value="Healesville" />
+            <input type="text" id="txt" placeholder="Type your location here" style="width:400px;" value="Toolangi" />
             <button id="sbtn"><img id="icon" src="~/Images/search-12-512.png" /></button>
         </div>
 
@@ -304,7 +304,7 @@
             style: 'mapbox://styles/jdah0001/ckn43upw24mwn18nz8ko60usa',
             center: [145.5139, -37.6561],
             zoom: 10
-        });
+        }); 
         var marker1 = new mapboxgl.Marker({ color: 'black' })
             .setLngLat([145.5139, -37.6561])
             .setPopup(new mapboxgl.Popup().setHTML("<h6>" + "Search your location to see the severity" + "</h6>"))
@@ -313,6 +313,41 @@
         function myfunction(lat, lon, ffdi_cat) {
             var b = lat;
             var a = lon;
+
+          @* if (ffdi_cat == "low-moderate") {
+
+                mapboxgl.accessToken = 'pk.eyJ1IjoiamRhaDAwMDEiLCJhIjoiY2ttb3pvMmYyMjlsdzJvdDRzc3R3ZWp1bSJ9.k4l8C8SfWsC8GDxRwdp4xQ';
+                var map = new mapboxgl.Map({
+                    container: 'map',
+                    style: 'mapbox://styles/mapbox/streets-v11',
+                    center: [a, b],
+                    zoom: 10
+                });
+
+                var text = ffdi_cat + "<br>" + txt_logic(ffdi_cat);
+                var marker1 = new mapboxgl.Marker({ color: 'black' })
+                    .setLngLat([a, b])
+                    .setPopup(new mapboxgl.Popup().setHTML("<h2>" + text + "</h2>"))
+                    .addTo(map);
+
+            } else {
+
+
+                mapboxgl.accessToken = 'pk.eyJ1IjoiamRhaDAwMDEiLCJhIjoiY2ttb3pvMmYyMjlsdzJvdDRzc3R3ZWp1bSJ9.k4l8C8SfWsC8GDxRwdp4xQ';
+                var map = new mapboxgl.Map({
+                    container: 'map',
+                    style: 'mapbox://styles/jdah0001/ckn43upw24mwn18nz8ko60usa',
+                    center: [a, b],
+                    zoom: 10
+                });
+
+                var text = ffdi_cat + "<br>" + txt_logic(ffdi_cat);
+                var marker1 = new mapboxgl.Marker({ color: 'black' })
+                    .setLngLat([a, b])
+                    .setPopup(new mapboxgl.Popup().setHTML("<h2>" + text + "</h2>"))
+                    .addTo(map);
+            }*@
+
 
 
             mapboxgl.accessToken = 'pk.eyJ1IjoiamRhaDAwMDEiLCJhIjoiY2ttb3pvMmYyMjlsdzJvdDRzc3R3ZWp1bSJ9.k4l8C8SfWsC8GDxRwdp4xQ';
@@ -331,6 +366,7 @@
         }
 
 
+
     </script>
 
 
@@ -340,7 +376,7 @@
 
     <script>
 
-        window.onload = function () {
+        window.onload = function () {   
             var page1 = localStorage.getItem("Q");
             @*alert(page1)*@
 
@@ -349,12 +385,12 @@
                 return
             } else
 *@
-            if (page1 !== null || page1 === "Healesville") {
+            if (page1 !== null || page1 === "Toolangi") {
                 play(page1)
                 document.getElementById('txt').value = page1;
 
-                localStorage.setItem('Q', "Healesville");
-                page1 = "Healesville";
+                localStorage.setItem('Q', "Toolangi");
+                page1 = "Toolangi";
             }
         }
 

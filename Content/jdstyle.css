@@ -24,7 +24,7 @@
 .first {
     display: flex;
     /* The image used */
-    background-image: url("/Images/abc.jpg");
+    background-image: url("/images/kar1.jpg");
     /* Set a specific height */
     min-height: 1100px;
     /* Create the parallax scrolling effect */
@@ -33,7 +33,7 @@
     background-repeat: no-repeat;
     background-size: cover;
     width: auto;
-    perspective:50px;
+    perspective: 100px;
 }
 
 
@@ -86,9 +86,11 @@
     font-family:Roboto-light !important;
     text-align:center !important;
     scroll-behavior:smooth;
-    text-shadow:10px 10px 15px #ffffff60;
-    padding-top:270px;
-    color:black;
+/*    text-shadow:10px 10px 15px #ffffff60;
+*/    padding-top:230px;
+    color:whitesmoke;
+    text-shadow:#000000 0px 5px 8px;
+    
 
 }
 

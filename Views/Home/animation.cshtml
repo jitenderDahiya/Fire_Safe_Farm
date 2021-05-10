@@ -3,7 +3,7 @@
 
 
 
-
+<body>
 <div class="row" style="margin-top:0%">
     <div class="farm" id="farm">
         <div class="model" id="model" style="float:left; width:65%;">
@@ -19,335 +19,524 @@
 </div>
 
 
-<!--defining style for annotation and canvas-->
-<style type="text/css">
 
 
-    canvas {
+<style>
+
+    body {
+        font-family: Roboto-light;
+        height: fit-content();
+    }
+
+    .flip_card {
+        border-radius: 10px;
+        background-color: transparent;
+        width: 500px;
+        height: 650px;
+        perspective: 2000px;
+    }
+
+    .flip_card_inner {
+        border-radius: 10px;
+        position: relative;
         width: 100%;
-        height: 100px;
-        display: block;
+        height: 100%;
+        text-align: center;
+        transition: transform 1.5s;
+        transform-style: preserve-3d;
+        box-shadow: 0 15px 15px 10px rgba(0,0,0,0.2);
     }
 
-    .header_item {
-        color: #fff;
-        font-family: 'Roboto-light', sans-serif;
-        font-size: 60px;
-        padding-bottom: 30px;
+
+
+    .flip_card:hover .flip_card_inner {
+        transform: rotateY(180deg)
     }
 
-    .text {
-        color: #fff;
-        font-family: 'Roboto-light', sans-serif;
-        font-size: 20px;
-        text-align: justify;
-        padding-right: 5%;
-    }
 
-    .text_min {
-        color: #fff;
-        font-family: 'Roboto-light', sans-serif;
-        font-size: 30px;
-        text-align: justify;
-        padding-right: 5%;
-    }
-
-    #info {
-        
-        margin-left: 10%;
-        margin-right: 2%;
-        overflow-y: scroll;
-        height: 70%
-    }
-
-    #number {
+    .flip-card-front, .flip-card-back {
         position: absolute;
-        z-index: -1;
+        width: 100%;
+        height: 100%;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+    }
+
+    .flip-card-front {
+        background-color: whitesmoke;
+        border-radius: 5px;
+        color: black;
+    }
+
+    .flip-card-back {
+        padding: 10px;
+        background-color: peru;
+        border-radius: 5px;
+        color: white;
+        transform: rotateY(180deg);
+    }
+
+
+
+    ol {
+        font-size: 15px;
+        text-align: justify !important;
+    }
+
+    #li {
+        font-family: RobotoLight;
+        font-size: 15px;
+        text-align: justify !important;
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+
+    p {
+        font-family: RobotoLight;
+        font-size: 15px;
+        text-align: justify !important;
     }
 </style>
-<!--Three js module -->
-<script type="module">
-    import * as THREE from 'https://threejs.org/build/three.module.js';
-    import { RoomEnvironment } from 'https://threejs.org/examples/jsm/environments/RoomEnvironment.js';
-    import { OrbitControls } from 'https://threejs.org/examples/jsm/controls/OrbitControls.js';
-    import { GLTFLoader } from 'https://threejs.org/examples/jsm/loaders/GLTFLoader.js';
-    import { MeshoptDecoder } from 'https://threejs.org/examples/jsm/libs/meshopt_decoder.module.js';
 
-    // store element id in constant
-    let camera, scene, renderer;
-    const popup = document.getElementById("popup_id");
+<p style="text-align:center !important;color:#000000;font-family:Roboto-light;font-size:30px;">Depending on the damage to the farm, we divide the damage to the farm into three categories. </p>
+<ul>
+    <li id="li" ; style="font-family: Roboto-light">
+        <h2 style="font-family: Roboto-light">
+            Mild burn (<= 25% ) means only a small part of crops are destroyed. In total, the farmland isn’t damaged with a huge loss.
+        </h2>
+    </li>
 
-    const raycaster = new THREE.Raycaster();
-    const mouse = new THREE.Vector2();
-    const scaleX = 0.65;
-    const scaleY = 1;
+    <li id="li" ;><h2 style="font-family: Roboto-light">Moderate burn (<=50%) means almost half of crops are damaged.</h2>  </li>
 
-    init();
+    <li id="li" ;><h2 style="font-family: Roboto-light">Hot burn (>=50%) means almost all crops are destroyed in the bushfire. Thus, it’s really different way to maintain and recover farmland with different situations. </h2></li>
+</ul>
+<br />
+<div class="row" style="justify-content:space-evenly;height:fit-content();font-family: Roboto-light;">
 
 
-    // main function//
-    function init() {
-        const container = document.getElementById('model')
 
-        const canvas = document.getElementById("number");
-        const ctx = canvas.getContext("2d");
-        const x = 5120;
-        const y = 5120;
-        const radius = 5120;
-        const startAngle = 0;
-        const endAngle = Math.PI * 2;
+    <div class="flip_card">
+        <div class="flip_card_inner">
+            <div class="flip-card-front">
 
-        ctx.fillStyle = "#0d0d0d";    // sprite texture
-        ctx.beginPath();
-        ctx.arc(x, y, radius, startAngle, endAngle);
-        ctx.fill();
-        ctx.opacity = 0.1;
+                <img src="~/images/pexels-public-domain-pictures-66267(1).jpg" alt="Avatar" style="width:500px;height:650px;border-radius:10px;">
+            </div>
+            <div class="flip-card-back">
+                <h2 style="font-family: Roboto-light">Mild Burn(<= 25% )</h2>
 
-        ctx.strokeStyle = "rgb(255, 255, 255)";
-        ctx.lineWidth = 300;
-        ctx.beginPath();
-        ctx.arc(x, y, radius, startAngle, endAngle);
-        ctx.stroke();
+                <h3 style="font-family: Roboto-light">For this situation, most crops are still in good condition. Hence, farmers need to follow these two steps:</h3>
 
-        ctx.fillStyle = "rgb(255, 255, 255)";
-        ctx.font = "7560px roboto-light";
-        ctx.textAlign = "center";
-        ctx.textBaseline = "middle";
-        ctx.fillText("+", x, y);
+                <ol style="font-family: Roboto-light">
+                    <li id="li" style="font-family: Roboto-light">
+                        Check the fertilizer of farmland
 
-        renderer = new THREE.WebGLRenderer({ antialias: true });
-        renderer.setPixelRatio(window.devicePixelRatio);
-        renderer.setSize((window.innerWidth * scaleX), (window.innerHeight * scaleY));
-        renderer.toneMapping = THREE.ACESFilmicToneMapping;
-        renderer.toneMappingExposure = 1;
-        renderer.outputEncoding = THREE.sRGBEncoding;
-        container.appendChild(renderer.domElement);
+                        It’s because after bushfire, even if a part of crops are burnt and transferred to fertilizer. It may be not enough for the left to recover. Some crops need more minerals because they are damaged. They need these minerals to repair their stems, leaves or roots. Thus, farmers need to make sure nitrogen fertilizer, Phosphate fertilizer and potash.
 
-        camera = new THREE.PerspectiveCamera(65, (window.innerWidth * scaleX) / (window.innerHeight * scaleY), 0.1, 1500);
-        camera.position.set(300, 100, 10);
+                    </li>
+                    <li id="li" style="font-family: Roboto-light">
+                        Clean up dead crops in time
 
-        const environment = new RoomEnvironment();
-        const pmremGenerator = new THREE.PMREMGenerator(renderer);
+                        It’s because the dead crops also have many roots that are still alive. These roots also intake water, minerals and other nutrition. Therefore, in order to let the left crops grow better, it’s suitable to clean these dead crops and leave more resource for the alive crops.
 
-        scene = new THREE.Scene();
-        scene.background = new THREE.Color("#87CEFA");
-        scene.environment = pmremGenerator.fromScene(environment).texture;
+                    </li>
+                </ol>
+            </div>
+
+        </div>
+
+    </div>
 
 
-        const loader = new GLTFLoader().setPath('/3dmodel/');
+    <div class="flip_card">
+        <div class="flip_card_inner">
+            <div class="flip-card-front">
+                <img src="~/images/pexels-tucă-bianca-360177(1).jpg" alt="Avatar" style="width:500px;height:650px;border-radius:10px;">
+            </div>
+            <div class="flip-card-back">
+                <h2 style="font-family: Roboto-light">Moderate burn(<=50%)</h2>
 
-        loader.setMeshoptDecoder(MeshoptDecoder);
-        loader.load('scene.gltf', function (gltf) {
-            scene.add(gltf.scene);
+                <h3 style="font-family: Roboto-light">
+                    For moderate burn, almost half of crops are destroyed. Thus, compared with mild burn, moderate burn has more steps to recover.
+                </h3>
+                <ol style="font-family: Roboto-light">
+                    <li id="li" style="font-family: Roboto-light">
+                        Check crops situation
+
+                        Even if only half of crops are destroyed, many left crops are also damaged. Thus, the first step is to check the whole condition of farmland. It’s worthwhile to keep these crops or not. To some extent, in this situation, the cost of repair may be higher than the cost of replant. As a result, we need to balance the cost
+                    </li>
+
+                    <li id="li" style="font-family: Roboto-light">
+                        Clean up dead crops in time
+
+                        It’s because the dead crops also have many roots that are still alive. These roots also intake water, minerals and other nutrition. Therefore, in order to let the left crops grow better, it’s suitable to clean these dead crops and leave more resource for the alive crops.
+                    </li>
+                    <li id="li" style="font-family: Roboto-light">
+                        Check the fertilizer of farmland
+                        It’s because after bushfire, even if a part of crops are burnt and transferred to fertilizer. It may be not enough for the left to recover. Some crops need more minerals because they are damaged. They need these minerals to repair their stems, leaves or roots. Thus, farmers need to make sure nitrogen fertilizer, Phosphate fertilizer and potash.
+                    </li>
+                    <li id="li" style="font-family: Roboto-light">
+                        Replant some plants in time
+                        When farmers want to do the replanting, it’s necessary to consider about the date. If it misses the precious for the crops, it’s better to plant another kind of crops to maximize profit.
+                    </li>
+                </ol>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+    <div class="flip_card">
+        <div class="flip_card_inner">
+            <div class="flip-card-front">
+                <img src="~/images/pexels-vlad-bagacian-1059042(1).jpg" alt="Avatar" style="width:500px;height:650px;border-radius:10px;">
+            </div>
+            <div class="flip-card-back">
+
+                <h2>Hot burn (>=50%)</h2>
+                <ul>
+                    <li id="li" style="font-family: Roboto-light">
+                        With more than half of crops are destroyed, the left crops are also damaged. It’s not worthwhile to keep current crops. In this situation, the only way is to replant another kind of crops that are suitable for the season. Because most crops are destroyed, farmers don’t consider the fertilizer. In total, the only way and best way is to replant the whole crops.
+                    </li>
+                </ul>
+
+            </div>
+
+        </div>
+        </div>
+    </div>
+    </body>
+
+    <!--defining style for annotation and canvas-->
+    <style type="text/css">
+
+
+        canvas {
+            width: 100%;
+            height: 100px;
+            display: block;
+        }
+
+        .header_item {
+            color: #fff;
+            font-family: 'Roboto-light', sans-serif;
+            font-size: 60px;
+            padding-bottom: 30px;
+        }
+
+        .text {
+            color: #fff;
+            font-family: 'Roboto-light', sans-serif;
+            font-size: 20px;
+            text-align: justify;
+            padding-right: 5%;
+        }
+
+        .text_min {
+            color: #fff;
+            font-family: 'Roboto-light', sans-serif;
+            font-size: 30px;
+            text-align: justify;
+            padding-right: 5%;
+        }
+
+        #info {
+            margin-left: 10%;
+            margin-right: 2%;
+            overflow-y: scroll;
+            height: 70%
+        }
+
+        #number {
+            position: absolute;
+            z-index: -1;
+        }
+    </style>
+    <!--Three js module -->
+    <script type="module">
+        import * as THREE from 'https://threejs.org/build/three.module.js';
+        import { RoomEnvironment } from 'https://threejs.org/examples/jsm/environments/RoomEnvironment.js';
+        import { OrbitControls } from 'https://threejs.org/examples/jsm/controls/OrbitControls.js';
+        import { GLTFLoader } from 'https://threejs.org/examples/jsm/loaders/GLTFLoader.js';
+        import { MeshoptDecoder } from 'https://threejs.org/examples/jsm/libs/meshopt_decoder.module.js';
+
+        // store element id in constant
+        let camera, scene, renderer;
+        const popup = document.getElementById("popup_id");
+
+        const raycaster = new THREE.Raycaster();
+        const mouse = new THREE.Vector2();
+        const scaleX = 0.65;
+        const scaleY = 1;
+
+        init();
+
+
+        // main function//
+        function init() {
+            const container = document.getElementById('model')
+
+            const canvas = document.getElementById("number");
+            const ctx = canvas.getContext("2d");
+            const x = 5120;
+            const y = 5120;
+            const radius = 5120;
+            const startAngle = 0;
+            const endAngle = Math.PI * 2;
+
+            ctx.fillStyle = "#0d0d0d";    // sprite texture
+            ctx.beginPath();
+            ctx.arc(x, y, radius, startAngle, endAngle);
+            ctx.fill();
+            ctx.opacity = 0.1;
+
+            ctx.strokeStyle = "rgb(255, 255, 255)";
+            ctx.lineWidth = 300;
+            ctx.beginPath();
+            ctx.arc(x, y, radius, startAngle, endAngle);
+            ctx.stroke();
+
+            ctx.fillStyle = "rgb(255, 255, 255)";
+            ctx.font = "7560px roboto-light";
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
+            ctx.fillText("+", x, y);
+
+            renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.setSize((window.innerWidth * scaleX), (window.innerHeight * scaleY));
+            renderer.toneMapping = THREE.ACESFilmicToneMapping;
+            renderer.toneMappingExposure = 1;
+            renderer.outputEncoding = THREE.sRGBEncoding;
+            container.appendChild(renderer.domElement);
+
+            camera = new THREE.PerspectiveCamera(65, (window.innerWidth * scaleX) / (window.innerHeight * scaleY), 0.1, 1500);
+            camera.position.set(300, 100, 10);
+
+            const environment = new RoomEnvironment();
+            const pmremGenerator = new THREE.PMREMGenerator(renderer);
+
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color("#87CEFA");
+            scene.environment = pmremGenerator.fromScene(environment).texture;
+
+
+            const loader = new GLTFLoader().setPath('/3dmodel/');
+
+            loader.setMeshoptDecoder(MeshoptDecoder);
+            loader.load('scene.gltf', function (gltf) {
+                scene.add(gltf.scene);
+                render();
+
+            });
+
+            //select canvas from tag id
+            const numberTexture = new THREE.CanvasTexture(
+                document.querySelector('#number')
+            );
+
+            const spriteMaterial = new THREE.SpriteMaterial({
+                map: numberTexture,
+                alphaTest: 0.7,
+                transparent: true,
+                depthTest: false,
+                depthWrite: false,
+            });
+
+            // defining sprite locations
+            var livestock = new THREE.Sprite(spriteMaterial);
+            livestock.position.set(1, 7, 28);
+            livestock.scale.set(8, 8, 1);
+            livestock.material.opacity = 0.9;
+            livestock.name = "livestock";
+            scene.add(livestock);
+
+            var crop = new THREE.Sprite(spriteMaterial);
+            crop.position.set(38, 10, 61);
+            crop.scale.set(8, 8, 1);
+            crop.material.opacity = 0.9;
+            crop.name = "crop";
+            scene.add(crop);
+
+            var house = new THREE.Sprite(spriteMaterial);
+            house.position.set(-30, 35, 0);
+            house.scale.set(8, 8, 1);
+            house.material.opacity = 0.9;
+            house.name = "house";
+            scene.add(house);
+
+            var tree = new THREE.Sprite(spriteMaterial);
+            tree.position.set(-25, 20, 35);
+            tree.scale.set(8, 8, 1);
+            tree.material.opacity = 0.9;
+            tree.name = "tree";
+            scene.add(tree);
+
+            var hay = new THREE.Sprite(spriteMaterial);
+            hay.position.set(-20, 10, -30);
+            hay.scale.set(8, 8, 1);
+            hay.material.opacity = 0.9;
+            hay.name = "hay";
+            scene.add(hay);
+
+            var machine = new THREE.Sprite(spriteMaterial);
+            machine.position.set(15, 14, -70);
+            machine.scale.set(8, 8, 1);
+            machine.material.opacity = 0.9;
+            machine.name = "machine";
+            scene.add(machine);
+
+
+
+            // orbital controls or camera controls
+            const controls = new OrbitControls(camera, renderer.domElement);
+            controls.addEventListener('change', render);
+            controls.enableZoom = true;
+            controls.minDistance = 10;
+            controls.maxDistance = 250;
+            controls.target.set(0, 0, 0);
+            controls.update();
+
+            window.addEventListener('resize', onWindowResize, false);
+            renderer.domElement.addEventListener('click', onClick, false);
+
+        }
+
+        // functions
+        function onWindowResize() {
+
+            camera.aspect = (window.innerWidth * scaleX) / (window.innerHeight * scaleY);
+            camera.updateProjectionMatrix();
+
+            renderer.setSize((window.innerWidth * scaleX), (window.innerHeight * scaleY));
             render();
-
-        });
-
-        //select canvas from tag id
-        const numberTexture = new THREE.CanvasTexture(
-            document.querySelector('#number')
-        );
-
-        const spriteMaterial = new THREE.SpriteMaterial({
-            map: numberTexture,
-            alphaTest: 0.7,
-            transparent: true,
-            depthTest: false,
-            depthWrite: false,
-        });
-
-        // defining sprite locations
-        var livestock = new THREE.Sprite(spriteMaterial);
-        livestock.position.set(1, 7, 28);
-        livestock.scale.set(8, 8, 1);
-        livestock.material.opacity = 0.9;
-        livestock.name = "livestock";
-        scene.add(livestock);
-
-        var crop = new THREE.Sprite(spriteMaterial);
-        crop.position.set(38, 10, 61);
-        crop.scale.set(8, 8, 1);
-        crop.material.opacity = 0.9;
-        crop.name = "crop";
-        scene.add(crop);
-
-        var house = new THREE.Sprite(spriteMaterial);
-        house.position.set(-30, 35, 0);
-        house.scale.set(8, 8, 1);
-        house.material.opacity = 0.9;
-        house.name = "house";
-        scene.add(house);
-
-        var tree = new THREE.Sprite(spriteMaterial);
-        tree.position.set(-25, 20, 35);
-        tree.scale.set(8, 8, 1);
-        tree.material.opacity = 0.9;
-        tree.name = "tree";
-        scene.add(tree);
-
-        var hay = new THREE.Sprite(spriteMaterial);
-        hay.position.set(-20, 10, -30);
-        hay.scale.set(8, 8, 1);
-        hay.material.opacity = 0.9;
-        hay.name = "hay";
-        scene.add(hay);
-
-        var machine = new THREE.Sprite(spriteMaterial);
-        machine.position.set(15, 14, -70);
-        machine.scale.set(8, 8, 1);
-        machine.material.opacity = 0.9;
-        machine.name = "machine";
-        scene.add(machine);
-
-
-
-        // orbital controls or camera controls
-        const controls = new OrbitControls(camera, renderer.domElement);
-        controls.addEventListener('change', render);
-        controls.enableZoom = true;
-        controls.minDistance = 10;
-        controls.maxDistance = 250;
-        controls.target.set(0, 0, 0);
-        controls.update();
-
-        window.addEventListener('resize', onWindowResize, false);
-        renderer.domElement.addEventListener('click', onClick, false);
-
-    }
-
-    // functions
-    function onWindowResize() {
-
-        camera.aspect = (window.innerWidth * scaleX) / (window.innerHeight * scaleY);
-        camera.updateProjectionMatrix();
-
-        renderer.setSize((window.innerWidth * scaleX), (window.innerHeight * scaleY));
-        render();
-    }
-
-    function onClick(event) {
-
-        event.preventDefault();
-
-        mouse.x = (event.clientX / ((window.innerWidth * scaleX) )) * 2 - 1;
-        mouse.y = -(event.clientY / ((window.innerHeight * scaleY) + 275)) * 2 + 1;
-
-        raycaster.setFromCamera(mouse, camera);
-
-        var intersects = raycaster.intersectObjects(scene.children.slice(0, 6), true);
-
-        if (intersects.length > 0) {
-            console.log('Intersection:', intersects[0].object.name);
-            renderText(intersects[0].object.name);
-
-        }
-    }
-
-    // render function  making vector and positioning on screen
-    function render() {
-        renderer.render(scene, camera);
-    }
-
-    function renderText(itemName) {
-        if (itemName == "tree") {
-            document.getElementById("info").innerHTML = "<h1 class='header_item'>Trees and Other Vegetation</h1>" + "</br>" +
-                "<p class='text'>Vegetation should be planned well around your property to protect it from the danger of bushfire. Sometimes you require a planning permit to cut down or burn off the vegetation. The given instructions provides certainty to landowners and residents at risk from bushfire so that vegetation can be cleared and the property maintained in a fire-ready condition. Follwing rules apply for residents living in bushfire prone areas.</p>" + "</br></br>" +
-                "<ol class='text'>" +
-                "<li><b>10m Rule:</b></br>This allows land owners and residents to clear any vegetation around 10m radious of the accomodation.</br></br></li>" +
-                "<li><b>30m Rule:</b></br>This allows land owners and residents to clear any vegetation except trees around 30m radious of the accomodation.</br></br></li>" +
-                "<li><b>50m Rule:</b></br>This allows land owners and residents to clear any vegetation except trees within 60m radious of the accomodation.</br></br></li>" +
-                "</ol >"
         }
 
-        else if (itemName == "hay") {
-            document.getElementById("info").innerHTML = "<h1 class='header_item'>Haystacks</h1>" + "</br>" +
-                "<p class='text'>Haystask fires can be caused by, </p>" +
-                "<ol class='text'>" +
-                "<li><b>A spark from machinary equipment:</b></br>As hays are dry and already high in temperature from inside, they are good source of fuel for fire. When one keeps the hay and machinary together, then there are chances of fire in hay due to accidential sparks in machinary.</br></br></li>" +
-                "<li><b>Embers coming from nearby fires:</b></br>Embers of nearby fires can act as a ignition to start a fire elsewhere. Hays already being hot are combustable and more prone to fire.</br></br></li>" +
-                "<li><b>Spontaneous ignition:</b></br>Spontaneous ignition is the major cause of heystack fires in Victoria. This can happen if the hay becomes damp before, during or after the baling or baled when its still green. It causes a complex chemical reaction inside haystack rising the temperature of hay from inside and as it reaches certain point (180 degree C) can burst into spontaneous ignitions.</br></br></li>" +
-                "</ol>" +
+        function onClick(event) {
+
+            event.preventDefault();
+
+            mouse.x = (event.clientX / ((window.innerWidth * scaleX))) * 2 - 1;
+            mouse.y = -(event.clientY / ((window.innerHeight * scaleY) + 275)) * 2 + 1;
+
+            raycaster.setFromCamera(mouse, camera);
+
+            var intersects = raycaster.intersectObjects(scene.children.slice(0, 6), true);
+
+            if (intersects.length > 0) {
+                console.log('Intersection:', intersects[0].object.name);
+                renderText(intersects[0].object.name);
+
+            }
+        }
+
+        // render function  making vector and positioning on screen
+        function render() {
+            renderer.render(scene, camera);
+        }
+
+        function renderText(itemName) {
+            if (itemName == "tree") {
+                document.getElementById("info").innerHTML = "<h1 class='header_item'>Trees and Other Vegetation</h1>" + "</br>" +
+                    "<p class='text'>Vegetation should be planned well around your property to protect it from the danger of bushfire. Sometimes you require a planning permit to cut down or burn off the vegetation. The given instructions provides certainty to landowners and residents at risk from bushfire so that vegetation can be cleared and the property maintained in a fire-ready condition. Follwing rules apply for residents living in bushfire prone areas.</p>" + "</br></br>" +
+                    "<ol class='text'>" +
+                    "<li><b>10m Rule:</b></br>This allows land owners and residents to clear any vegetation around 10m radious of the accomodation.</br></br></li>" +
+                    "<li><b>30m Rule:</b></br>This allows land owners and residents to clear any vegetation except trees around 30m radious of the accomodation.</br></br></li>" +
+                    "<li><b>50m Rule:</b></br>This allows land owners and residents to clear any vegetation except trees within 60m radious of the accomodation.</br></br></li>" +
+                    "</ol >"
+            }
+
+            else if (itemName == "hay") {
+                document.getElementById("info").innerHTML = "<h1 class='header_item'>Haystacks</h1>" + "</br>" +
+                    "<p class='text'>Haystask fires can be caused by, </p>" +
+                    "<ol class='text'>" +
+                    "<li><b>A spark from machinary equipment:</b></br>As hays are dry and already high in temperature from inside, they are good source of fuel for fire. When one keeps the hay and machinary together, then there are chances of fire in hay due to accidential sparks in machinary.</br></br></li>" +
+                    "<li><b>Embers coming from nearby fires:</b></br>Embers of nearby fires can act as a ignition to start a fire elsewhere. Hays already being hot are combustable and more prone to fire.</br></br></li>" +
+                    "<li><b>Spontaneous ignition:</b></br>Spontaneous ignition is the major cause of heystack fires in Victoria. This can happen if the hay becomes damp before, during or after the baling or baled when its still green. It causes a complex chemical reaction inside haystack rising the temperature of hay from inside and as it reaches certain point (180 degree C) can burst into spontaneous ignitions.</br></br></li>" +
+                    "</ol>" +
+                    "</br>" +
+                    "<p class='text_min'>What you need to do?</p>" +
+                    "<ul class='text'>" +
+                    "<li>Ensure you follow right procedures for baling and store them at correct moisture level.</li>" +
+                    "<li>Protect your hay from getting wet due to rain or any other water leakage.</li>" +
+                    "<li>Use hay caps to cover your hay to protect it from getting moist or from ember attack.</li>" +
+                    "<li>Store away hays in different locations around your farm to reduce the impact of loss.</li>" +
+                    "<li>Keep your machinary away from haystacks as much as possible.</li>" +
+                    "<li>Create wide fuel breaks around haystacks</li>" +
+                    "<li>Regularly check haystacks for any signs of heating.</li>" +
+                    "</ul>"
+            }
+
+            else if (itemName == "machine") {
+                document.getElementById("info").innerHTML = "<h1 class='header_item'>Vehicles and Machinary</h1>" + "</br>" +
+                    "<p class='text'>Machinary can be one of the causes of strating fires in your farm. On hot, dry and windy days, be very careful while harvesting, grinding, slashing or mowing.</p>" +
+                    "<p class='text'>Most commmon cause of of fire while harvesting is due to the machineary. Materials collecting on hot engine components such as manifold, exhaust and turbocharger can be a starter for fire. Therefore, avoid driving any vehicles and machinary thorugh dry grass.</p>" +
+                    "</br>" +
+                    "<p class='text_min'>What you need to do?</p>" +
+                    "<ul class='text'>" +
+                    "<li>Regularly make sure the machinary is clean and in good working condition</li>" +
+                    "<li>Check and assess the weather conditions especially strong winds and temperature while harvesting</li>" +
+                    "<li>Keep a fire safety kit nearby. Equip your vehicle with atleast 2 fire extinguishers</li>" +
+                    "<li>Make sure to take regular breaks for machinary to cool down while harvesting.</li>" +
+                    "<li>While cutting and grinding make sure to use fire rststent sheilds to stop sparks </li>" +
+                    "<li>Do not use any machinary on total fire ban days</li>" +
+                    "</ul>"
+            }
+
+            else if (itemName == "crop") {
+                document.getElementById("info").innerHTML = "<h1 class='header_item'>Crops</h1>" + "</br>" +
+                    "<p class='text'>Crops in the farm are biggest asset to an arable crop farmer. Crops such as wheat and barley are most prone to fires when they are grown and ready to be harvested. Therefore, during bushfire season, when fire starts they can easily catch fire and can cause damage. It is important to perform cleaning and mowing in the farm on regular basis. Whatever the debris is collected should be cleared out. It is importnat to add fuel breaks around the farm, therefore even if fire starts somwhere, you won't loose everything.</p>" +
+                    "<p class='text'>Burn off is a good way for fuel management in farms. If you decide to do burn off, you should seek permission from emergency services and report any incident immediately. There are certain regions which has fire bans imposed. In these regions you can't start a fire withour proper authorisation. Check the following links for application.</p>" +
+                    "<p class='text'>It is importnt to clear out the vegetation around the fence. This clearance must not exceed 4m in total from both side of fence except when vegetation on the one side is cleared by more than 4m on one side.</p>"
                 "</br>" +
-                "<p class='text_min'>What you need to do?</p>" +
-                "<ul class='text'>" +
-                "<li>Ensure you follow right procedures for baling and store them at correct moisture level.</li>" +
-                "<li>Protect your hay from getting wet due to rain or any other water leakage.</li>" +
-                "<li>Use hay caps to cover your hay to protect it from getting moist or from ember attack.</li>" +
-                "<li>Store away hays in different locations around your farm to reduce the impact of loss.</li>" +
-                "<li>Keep your machinary away from haystacks as much as possible.</li>" +
-                "<li>Create wide fuel breaks around haystacks</li>" +
-                "<li>Regularly check haystacks for any signs of heating.</li>" +
-                "</ul>"
-        }
+                    "<p class='text_min'>What you need to do?</p>" +
+                    "<ul class='text'>" +
+                    "<li> Do fuel managemnet by clearing debris and dry leaves on the farm and performing burn offs.</li>" +
+                    "<li>Perform regular mowing around farm</li>" +
+                    "<li>Keep sufficient gap between fences and crops </li>" +
+                    "<li>Add fuel gaps within farms to the damage can be restricted to certain area</li>" +
+                    "</ul>"
+            }
 
-        else if (itemName == "machine") {
-            document.getElementById("info").innerHTML = "<h1 class='header_item'>Vehicles and Machinary</h1>" + "</br>" +
-                "<p class='text'>Machinary can be one of the causes of strating fires in your farm. On hot, dry and windy days, be very careful while harvesting, grinding, slashing or mowing.</p>" +
-                "<p class='text'>Most commmon cause of of fire while harvesting is due to the machineary. Materials collecting on hot engine components such as manifold, exhaust and turbocharger can be a starter for fire. Therefore, avoid driving any vehicles and machinary thorugh dry grass.</p>" +
-                "</br>" +
-                "<p class='text_min'>What you need to do?</p>" +
-                "<ul class='text'>" +
-                "<li>Regularly make sure the machinary is clean and in good working condition</li>" +
-                "<li>Check and assess the weather conditions especially strong winds and temperature while harvesting</li>" +
-                "<li>Keep a fire safety kit nearby. Equip your vehicle with atleast 2 fire extinguishers</li>" +
-                "<li>Make sure to take regular breaks for machinary to cool down while harvesting.</li>" +
-                "<li>While cutting and grinding make sure to use fire rststent sheilds to stop sparks </li>" +
-                "<li>Do not use any machinary on total fire ban days</li>" +
-                "</ul>"
-        }
+            else if (itemName == "livestock") {
+                document.getElementById("info").innerHTML = "<h1 class='header_item'>Livestocks</h1>" + "</br>" +
+                    "<p class='text'>You can do a lot more to save the animals on the farm. When prepared well, you can save there lives. During bushfires, if no taken care of animals can panic and suffer injuries which may even result in their deaths. Some of the animals, like horses have a good insticts to avoid fire while when weather gets hot, sheeps are always reluctatnt to go. You have to make specific arrangemnets based on the animals you own to protect them in bushfire season.</p>" +
+                    "</br>" +
+                    "<p class='text_min'>What you need to do?</p>" +
+                    "<ul class='text'>" +
+                    "<li> Create green paddocks away from the farms with sufficient space and food and water supplies for animals. </li>" +
+                    "<li>Do not enclose animals especially horses in the confined space. Horses have good ability to avoid fire given ample of space.</li>" +
+                    "<li>Prepare route for evacuation before fire season and train your animals accordingly. It is always difficult to handle a panic animal. </li>" +
+                    "<li>Keep the external gates closed so animals dont go on run and damage themselves due to poor vision.</li>" +
+                    "</ul>"
+            }
 
-        else if (itemName == "crop") {
-            document.getElementById("info").innerHTML = "<h1 class='header_item'>Crops</h1>" + "</br>" +
-                "<p class='text'>Crops in the farm are biggest asset to an arable crop farmer. Crops such as wheat and barley are most prone to fires when they are grown and ready to be harvested. Therefore, during bushfire season, when fire starts they can easily catch fire and can cause damage. It is important to perform cleaning and mowing in the farm on regular basis. Whatever the debris is collected should be cleared out. It is importnat to add fuel breaks around the farm, therefore even if fire starts somwhere, you won't loose everything.</p>" +
-                "<p class='text'>Burn off is a good way for fuel management in farms. If you decide to do burn off, you should seek permission from emergency services and report any incident immediately. There are certain regions which has fire bans imposed. In these regions you can't start a fire withour proper authorisation. Check the following links for application.</p>" +
-                "<p class='text'>It is importnt to clear out the vegetation around the fence. This clearance must not exceed 4m in total from both side of fence except when vegetation on the one side is cleared by more than 4m on one side.</p>"
-            "</br>" +
-                "<p class='text_min'>What you need to do?</p>" +
-                "<ul class='text'>" +
-                "<li> Do fuel managemnet by clearing debris and dry leaves on the farm and performing burn offs.</li>" +
-                "<li>Perform regular mowing around farm</li>" +
-                "<li>Keep sufficient gap between fences and crops </li>" +
-                "<li>Add fuel gaps within farms to the damage can be restricted to certain area</li>" +
-                "</ul>"
-        }
+            else if (itemName == "house") {
+                document.getElementById("info").innerHTML = "<h1 class='header_item'>House</h1>" + "</br>" +
+                    "<p class='text'>Protecting your property is very important during bushfire. When it comes to house safety, you can do a lot more. The following list items and their  certain measures taken with them can help you protect your house during bushfire.</p>" +
+                    "<p class='text'>You can do a lot more to save the animals on the farm. When prepared well, you can save there lives. During bushfires, if no taken care of animals can panic and suffer injuries which may even result in their deaths. Some of the animals, like horses have a good insticts to avoid fire while when weather gets hot, sheeps are always reluctatnt to go. You have to make specific arrangemnets based on the animals you own to protect them in bushfire season.</p>" +
+                    "</br>" +
+                    "<p class='text_min'>What you need to do?</p>" +
+                    "<ol class='text', type='1'>" +
+                    "<li><b>Roof:</b>" +
+                    "<ul class='text'><li>Use fire resistent sarking under the roofs to prevent bushfire damagning and coming from your roof</li><li>Seal the roof gaps using compressed minaral wool insulation</li></ul>" +
+                    "</li > " +
+                    "<li>Windows:" +
+                    "<ul class='text'><li>Use shutters on windows to tightly close them and prevent fire from coming inside</li><li>Seal the gaps in windows and its borders</li><li>Maintain window sills so they don't have any flaking paint</li></ul>" +
+                    "</li>" +
+                    "<li><b>Doors:</b>" +
+                    "<ul class='text'><li>Avoid wooden doors. Insead use metal ones.</li><li>Seal the gaps around door frame</li></ul>" +
+                    "</li>" +
+                    "<li><b>Decks:</b>" +
+                    "<ul class='text'><li>Make decks out of concrete material or metal</li><li>Add some gaps between decking materials</li><li>Leep it seperate from dwellings</li></ul>" +
+                    "</li>" +
+                    "</ul>"
 
-        else if (itemName == "livestock") {
-            document.getElementById("info").innerHTML = "<h1 class='header_item'>Livestocks</h1>" + "</br>" +
-                "<p class='text'>You can do a lot more to save the animals on the farm. When prepared well, you can save there lives. During bushfires, if no taken care of animals can panic and suffer injuries which may even result in their deaths. Some of the animals, like horses have a good insticts to avoid fire while when weather gets hot, sheeps are always reluctatnt to go. You have to make specific arrangemnets based on the animals you own to protect them in bushfire season.</p>" +
-                "</br>" +
-                "<p class='text_min'>What you need to do?</p>" +
-                "<ul class='text'>" +
-                "<li> Create green paddocks away from the farms with sufficient space and food and water supplies for animals. </li>" +
-                "<li>Do not enclose animals especially horses in the confined space. Horses have good ability to avoid fire given ample of space.</li>" +
-                "<li>Prepare route for evacuation before fire season and train your animals accordingly. It is always difficult to handle a panic animal. </li>" +
-                "<li>Keep the external gates closed so animals dont go on run and damage themselves due to poor vision.</li>" +
-                "</ul>"
-        }
 
-        else if (itemName == "house") {
-            document.getElementById("info").innerHTML = "<h1 class='header_item'>House</h1>" + "</br>" +
-                "<p class='text'>Protecting your property is very important during bushfire. When it comes to house safety, you can do a lot more. The following list items and their  certain measures taken with them can help you protect your house during bushfire.</p>" +
-                "<p class='text'>You can do a lot more to save the animals on the farm. When prepared well, you can save there lives. During bushfires, if no taken care of animals can panic and suffer injuries which may even result in their deaths. Some of the animals, like horses have a good insticts to avoid fire while when weather gets hot, sheeps are always reluctatnt to go. You have to make specific arrangemnets based on the animals you own to protect them in bushfire season.</p>" +
-                "</br>" +
-                "<p class='text_min'>What you need to do?</p>" +
-                "<ol class='text', type='1'>" +
-                "<li><b>Roof:</b>" +
-                "<ul class='text'><li>Use fire resistent sarking under the roofs to prevent bushfire damagning and coming from your roof</li><li>Seal the roof gaps using compressed minaral wool insulation</li></ul>" +
-                "</li > " +
-                "<li>Windows:" +
-                "<ul class='text'><li>Use shutters on windows to tightly close them and prevent fire from coming inside</li><li>Seal the gaps in windows and its borders</li><li>Maintain window sills so they don't have any flaking paint</li></ul>" +
-                "</li>" + 
-                "<li><b>Doors:</b>" +
-                "<ul class='text'><li>Avoid wooden doors. Insead use metal ones.</li><li>Seal the gaps around door frame</li></ul>" +
-                "</li>" +
-                "<li><b>Decks:</b>" +
-                "<ul class='text'><li>Make decks out of concrete material or metal</li><li>Add some gaps between decking materials</li><li>Leep it seperate from dwellings</li></ul>" +
-                "</li>" +
-                "</ul>"
+            }
 
 
         }
-
-
-    }
-</script>
+    </script>
