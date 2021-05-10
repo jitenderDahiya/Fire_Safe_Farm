@@ -473,18 +473,31 @@
 *@
             $.getJSON('https://firesafe-farms.ga/check?locality=' + loc, function (data) {
 
-@*                var sdt = Number(data.start.split('/')[0]);
-                var smn = Number(data.start.split('/')[1]);
+                var syear = Number(data.start.split('-')[0]);
+                var smonth = Number(data.start.split('-')[1]);
+                var sday = Number(data.start.split('-')[2]);
+
+                var eyear = Number(data.end.split('-')[0]);
+                var emonth = Number(data.end.split('-')[1]);
+                var eday = Number(data.end.split('-')[2]);
+
+                var trans = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                var smonth1 = trans[smonth - 1];
+                var emonth1 = trans[emonth - 1];
+
+
+                @*              var smn = Number(data.start.split('/')[1]);
                 var syr = Number(data.start.split('/')[2]);
                 var edt = Number(data.end.split('/')[0]);
                 var emn = Number(data.end.split('/')[1]);
                 var eyr = Number(data.end.split('/')[2]);*@
+
                 var sdt = String(data.start);
                 var edt = String(data.end);
                 var tfb = String(data.fire_ban);
 
 
-                document.getElementById("FDP").innerHTML = sdt+"-"+edt;
+                document.getElementById("FDP").innerHTML = sday + "-" + smonth1 + "-" + syear + " - " + eday + "-" + emonth1 + "-" + eyear;
                 document.getElementById("TFB").innerHTML = tf(tfb);
                 console.log(tfb)
 

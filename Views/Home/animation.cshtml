@@ -229,7 +229,7 @@
 
         event.preventDefault();
 
-        mouse.x = (event.clientX / ((window.innerWidth * scaleX) - 10)) * 2 - 1;
+        mouse.x = (event.clientX / ((window.innerWidth * scaleX) )) * 2 - 1;
         mouse.y = -(event.clientY / ((window.innerHeight * scaleY) + 275)) * 2 + 1;
 
         raycaster.setFromCamera(mouse, camera);
