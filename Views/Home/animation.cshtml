@@ -10,7 +10,7 @@
                 <div class="model" id="model" style="float:left; width:65%;">
                     <canvas id="number" width="10240" height="10240"> </canvas>
                 </div>
-                <div style="float:right; width:35%; background-color:#333333;height:100% ">
+                <div style="float:right; width:35%; background-color:#333333;height:100%">
                     <div id="info" style="margin-top:5%">
                         <h1 class="header_item">Click on item to see the details</h1>
                     </div>
@@ -253,8 +253,8 @@
         #info {
             margin-left: 10%;
             margin-right: 2%;
-            overflow-y: scroll;
-            height: 70%
+            overflow-y: auto;
+            max-height: 60%;
         }
 
         #number {
@@ -290,7 +290,7 @@
             const ctx = canvas.getContext("2d");
             const x = 5120;
             const y = 5120;
-            const radius = 5120;
+            const radius = 2560;
             const startAngle = 0;
             const endAngle = Math.PI * 2;
 
@@ -307,7 +307,7 @@
             ctx.stroke();
 
             ctx.fillStyle = "rgb(255, 255, 255)";
-            ctx.font = "7560px roboto-light";
+            ctx.font = "5120px roboto-light";
             ctx.textAlign = "center";
             ctx.textBaseline = "middle";
             ctx.fillText("+", x, y);
@@ -356,42 +356,42 @@
             // defining sprite locations
             var livestock = new THREE.Sprite(spriteMaterial);
             livestock.position.set(1, 7, 28);
-            livestock.scale.set(8, 8, 1);
+            livestock.scale.set(24, 24, 1);
             livestock.material.opacity = 0.9;
             livestock.name = "livestock";
             scene.add(livestock);
 
             var crop = new THREE.Sprite(spriteMaterial);
             crop.position.set(38, 10, 61);
-            crop.scale.set(8, 8, 1);
+            crop.scale.set(24, 24, 1);
             crop.material.opacity = 0.9;
             crop.name = "crop";
             scene.add(crop);
 
             var house = new THREE.Sprite(spriteMaterial);
             house.position.set(-30, 35, 0);
-            house.scale.set(8, 8, 1);
+            house.scale.set(24, 24, 1);
             house.material.opacity = 0.9;
             house.name = "house";
             scene.add(house);
 
             var tree = new THREE.Sprite(spriteMaterial);
             tree.position.set(-25, 20, 35);
-            tree.scale.set(8, 8, 1);
+            tree.scale.set(24, 24, 1);
             tree.material.opacity = 0.9;
             tree.name = "tree";
             scene.add(tree);
 
             var hay = new THREE.Sprite(spriteMaterial);
             hay.position.set(-20, 10, -30);
-            hay.scale.set(8, 8, 1);
+            hay.scale.set(24, 24, 1);
             hay.material.opacity = 0.9;
             hay.name = "hay";
             scene.add(hay);
 
             var machine = new THREE.Sprite(spriteMaterial);
             machine.position.set(15, 14, -70);
-            machine.scale.set(8, 8, 1);
+            machine.scale.set(24, 24, 1);
             machine.material.opacity = 0.9;
             machine.name = "machine";
             scene.add(machine);
