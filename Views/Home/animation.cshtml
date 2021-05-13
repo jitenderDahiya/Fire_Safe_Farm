@@ -356,42 +356,42 @@
             // defining sprite locations
             var livestock = new THREE.Sprite(spriteMaterial);
             livestock.position.set(1, 7, 28);
-            livestock.scale.set(24, 24, 1);
+            livestock.scale.set(18, 18, 1);
             livestock.material.opacity = 0.9;
             livestock.name = "livestock";
             scene.add(livestock);
 
             var crop = new THREE.Sprite(spriteMaterial);
             crop.position.set(38, 10, 61);
-            crop.scale.set(24, 24, 1);
+            crop.scale.set(14, 14, 1);
             crop.material.opacity = 0.9;
             crop.name = "crop";
             scene.add(crop);
 
             var house = new THREE.Sprite(spriteMaterial);
             house.position.set(-30, 35, 0);
-            house.scale.set(24, 24, 1);
+            house.scale.set(18, 18, 1);
             house.material.opacity = 0.9;
             house.name = "house";
             scene.add(house);
 
             var tree = new THREE.Sprite(spriteMaterial);
             tree.position.set(-25, 20, 35);
-            tree.scale.set(24, 24, 1);
+            tree.scale.set(18, 18, 1);
             tree.material.opacity = 0.9;
             tree.name = "tree";
             scene.add(tree);
 
             var hay = new THREE.Sprite(spriteMaterial);
             hay.position.set(-20, 10, -30);
-            hay.scale.set(24, 24, 1);
+            hay.scale.set(18, 18, 1);
             hay.material.opacity = 0.9;
             hay.name = "hay";
             scene.add(hay);
 
             var machine = new THREE.Sprite(spriteMaterial);
             machine.position.set(15, 14, -70);
-            machine.scale.set(24, 24, 1);
+            machine.scale.set(16, 16, 1);
             machine.material.opacity = 0.9;
             machine.name = "machine";
             scene.add(machine);
@@ -401,7 +401,7 @@
             // orbital controls or camera controls
             const controls = new OrbitControls(camera, renderer.domElement);
             controls.addEventListener('change', render);
-            controls.enableZoom = true;
+            controls.enableZoom = false;
             controls.minDistance = 10;
             controls.maxDistance = 250;
             controls.target.set(0, 0, 0);
