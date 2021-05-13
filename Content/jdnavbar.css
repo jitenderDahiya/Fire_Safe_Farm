@@ -1,0 +1,82 @@
+﻿body {
+    font-family: Roboto-med;
+    padding: 0;
+    margin-top:-20px !important;
+    background-color:whitesmoke;
+}
+
+.img-responsive {
+    display: block;
+    max-width: 100%;
+    height: inherit;
+}
+
+
+
+.navbar-brand {
+    margin-top: -25px !important;
+    height: auto;
+    font-size: 0;
+    text-decoration: none;
+    white-space: nowrap;
+    width: 120px;
+}
+
+#nav_container{
+
+    height:100px !important;
+
+
+}
+
+
+.nav-item {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.navbar-nav {
+    margin-top: -30px;
+}
+
+#nav_txt {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-weight: 900;
+    font-size: 20px;
+    text-decoration: none;
+    font-family: 'Roboto-light';
+    color: #000000;
+}
+
+.btn {
+    background-color: #ffffff30 !important;
+    border-radius: 2.5rem !important;
+}
+
+.btn:hover {
+        background-color: #e5af7c !important;
+        border-color: #ffffff30 !important;
+}
+
+.btn-info {
+    border-color: #ffffff40 !important;
+}
+
+.navbar-collapse {
+    padding-top: 30px;
+}
+
+
+
+#mynav {
+    padding-top: 0;
+
+    background-color: #ffffff30;
+    backdrop-filter: blur(3px);
+    text-align: center;
+    z-index: 400;
+    box-shadow: 0px 8px 10px #00000060;
+}

@@ -2,13 +2,21 @@
 @{ Layout = "~/Views/Shared/map_ani_layout.cshtml"; }
 
 
+<html>
+<head>
+    <link href="~/Content/jdnavbar.css" rel="stylesheet" />
+    <link href="~/Content/jdstyle.css" rel="stylesheet" />
+</head>
 
 <body>
-    <div class="container-fluid" style="height:900px;">
+
+   
+
+    <div class="container-fluid" style="height:800px;">
         <div class="row" style="margin-top:0%;">
             <div class="farm" id="farm">
                 <div class="model" id="model" style="float:left; width:65%;">
-                    <canvas id="number" width="10240" height="10240"> </canvas>
+                    <canvas id="number" width="10240" height="10240" > </canvas>
                 </div>
                 <div style="float:right; width:35%; background-color:#333333;height:100%">
                     <div id="info" style="margin-top:5%">
@@ -18,204 +26,11 @@
 
             </div>
         </div>
-     </div>
-    <div class="container-fluid" style="margin-top:100px; position:relative;">
-
-        <style>
-
-            body {
-                font-family: Roboto-light;
-                height: fit-content();
-                background-color: lightgray;
-            }
-
-            .flip_card {
-                border-radius: 10px;
-                background-color: transparent;
-                width: 500px;
-                height: 650px;
-                perspective: 2000px;
-            }
-
-            .flip_card_inner {
-                border-radius: 10px;
-                position: relative;
-                width: 100%;
-                height: 100%;
-                text-align: center;
-                transition: transform 1.5s;
-                transform-style: preserve-3d;
-                box-shadow: 0 15px 15px 10px rgba(0,0,0,0.2);
-            }
-
-
-
-            .flip_card:hover .flip_card_inner {
-                transform: rotateY(180deg)
-            }
-
-
-            .flip-card-front, .flip-card-back {
-                position: absolute;
-                width: 100%;
-                height: 100%;
-                -webkit-backface-visibility: hidden;
-                backface-visibility: hidden;
-            }
-
-            .flip-card-front {
-                background-color: whitesmoke;
-                border-radius: 5px;
-                color: black;
-            }
-
-            .flip-card-back {
-                padding: 10px;
-                background-color: #e5af7c;
-                border-radius: 5px;
-                color: white;
-                transform: rotateY(180deg);
-            }
-
-
-
-            ol {
-                font-size: 15px;
-                text-align: justify !important;
-            }
-
-            #li {
-                font-family: RobotoLight;
-                font-size: 15px;
-                text-align: justify !important;
-                margin-left: 5%;
-                margin-right: 5%;
-            }
-
-            p {
-                font-family: RobotoLight;
-                font-size: 15px;
-                text-align: justify !important;
-            }
-        </style>
-
-        <p style="text-align:center !important;color:#000000;font-family:Roboto-med;font-size:35px;text-align:justify">Depending on the damage to the farm, we divide the damage to the farm into three categories. </p>
-        <ul>
-            <li id="li" ; style="font-family: Roboto-light">
-                <h2 style="font-family: Roboto-light">
-                    Mild burn (<= 25% ) means only a small part of crops are destroyed. In total, the farmland isn’t damaged with a huge loss.
-                </h2>
-            </li>
-
-            <li id="li" ;><h2 style="font-family: Roboto-light">Moderate burn (<=50%) means almost half of crops are damaged.</h2>  </li>
-
-            <li id="li" ;><h2 style="font-family: Roboto-light">Hot burn (>=50%) means almost all crops are destroyed in the bushfire. Thus, it’s really different way to maintain and recover farmland with different situations. </h2></li>
-        </ul>
-        <br />
-        <div class="row" style="justify-content:space-evenly;height:fit-content();font-family: Roboto-light;">
-
-
-
-            <div class="flip_card">
-                <div class="flip_card_inner">
-                    <div class="flip-card-front">
-
-                        <img src="/images/b.png" alt="Avatar" style="width:500px;height:650px;border-radius:10px;">
-                    </div>
-                    <div class="flip-card-back">
-                        <h2 style="font-family: Roboto-light">Mild Burn(<= 25% )</h2>
-
-                        <h3 style="font-family: Roboto-light">For this situation, most crops are still in good condition. Hence, farmers need to follow these two steps:</h3>
-
-                        <ol style="font-family: Roboto-light">
-                            <li id="li" style="font-family: Roboto-light">
-                                Check the fertilizer of farmland
-
-                                It’s because after bushfire, even if a part of crops are burnt and transferred to fertilizer. It may be not enough for the left to recover. Some crops need more minerals because they are damaged. They need these minerals to repair their stems, leaves or roots. Thus, farmers need to make sure nitrogen fertilizer, Phosphate fertilizer and potash.
-
-                            </li>
-                            <li id="li" style="font-family: Roboto-light">
-                                Clean up dead crops in time
-
-                                It’s because the dead crops also have many roots that are still alive. These roots also intake water, minerals and other nutrition. Therefore, in order to let the left crops grow better, it’s suitable to clean these dead crops and leave more resource for the alive crops.
-
-                            </li>
-                        </ol>
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="flip_card">
-                <div class="flip_card_inner">
-                    <div class="flip-card-front">
-                        <img src="/images/c.png" alt="Avatar" style="width:500px;height:650px;border-radius:10px;">
-                    </div>
-                    <div class="flip-card-back">
-                        <h2 style="font-family: Roboto-light">Moderate burn(<=50%)</h2>
-
-                        <h3 style="font-family: Roboto-light">
-                            For moderate burn, almost half of crops are destroyed. Thus, compared with mild burn, moderate burn has more steps to recover.
-                        </h3>
-                        <ol style="font-family: Roboto-light">
-                            <li id="li" style="font-family: Roboto-light">
-                                Check crops situation
-
-                                Even if only half of crops are destroyed, many left crops are also damaged. Thus, the first step is to check the whole condition of farmland. It’s worthwhile to keep these crops or not. To some extent, in this situation, the cost of repair may be higher than the cost of replant. As a result, we need to balance the cost
-                            </li>
-
-                            <li id="li" style="font-family: Roboto-light">
-                                Clean up dead crops in time
-
-                                It’s because the dead crops also have many roots that are still alive. These roots also intake water, minerals and other nutrition. Therefore, in order to let the left crops grow better, it’s suitable to clean these dead crops and leave more resource for the alive crops.
-                            </li>
-                            <li id="li" style="font-family: Roboto-light">
-                                Check the fertilizer of farmland
-                                It’s because after bushfire, even if a part of crops are burnt and transferred to fertilizer. It may be not enough for the left to recover. Some crops need more minerals because they are damaged. They need these minerals to repair their stems, leaves or roots. Thus, farmers need to make sure nitrogen fertilizer, Phosphate fertilizer and potash.
-                            </li>
-                            <li id="li" style="font-family: Roboto-light">
-                                Replant some plants in time
-                                When farmers want to do the replanting, it’s necessary to consider about the date. If it misses the precious for the crops, it’s better to plant another kind of crops to maximize profit.
-                            </li>
-                        </ol>
-
-                    </div>
-
-
-                </div>
-
-            </div>
-
-
-            <div class="flip_card">
-                <div class="flip_card_inner">
-                    <div class="flip-card-front">
-                        <img src="/images/d.png" alt="Avatar" style="width:500px;height:650px;border-radius:10px;">
-                    </div>
-                    <div class="flip-card-back">
-
-                        <h2>Hot burn (>=50%)</h2>
-                        <ul>
-                            <li id="li" style="font-family: Roboto-light">
-                                With more than half of crops are destroyed, the left crops are also damaged. It’s not worthwhile to keep current crops. In this situation, the only way is to replant another kind of crops that are suitable for the season. Because most crops are destroyed, farmers don’t consider the fertilizer. In total, the only way and best way is to replant the whole crops.
-                            </li>
-                        </ul>
-
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
     </div>
+  
 
 
 
-
-
-    </body>
 
     <!--defining style for annotation and canvas-->
     <style type="text/css">
@@ -229,14 +44,14 @@
 
         .header_item {
             color: #fff;
-            font-family: 'Roboto-light', sans-serif;
+            font-family: Roboto-light;
             font-size: 60px;
             padding-bottom: 30px;
         }
 
         .text {
             color: #fff;
-            font-family: 'Roboto-light', sans-serif;
+            font-family: Roboto-light;
             font-size: 20px;
             text-align: justify;
             padding-right: 5%;
@@ -244,7 +59,7 @@
 
         .text_min {
             color: #fff;
-            font-family: 'Roboto-light', sans-serif;
+            font-family: Roboto-light;
             font-size: 30px;
             text-align: justify;
             padding-right: 5%;
@@ -548,3 +363,7 @@
 
         }
     </script>
+   
+</body>
+
+</html>

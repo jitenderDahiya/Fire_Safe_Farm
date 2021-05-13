@@ -18,6 +18,8 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 
+    <link href="~/Content/jdnavbar.css" rel="stylesheet" />
+
 
     <!--indicator js -->
     @*    <script src="~/Scripts/Indicator.js"></script>
@@ -31,17 +33,17 @@
     <header>
 
         <style>
-            #main {
-                height: fit-content();
-                width: 100%;
-                background-color: cornflowerblue;
-                margin-top: -150px;
+
+            body{
+                font-family:Roboto-light;
+                height:fit-content();
             }
 
+
             #container {
+                margin-top: 10%;
                 display: block;
                 position: absolute;
-                margin-top: 5%;
                 top: 100px;
                 left: 20px;
                 width: 650px;
@@ -70,14 +72,14 @@
             #map {
                 margin-top: -20px !important;
                 width: 100%;
-                height: auto;
+                height: 1000px;
             }
         </style>
 
         <style>
-
             input[type=text] {
                 width: 400px;
+                height: 60px;
                 padding: 10px 20px;
                 margin: 5px 0;
                 box-sizing: border-box;
@@ -86,8 +88,10 @@
                 transition: 0.3s;
                 outline: none;
                 font-size: 20px;
-                font-family: sans-serif;
+                font-family: Roboto-light;
+                color: black;
                 border-radius: 30px;
+                margin-bottom: 0px;
             }
 
                 input[type=text]:focus {
@@ -97,9 +101,10 @@
 
             #srow {
                 border-radius: 30px;
-                height: 50px;
-                margin-left: 10%;
-                margin-top: 40%;
+                height: fit-content();
+                margin-top: 0%;
+                width: 100%;
+                align-items: center;
             }
 
             #sbtn {
@@ -108,7 +113,8 @@
                 width: 50px;
                 border-radius: 50%;
                 border-style: none;
-                margin: 1%;
+                margin-top: 10px;
+                margin-left: 5px;
             }
 
             #location {
@@ -117,7 +123,7 @@
                 width: fit-content();
                 max-width: 300px;
                 border-radius: 20px;
-                font-family: sans-serif;
+                font-family: Roboto-light;
                 font-size: 30px;
                 border-color: white;
                 border-style: none;
@@ -129,10 +135,14 @@
                 }
 
             #icon {
-                align-content: center;
-                height: 30px;
-                width: 30px;
+                height: 25px;
+                width: 25px;
             }
+
+            img, svg {
+                vertical-align: text-top;
+            }
+
 
             autocomplete-items {
                 width: 280px;
@@ -142,28 +152,30 @@
                 border-top: none;
                 z-index: 100;
                 left: 50%;
-                top: 150px;
+                top: -50px;
             }
 
+
             .autocomplete-items div {
-                font-family: sans-serif;
+                font-family: 'Roboto-light';
                 text-align: left;
-                width: 250px;
+                width: 275px;
                 font-size: 18px;
-                margin-left: 32px;
-                border-radius: 20px;
+                border-radius: 30px;
                 cursor: pointer;
-                background-color: #fff;
+                background-color: #ffffffdb;
                 border-bottom: none;
                 padding: 15px;
+                color: black;
+                margin-left: 10%;
             }
 
                 .autocomplete-items div:hover {
-                    background-color: #e9e9e9;
+                    background-color: #e5af7c;
                 }
 
             .autocomplete-active {
-                background-color: DodgerBlue !important;
+                background-color: #e5af7c !important;
                 color: #ffffff;
             }
         </style>
@@ -192,7 +204,7 @@
             }
 
             .cp {
-                font-family: sans-serif;
+                font-family: Roboto-light;
                 font-weight: 700;
                 font-size: 15px;
                 padding-top: 50px;
@@ -222,20 +234,41 @@
         </style>
     </header>
 
+    <div id="map"></div>
 
-    <div id="main">
+    <div style="margin-top:5%;">
         @*        <div class="row" style="background-color:none;display:flex;padding:5px !important; justify-content:center !important;margin-top:45px;position:absolute;">
                 <input type="text" id="txt" placeholder="Type your location here">
                 <button id="sbtn" onclick="submit();"><img id="icon" src="~/Images/search-12-512.png" /></button>
             </div>*@
-        <div class="container" style="justify-content:center;text-align:center;width:400px;position:absolute;z-index:1000;left:40%;margin-top: 150px;">
 
-            <input type="text" id="txt" placeholder="Type your location here" style="width:400px;" value="Toolangi" />
-            <button id="sbtn"><img id="icon" src="~/Images/search-12-512.png" /></button>
+
+        <style>
+            #searchcontainer {
+                margin-top: 3%;
+                position: absolute;
+                top: 80px;
+                left: 0%;
+                width: 100%;
+                height: 100px;
+                z-index:500;
+                background-color:#ffffff40;
+                backdrop-filter:blur(3px);
+                border-radius:50px;
+                text-align:center;
+            }
+
+        </style>
+        <div id="searchcontainer" class="container-fluid"  >
+
+            <input  type="text" id="txt" placeholder="Type your location here" style="width:400px;"  />
+            <button  id="sbtn"><img id="icon" src="~/Images/search-12-512.png" /></button>
+
+            <h3  style="font-family:Roboto-med; padding-top:5px;">Fire prone areas based on previous bushfires.</h3>
+
+
         </div>
 
-        ["#228B22", "#00BFFF", "#FFD700", "#DAA520", "#B22222"]
-        <div id="map"></div>
         <div id="container">
             <div id="row1">
                 <div class="lg col-md-12" style="background-color: #228B22;">  </div>
@@ -278,7 +311,7 @@
             </div>
 
             <div class="container" style="position:absolute;margin-top:40px;">
-                <p style="font-family:'Lucida Sans';font-size:30px;text-align:center;">Danger Rating</p>
+                <p style="font-family:'Roboto-light';font-size:30px;text-align:center;">Danger Rating</p>
                 <div id="rating_text"> </div>
             </div>
 
@@ -286,7 +319,7 @@
     </div>
     <style>
         #rating_text {
-            font-family: Candara !important;
+            font-family: Roboto-light !important;
             font-size: 18px !important;
             text-align: justify !important;
             padding: 40px !important;
@@ -303,50 +336,20 @@
             container: 'map',
             style: 'mapbox://styles/jdah0001/ckn43upw24mwn18nz8ko60usa',
             center: [145.5139, -37.6561],
-            zoom: 10
-        }); 
-        var marker1 = new mapboxgl.Marker({ color: 'black' })
+            zoom: 10,
+@*            maxZoom: 15, 
+*@            minZoom: 9, 
+        });
+    @*    var marker1 = new mapboxgl.Marker({ color: 'black' })
             .setLngLat([145.5139, -37.6561])
             .setPopup(new mapboxgl.Popup().setHTML("<h6>" + "Search your location to see the severity" + "</h6>"))
-            .addTo(map);
+            .addTo(map);*@
 
         function myfunction(lat, lon, ffdi_cat) {
             var b = lat;
             var a = lon;
 
-          @* if (ffdi_cat == "low-moderate") {
-
-                mapboxgl.accessToken = 'pk.eyJ1IjoiamRhaDAwMDEiLCJhIjoiY2ttb3pvMmYyMjlsdzJvdDRzc3R3ZWp1bSJ9.k4l8C8SfWsC8GDxRwdp4xQ';
-                var map = new mapboxgl.Map({
-                    container: 'map',
-                    style: 'mapbox://styles/mapbox/streets-v11',
-                    center: [a, b],
-                    zoom: 10
-                });
-
-                var text = ffdi_cat + "<br>" + txt_logic(ffdi_cat);
-                var marker1 = new mapboxgl.Marker({ color: 'black' })
-                    .setLngLat([a, b])
-                    .setPopup(new mapboxgl.Popup().setHTML("<h2>" + text + "</h2>"))
-                    .addTo(map);
-
-            } else {
-
-
-                mapboxgl.accessToken = 'pk.eyJ1IjoiamRhaDAwMDEiLCJhIjoiY2ttb3pvMmYyMjlsdzJvdDRzc3R3ZWp1bSJ9.k4l8C8SfWsC8GDxRwdp4xQ';
-                var map = new mapboxgl.Map({
-                    container: 'map',
-                    style: 'mapbox://styles/jdah0001/ckn43upw24mwn18nz8ko60usa',
-                    center: [a, b],
-                    zoom: 10
-                });
-
-                var text = ffdi_cat + "<br>" + txt_logic(ffdi_cat);
-                var marker1 = new mapboxgl.Marker({ color: 'black' })
-                    .setLngLat([a, b])
-                    .setPopup(new mapboxgl.Popup().setHTML("<h2>" + text + "</h2>"))
-                    .addTo(map);
-            }*@
+        
 
 
 
@@ -355,7 +358,8 @@
                 container: 'map',
                 style: 'mapbox://styles/jdah0001/ckn43upw24mwn18nz8ko60usa',
                 center: [a, b],
-                zoom: 10
+                zoom: 10,
+                minZoom: 9, 
             });
 
             var text = ffdi_cat + "<br>" + txt_logic(ffdi_cat);
@@ -376,7 +380,7 @@
 
     <script>
 
-        window.onload = function () {   
+        window.onload = function () {
             var page1 = localStorage.getItem("Q");
             @*alert(page1)*@
 
