@@ -193,15 +193,15 @@
 
             camera = new THREE.PerspectiveCamera(65, (window.innerWidth * scaleX) / (window.innerHeight * scaleY), 0.1, 1500);
             camera.position.set(500, 100, 10);
+            
 
             const environment = new RoomEnvironment();
             const pmremGenerator = new THREE.PMREMGenerator(renderer);
 
             scene = new THREE.Scene();
-            scene.translateZ(90);
+            scene.translateZ(85);
             scene.translateY(-20);
-
-
+            console.log(scene.position);
             scene.background = new THREE.Color("#87CEFA");
             scene.environment = pmremGenerator.fromScene(environment).texture;
 
@@ -276,7 +276,8 @@
             // orbital controls or camera controls
             const controls = new OrbitControls(camera, renderer.domElement);
             controls.addEventListener('change', render);
-            controls.enableZoom = false;
+            controls.enableZoom = true;
+            controls.enableRotate = false;
             controls.minDistance = 10;
             controls.maxDistance = 250;
             controls.target.set(0, 0, 0);
