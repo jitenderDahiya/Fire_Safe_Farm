@@ -311,6 +311,7 @@
                             break;
                         }
                         b = document.createElement("DIV");
+                        b.style.boxShadow = '0px 10px 10px #00000040';
                         b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
                         b.innerHTML += arr[i].substr(val.length);
                         b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
