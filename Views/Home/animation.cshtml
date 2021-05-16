@@ -1,35 +1,83 @@
 ﻿
-@{ Layout = "~/Views/Shared/map_ani_layout.cshtml"; }
+@{
+    Layout = "~/Views/Shared/map_ani_layout.cshtml";
+}
 
 
 <html>
 <head>
-    <link href="~/Content/jdnavbar.css" rel="stylesheet" />
+
     <link href="~/Content/jdstyle.css" rel="stylesheet" />
 </head>
 
 <body>
 
-   
 
-    <div class="container-fluid" style="height:800px;">
-        <div class="row" style="margin-top:0%;">
-            <div class="farm" id="farm">
-                <div class="model" id="model" style="float:left; width:65%;">
-                    <canvas id="number" width="10240" height="10240" > </canvas>
-                </div>
-                <div style="float:right; width:35%; background-color:#333333;height:100%">
-                    <div id="info" style="margin-top:5%">
-                        <h1 class="header_item">Click on item to see the details</h1>
-                    </div>
-                </div>
 
-            </div>
+    <div class="farm" id="farm" style="width:100%;">
+        <div class="model" id="model" style="width:100%">
+            <canvas id="number" width="10240" height="10240"> </canvas>
         </div>
+
     </div>
-  
+
+    @*  <div style="float:right; width:35%; background-color:#333333;height:100%;position:absolute; top:100px;right:100px">
+            <div id="info" style="max-height:700px">
+                <h1 class="header_item">Click on item to see the details</h1>
+            </div>
+        </div>*@
+
+    <div id="info" style="position:absolute; right:50px;top:120px;width:33%;background-color:#ffffffcc;min-height:600px;border-radius:30px;max-height:fit-content();backdrop-filter:blur(5px);padding-bottom:2%;">
+        <h4 style="font-family:Roboto-light;color:black;text-align:center;padding:5%;font-weight:400;">Click on item to see the details</h4>
+    </div>
+
+    <style>
+
+        .btn {
+            background-color: #ffffff30 !important;
+            border-radius: 2.5rem !important;
+        }
+
+            .btn:hover {
+                background-color: #e5af7c !important;
+                border-color: #ffffff30 !important;
+            }
+
+        .btn-info {
+            border-color: #ffffff40 !important;
+        }
+    </style>
+    <style>
+        ::-webkit-scrollbar {
+            width: 20px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background-color: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: #d6dee1;
+            border-radius: 20px;
+            border: 6px solid transparent;
+            background-clip: content-box;
+        }
+
+            ::-webkit-scrollbar-thumb:hover {
+                background-color: #a8bbbf;
+            }
+    </style>
+    <style>
+
+        .btn2 {
+            background-color: #e5af7c !important;
+            border-radius: 2.5rem !important;
+            padding:2%;
+            
+        }
 
 
+    </style>
 
 
     <!--defining style for annotation and canvas-->
@@ -38,31 +86,39 @@
 
         canvas {
             width: 100%;
-            height: 100px;
-            display: block;
+            height: 100%;
+            display: inline-flex;
         }
 
         .header_item {
-            color: #fff;
+            color: black;
             font-family: Roboto-light;
-            font-size: 60px;
-            padding-bottom: 30px;
+            font-size: 35px;
+            text-align: center;
+            padding: 5%;
+            padding-bottom: 1%;
+            padding-top: 10%;
         }
 
         .text {
-            color: #fff;
+            color: black;
+            font-family: Roboto-light;
+            font-size: 15px;
+            text-align: justify;
+            padding: 5%;
+            padding-top: 1%;
+            padding-bottom: 1%;
+        }
+
+
+
+        .text_min {
+            color: black;
             font-family: Roboto-light;
             font-size: 20px;
             text-align: justify;
-            padding-right: 5%;
-        }
-
-        .text_min {
-            color: #fff;
-            font-family: Roboto-light;
-            font-size: 30px;
-            text-align: justify;
-            padding-right: 5%;
+            padding: 5%;
+            padding-bottom: 1%;
         }
 
         #info {
@@ -91,7 +147,7 @@
 
         const raycaster = new THREE.Raycaster();
         const mouse = new THREE.Vector2();
-        const scaleX = 0.65;
+        const scaleX = 1;
         const scaleY = 1;
 
         init();
@@ -129,19 +185,23 @@
 
             renderer = new THREE.WebGLRenderer({ antialias: true });
             renderer.setPixelRatio(window.devicePixelRatio);
-            renderer.setSize((window.innerWidth * scaleX), (window.innerHeight * scaleY));
+            renderer.setSize((window.innerWidth * scaleX ), (window.innerHeight * scaleY ));
             renderer.toneMapping = THREE.ACESFilmicToneMapping;
             renderer.toneMappingExposure = 1;
             renderer.outputEncoding = THREE.sRGBEncoding;
             container.appendChild(renderer.domElement);
 
             camera = new THREE.PerspectiveCamera(65, (window.innerWidth * scaleX) / (window.innerHeight * scaleY), 0.1, 1500);
-            camera.position.set(300, 100, 10);
+            camera.position.set(500, 100, 10);
 
             const environment = new RoomEnvironment();
             const pmremGenerator = new THREE.PMREMGenerator(renderer);
 
             scene = new THREE.Scene();
+            scene.translateZ(90);
+            scene.translateY(-20);
+
+
             scene.background = new THREE.Color("#87CEFA");
             scene.environment = pmremGenerator.fromScene(environment).texture;
 
@@ -171,42 +231,42 @@
             // defining sprite locations
             var livestock = new THREE.Sprite(spriteMaterial);
             livestock.position.set(1, 7, 28);
-            livestock.scale.set(18, 18, 1);
+            livestock.scale.set(24, 24, 1);
             livestock.material.opacity = 0.9;
             livestock.name = "livestock";
             scene.add(livestock);
 
             var crop = new THREE.Sprite(spriteMaterial);
             crop.position.set(38, 10, 61);
-            crop.scale.set(14, 14, 1);
+            crop.scale.set(24, 24, 1);
             crop.material.opacity = 0.9;
             crop.name = "crop";
             scene.add(crop);
 
             var house = new THREE.Sprite(spriteMaterial);
             house.position.set(-30, 35, 0);
-            house.scale.set(18, 18, 1);
+            house.scale.set(24, 24, 1);
             house.material.opacity = 0.9;
             house.name = "house";
             scene.add(house);
 
             var tree = new THREE.Sprite(spriteMaterial);
             tree.position.set(-25, 20, 35);
-            tree.scale.set(18, 18, 1);
+            tree.scale.set(24, 24, 1);
             tree.material.opacity = 0.9;
             tree.name = "tree";
             scene.add(tree);
 
             var hay = new THREE.Sprite(spriteMaterial);
             hay.position.set(-20, 10, -30);
-            hay.scale.set(18, 18, 1);
+            hay.scale.set(24, 24, 1);
             hay.material.opacity = 0.9;
             hay.name = "hay";
             scene.add(hay);
 
             var machine = new THREE.Sprite(spriteMaterial);
             machine.position.set(15, 14, -70);
-            machine.scale.set(16, 16, 1);
+            machine.scale.set(24, 24, 1);
             machine.material.opacity = 0.9;
             machine.name = "machine";
             scene.add(machine);
@@ -242,7 +302,7 @@
             event.preventDefault();
 
             mouse.x = (event.clientX / ((window.innerWidth * scaleX))) * 2 - 1;
-            mouse.y = -(event.clientY / ((window.innerHeight * scaleY) + 275)) * 2 + 1;
+            mouse.y = -(event.clientY / ((window.innerHeight * scaleY))) * 2 + 1;
 
             raycaster.setFromCamera(mouse, camera);
 
@@ -269,6 +329,13 @@
                     "<li><b>30m Rule:</b></br>This allows land owners and residents to clear any vegetation except trees around 30m radious of the accomodation.</br></br></li>" +
                     "<li><b>50m Rule:</b></br>This allows land owners and residents to clear any vegetation except trees within 60m radious of the accomodation.</br></br></li>" +
                     "</ol >"
+                var x = document.createElement("a");
+                x.setAttribute("id", "infohref");
+                x.setAttribute("class", "btn2");
+
+                x.setAttribute("href", "@Url.Action("Recovery","Home")");
+                x.innerHTML = "Click to Check Recovery Guideline";
+                document.getElementById("info").appendChild(x);
             }
 
             else if (itemName == "hay") {
@@ -290,6 +357,14 @@
                     "<li>Create wide fuel breaks around haystacks</li>" +
                     "<li>Regularly check haystacks for any signs of heating.</li>" +
                     "</ul>"
+                var x = document.createElement("a");
+                x.setAttribute("id", "infohref");
+                x.setAttribute("class", "btn2");
+
+                x.setAttribute("href", "@Url.Action("Recovery","Home")");
+                x.innerHTML = "Click to Check Recovery Guideline";
+                document.getElementById("info").appendChild(x);
+
             }
 
             else if (itemName == "machine") {
@@ -306,6 +381,14 @@
                     "<li>While cutting and grinding make sure to use fire rststent sheilds to stop sparks </li>" +
                     "<li>Do not use any machinary on total fire ban days</li>" +
                     "</ul>"
+                var x = document.createElement("a");
+                x.setAttribute("id", "infohref");
+                x.setAttribute("class", "btn2");
+
+                x.setAttribute("href", "@Url.Action("Recovery","Home")");
+                x.innerHTML = "Click to Check Recovery Guideline";
+                document.getElementById("info").appendChild(x);
+
             }
 
             else if (itemName == "crop") {
@@ -320,7 +403,17 @@
                     "<li>Perform regular mowing around farm</li>" +
                     "<li>Keep sufficient gap between fences and crops </li>" +
                     "<li>Add fuel gaps within farms to the damage can be restricted to certain area</li>" +
+                    "<button id='btn' name='btn' style='font-size:30px'>Button</button>" +
                     "</ul>"
+                var x = document.createElement("a");
+                x.setAttribute("id", "infohref");
+                x.setAttribute("class", "btn2");
+
+                x.setAttribute("href", "@Url.Action("Recovery","Home")");
+                x.innerHTML = "Click to Check Recovery Guideline";
+                document.getElementById("info").appendChild(x);
+
+
             }
 
             else if (itemName == "livestock") {
@@ -334,6 +427,14 @@
                     "<li>Prepare route for evacuation before fire season and train your animals accordingly. It is always difficult to handle a panic animal. </li>" +
                     "<li>Keep the external gates closed so animals dont go on run and damage themselves due to poor vision.</li>" +
                     "</ul>"
+                var x = document.createElement("a");
+                x.setAttribute("id", "infohref");
+                x.setAttribute("class", "btn2");
+
+                x.setAttribute("href", "@Url.Action("Recovery","Home")");
+                x.innerHTML = "Click to Check Recovery Guideline";
+                document.getElementById("info").appendChild(x);
+
             }
 
             else if (itemName == "house") {
@@ -346,7 +447,7 @@
                     "<li><b>Roof:</b>" +
                     "<ul class='text'><li>Use fire resistent sarking under the roofs to prevent bushfire damagning and coming from your roof</li><li>Seal the roof gaps using compressed minaral wool insulation</li></ul>" +
                     "</li > " +
-                    "<li>Windows:" +
+                    "<li><b>Windows:</b>" +
                     "<ul class='text'><li>Use shutters on windows to tightly close them and prevent fire from coming inside</li><li>Seal the gaps in windows and its borders</li><li>Maintain window sills so they don't have any flaking paint</li></ul>" +
                     "</li>" +
                     "<li><b>Doors:</b>" +
@@ -356,14 +457,29 @@
                     "<ul class='text'><li>Make decks out of concrete material or metal</li><li>Add some gaps between decking materials</li><li>Leep it seperate from dwellings</li></ul>" +
                     "</li>" +
                     "</ul>"
+                var x = document.createElement("a");
+                x.setAttribute("id", "infohref");
+                x.setAttribute("class", "btn2");
 
-
+                x.setAttribute("href", "@Url.Action("Recovery","Home")");
+                x.innerHTML = "Click to Check Recovery Guideline";
+                document.getElementById("info").appendChild(x);
             }
 
 
         }
     </script>
-   
+    <style>
+        #infohref {
+            font-size:15px;
+            font-family:Roboto-light;
+            color:white;
+            text-align: center;
+            text-decoration: none;
+            justify-content: center;
+            margin-left: 30%;
+        }
+    </style>
 </body>
 
 </html>

@@ -14,200 +14,325 @@
 
     <link href="~/Content/jdstyle.css" rel="stylesheet" />
     <link href="~/Content/jdnavbar.css" rel="stylesheet" />
+
+
+
+    <!--jquery-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!--Bootstrap 5 links-->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+
 </head>
 <body>
-        <div class="container-fluid" style="margin-top:10%; position:relative;">
-
-            <style>
-
-                body {
-                    font-family: Roboto-light;
-                    height: fit-content();
-                    background-color: lightgray;
-                }
-
-                .flip_card {
-                    border-radius: 10px;
-                    background-color: transparent;
-                    width: 500px;
-                    height: 650px;
-                    perspective: 2000px;
-                }
-
-                .flip_card_inner {
-                    border-radius: 10px;
-                    position: relative;
-                    width: 100%;
-                    height: 100%;
-                    text-align: center;
-                    transition: transform 1.5s;
-                    transform-style: preserve-3d;
-                    box-shadow: 0 15px 15px 10px rgba(0,0,0,0.2);
-                }
 
 
+    <style>
 
-                .flip_card:hover .flip_card_inner {
-                    transform: rotateY(180deg)
-                }
+        body {
+            font-family: Roboto-light;
+            height: fit-content();
+            background-color: lightgray;
+        }
 
+        .flip_card {
+            border-radius: 10px;
+            background-color: transparent;
+            width: 30%;
+            height: 650px;
+            perspective: 2000px;
+        }
 
-                .flip-card-front, .flip-card-back {
-                    position: absolute;
-                    width: 100%;
-                    height: 100%;
-                    -webkit-backface-visibility: hidden;
-                    backface-visibility: hidden;
-                }
-
-                .flip-card-front {
-                    background-color: whitesmoke;
-                    border-radius: 5px;
-                    color: black;
-                }
-
-                .flip-card-back {
-                    padding: 10px;
-                    background-color: #e5af7c;
-                    border-radius: 5px;
-                    color: white;
-                    transform: rotateY(180deg);
-                }
+        .flip_card_inner {
+            border-radius: 10px;
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 1.5s;
+            transform-style: preserve-3d;
+            box-shadow: 0 15px 15px 10px rgba(0,0,0,0.2);
+        }
 
 
 
-                ol {
-                    font-size: 15px;
-                    text-align: justify !important;
-                }
+        .flip_card:hover .flip_card_inner {
+            transform: rotateY(180deg)
+        }
 
-                #li {
-                    font-family: RobotoLight;
-                    font-size: 15px;
-                    text-align: justify !important;
-                    margin-left: 5%;
-                    margin-right: 5%;
-                }
 
-                p {
-                    font-family: RobotoLight;
-                    font-size: 15px;
-                    text-align: justify !important;
-                }
-            </style>
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
 
-            <p style="text-align:center !important;color:#000000;font-family:Roboto-med;font-size:35px;text-align:justify">Depending on the damage to the farm, we divide the damage to the farm into three categories. </p>
-            <ul>
-                <li id="li" ; style="font-family: Roboto-light">
-                    <h2 style="font-family: Roboto-light">
-                        Mild burn (<= 25% ) means only a small part of crops are destroyed. In total, the farmland isn’t damaged with a huge loss.
-                    </h2>
-                </li>
+        .flip-card-front {
+            background-color: whitesmoke;
+            border-radius: 5px;
+            color: black;
+        }
 
-                <li id="li" ;><h2 style="font-family: Roboto-light">Moderate burn (<=50%) means almost half of crops are damaged.</h2>  </li>
-
-                <li id="li" ;><h2 style="font-family: Roboto-light">Hot burn (>=50%) means almost all crops are destroyed in the bushfire. Thus, it’s really different way to maintain and recover farmland with different situations. </h2></li>
-            </ul>
-            <br />
-            <div class="row" style="justify-content:space-evenly;height:fit-content();font-family: Roboto-light;">
+        .flip-card-back {
+            padding: 10px;
+            background-color: #e5af7c;
+            border-radius: 5px;
+            color: white;
+            transform: rotateY(180deg);
+        }
 
 
 
-                <div class="flip_card">
-                    <div class="flip_card_inner">
-                        <div class="flip-card-front">
+        ol {
+            font-size: 15px;
+            text-align: justify !important;
+        }
 
-                            <img src="/images/b.png" alt="Avatar" style="width:500px;height:650px;border-radius:10px;">
-                        </div>
-                        <div class="flip-card-back">
-                            <h2 style="font-family: Roboto-light">Mild Burn(<= 25% )</h2>
+        #li {
+            font-family: RobotoLight;
+            font-size: 15px;
+            text-align: justify !important;
+            margin-left: 5%;
+            margin-right: 5%;
+        }
 
-                            <h3 style="font-family: Roboto-light">For this situation, most crops are still in good condition. Hence, farmers need to follow these two steps:</h3>
+        p {
+            font-family: RobotoLight;
+            font-size: 15px;
+            text-align: justify !important;
+        }
+    </style>
 
-                            <ol style="font-family: Roboto-light">
-                                <li id="li" style="font-family: Roboto-light">
-                                    Check the fertilizer of farmland
+    
 
-                                    It’s because after bushfire, even if a part of crops are burnt and transferred to fertilizer. It may be not enough for the left to recover. Some crops need more minerals because they are damaged. They need these minerals to repair their stems, leaves or roots. Thus, farmers need to make sure nitrogen fertilizer, Phosphate fertilizer and potash.
+    <div class="cover container-fluid" style="justify-content: center;height:fit-content() !important; overflow:scroll;">
+        <div style="backdrop-filter:blur(4px);width:100%;margin:2%;margin-top:1%; border-radius:30px;">
 
-                                </li>
-                                <li id="li" style="font-family: Roboto-light">
-                                    Clean up dead crops in time
-
-                                    It’s because the dead crops also have many roots that are still alive. These roots also intake water, minerals and other nutrition. Therefore, in order to let the left crops grow better, it’s suitable to clean these dead crops and leave more resource for the alive crops.
-
-                                </li>
-                            </ol>
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <div class="flip_card">
-                    <div class="flip_card_inner">
-                        <div class="flip-card-front">
-                            <img src="/images/c.png" alt="Avatar" style="width:500px;height:650px;border-radius:10px;">
-                        </div>
-                        <div class="flip-card-back">
-                            <h2 style="font-family: Roboto-light">Moderate burn(<=50%)</h2>
-
-                            <h3 style="font-family: Roboto-light">
-                                For moderate burn, almost half of crops are destroyed. Thus, compared with mild burn, moderate burn has more steps to recover.
-                            </h3>
-                            <ol style="font-family: Roboto-light">
-                                <li id="li" style="font-family: Roboto-light">
-                                    Check crops situation
-
-                                    Even if only half of crops are destroyed, many left crops are also damaged. Thus, the first step is to check the whole condition of farmland. It’s worthwhile to keep these crops or not. To some extent, in this situation, the cost of repair may be higher than the cost of replant. As a result, we need to balance the cost
-                                </li>
-
-                                <li id="li" style="font-family: Roboto-light">
-                                    Clean up dead crops in time
-
-                                    It’s because the dead crops also have many roots that are still alive. These roots also intake water, minerals and other nutrition. Therefore, in order to let the left crops grow better, it’s suitable to clean these dead crops and leave more resource for the alive crops.
-                                </li>
-                                <li id="li" style="font-family: Roboto-light">
-                                    Check the fertilizer of farmland
-                                    It’s because after bushfire, even if a part of crops are burnt and transferred to fertilizer. It may be not enough for the left to recover. Some crops need more minerals because they are damaged. They need these minerals to repair their stems, leaves or roots. Thus, farmers need to make sure nitrogen fertilizer, Phosphate fertilizer and potash.
-                                </li>
-                                <li id="li" style="font-family: Roboto-light">
-                                    Replant some plants in time
-                                    When farmers want to do the replanting, it’s necessary to consider about the date. If it misses the precious for the crops, it’s better to plant another kind of crops to maximize profit.
-                                </li>
-                            </ol>
-
-                        </div>
-
-
-                    </div>
-
-                </div>
-
-
-                <div class="flip_card">
-                    <div class="flip_card_inner">
-                        <div class="flip-card-front">
-                            <img src="/images/d.png" alt="Avatar" style="width:500px;height:650px;border-radius:10px;">
-                        </div>
-                        <div class="flip-card-back">
-
-                            <h2>Hot burn (>=50%)</h2>
-                            <ul>
-                                <li id="li" style="font-family: Roboto-light">
-                                    With more than half of crops are destroyed, the left crops are also damaged. It’s not worthwhile to keep current crops. In this situation, the only way is to replant another kind of crops that are suitable for the season. Because most crops are destroyed, farmers don’t consider the fertilizer. In total, the only way and best way is to replant the whole crops.
-                                </li>
-                            </ul>
-
-                        </div>
-
-                    </div>
-                </div>
+            <div id="text2" class="container">
+                Learn how to recover your farm after bushfire?
+                <div style="font-size:30px;"> Select the estimated percent of farm burnt to see how can you recover</div>
             </div>
 
+                <button class="btn1 burnoff" id="burnoffNF">Mild burn (<= 25% ) </button>
+                <div class="collapse txt_burnoff inner" style="font-family:Roboto-light">
+                    <h2> Mild burn (<= 25% ) means only a small part of crops are destroyed. In total, the farmland is not damaged with a huge loss.</h2>
+                    <br />
+                    <h2> For this situation, most crops are still in good condition. Hence, farmers need to follow these two steps:</h2>
+
+                    <ul>
+                        <li>
+                            Check the fertilizer of farmland It’s because after bushfire, even if a part of crops are burnt and transferred to fertilizer. It may be not enough for the left to recover. Some crops need more minerals because they are damaged. They need these minerals to repair their stems, leaves or roots. Thus, farmers need to make sure nitrogen fertilizer, Phosphate fertilizer and potash.
+                        </li>
+                        <li>
+                            Clean up dead crops in time It’s because the dead crops also have many roots that are still alive. These roots also intake water, minerals and other nutrition. Therefore, in order to let the left crops grow better, it’s suitable to clean these dead crops and leave more resource for the alive crops.
+                        </li>
+
+
+                    </ul>
+
+
+                </div>
+                <button class="btn1 s13" id="s13NF">Moderate burn (<=50%)</button>
+                <div class="collapse txt_s13 inner" style="font-family:Roboto-light">
+                    <h2>Moderate burn (<=50%) means almost half of crops are damaged.</h2>
+                    <h2>For moderate burn, almost half of crops are destroyed. Thus, compared with mild burn, moderate burn has more steps to recover.</h2>
+
+
+                    <ul>
+                        <li>
+                            <strong> Check crops situation  </strong>
+
+                            Even if only half of crops are destroyed, many left crops are also damaged. Thus, the first step is to check the whole condition of farmland. It’s worthwhile to keep these crops or not. To some extent, in this situation, the cost of repair may be higher than the cost of replant. As a result, we need to balance the cost
+                        </li>
+                        <li><strong> Clean up dead crops  </strong> In time It’s because the dead crops also have many roots that are still alive. These roots also intake water, minerals and other nutrition. Therefore, in order to let the left crops grow better, it’s suitable to clean these dead crops and leave more resource for the alive crops.</li>
+                        <li>
+
+                            <strong> Check the fertilizer of farmland</strong>
+                            It’s because after bushfire, even if a part of crops are burnt and transferred to fertilizer. It may be not enough for the left to recover. Some crops need more minerals because they are damaged. They need these minerals to repair their stems, leaves or roots. Thus, farmers need to make sure nitrogen fertilizer, Phosphate fertilizer and potash.
+                        </li>
+                        <li>
+                            <strong>Clean up dead crops in time</strong>
+
+                            It’s because the dead crops also have many roots that are still alive. These roots also intake water, minerals and other nutrition. Therefore, in order to let the left crops grow better, it’s suitable to clean these dead crops and leave more resource for the alive crops.
+
+                        </li>
+                        <li>
+                            <strong>Replant some plants in time</strong>
+                            When farmers want to do the replanting, it’s necessary to consider about the date. If it misses the precious for the crops, it’s better to plant another kind of crops to maximize profit.
+                        </li>
+                    </ul>
+
+                </div>
+                <button class="btn1 s14" id="s14NF">Hot burn (>=50%)</button>
+                <div class="collapse txt_s14 inner" style="font-family:Roboto-light">
+                    <h2> Hot burn (>=50%) means almost all crops are destroyed in the bushfire. Thus, it’s really different way to maintain and recover farmland with different situations.</h2>
+                    <ul>
+                        With more than half of crops are destroyed, the left crops are also damaged. It’s not worthwhile to keep current crops. In this situation, the only way is to replant another kind of crops that are suitable for the season. Because most crops are destroyed, farmers don’t consider the fertilizer. In total, the only way and best way is to replant the whole crops.
+                    </ul>
+
+
+                </div>
+
+
+            </div>
         </div>
 
+    <style>
+        ::-webkit-scrollbar {
+            width: 20px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background-color: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: #d6dee1;
+            border-radius: 20px;
+            border: 6px solid transparent;
+            background-clip: content-box;
+        }
+
+            ::-webkit-scrollbar-thumb:hover {
+                background-color: #a8bbbf;
+            }
+    </style>
+
+    <style>
+
+        .btn1 {
+            height: 50px;
+            text-align: center;
+            width: 100%;
+            background-color: #ffffffcc;
+            backdrop-filter: blur(5px);
+            text-align: left;
+            vertical-align: middle;
+            padding-left: 20px;
+            font-family: Roboto-light;
+            font-size: 20px;
+            font-weight: bold;
+            border-block-color: #00000020;
+            margin: 2px;
+            border-radius: 30px;
+            border-width: 1px;
+        }
+
+
+
+            .btn1:hover {
+                background-color: #e5af7c;
+            }
+
+
+
+        .inner {
+            padding: 20px;
+            background-color: #ffffffcc;
+            backdrop-filter: blur(5px);
+            border-radius: 30px;
+        }
+    </style>
+
+
+
+    <style>
+
+        .btn {
+            background-color: #ffffff30 !important;
+            border-radius: 2.5rem !important;
+        }
+
+            .btn:hover {
+                background-color: #e5af7c !important;
+                border-color: #ffffff30 !important;
+            }
+
+        .btn-info {
+            border-color: #ffffff40 !important;
+        }
+
+        .navbar-collapse {
+            padding-top: 30px;
+        }
+
+        body {
+            font-family: Roboto-light !important;
+            font-size: 20px;
+            height: fit-content();
+        }
+
+        h2 {
+            font-weight: bold;
+        }
+
+
+
+
+        .cover {
+            background-image: url("/images/c3.jpg");
+            height: 1200px;
+            width: 100%;
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            width: auto;
+            perspective: 50px;
+            display: flex;
+        }
+
+
+        .output {
+            height: 80px;
+            width: 500px;
+            border-radius: 10px;
+            background-color: #00000070;
+            backdrop-filter: blur(30px);
+        }
+
+
+        .fillbtn {
+            font-family: Roboto-light;
+            background-color: #e5af7c;
+            font-size: 15px;
+            color: white;
+            font-weight: 400;
+            border-radius: 30px;
+            border-width: 1px;
+            border-color: #00000010;
+            padding: 5px;
+        }
+    </style>
+
+    <script>
+
+        $(document).ready(function () {
+
+            $(".burnoff").click(function () {
+                $('.txt_burnoff').collapse('toggle')
+            })
+            $(".s13").click(function () {
+                $('.txt_s13').collapse('toggle')
+            })
+            $(".s14").click(function () {
+                $('.txt_s14').collapse('toggle')
+            })
+            $(".s40").click(function () {
+                $('.txt_s40').collapse('toggle')
+            })
+
+
+        });
+    </script>
 
 
 </body>
